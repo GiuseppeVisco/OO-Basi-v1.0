@@ -6,5 +6,6 @@ public class Main {
 		
 		WelcomePage wp1 = new WelcomePage();	
 		FinestraRistorante f = new FinestraRistorante();
+		String nomecognome;
 			}
 }
