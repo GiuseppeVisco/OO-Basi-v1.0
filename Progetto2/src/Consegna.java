@@ -7,8 +7,7 @@ public class Consegna {
 	private String codiceUtente;
 	
 //  Generatore random di codice alfanumerico ?
-	// scrivo cose a caso 
-	public String xyz;
+
 	public String getCodiceConsegna() {
 		return codiceConsegna;
 	}
