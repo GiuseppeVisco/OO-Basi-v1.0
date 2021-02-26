@@ -38,9 +38,11 @@ CREATE TABLE Ristoranti
 	Indirizzo VARCHAR ( 25 ) NOT NULL
 );
 
-Insert Into Ristoranti (Indirizzo)
-Values
-("Via Giulio Cesare 13", "Via San Ciro 10", "Via Marina 5");
+INSERT INTO "Ristoranti"("Indirizzo")
+	VALUES 
+	('Via Giulio Cesare 13'),
+	('Via San Ciro 10'),
+	('Via Marina 5');
 
 INSERT INTO rider (nome, veicolo, Cap_numero_consegne_raggiunto)
 VALUES
