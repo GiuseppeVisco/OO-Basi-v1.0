@@ -32,6 +32,15 @@ CREATE TABLE accounts
 	created_on TIMESTAMP NOT NULL
 );
 
+CREATE TABLE Ristoranti
+(
+	Indirizzo VARCHAR ( 25 ) NOT NULL,
+);
+
+Insert Into Ristoranti (Indirizzo)
+Values
+("Via Giulio Cesare 13", "Via San Ciro 10", "Via Marina 5");
+
 INSERT INTO rider (nome, veicolo, Cap_numero_consegne_raggiunto)
 VALUES
 ('Aldo', 'moto', false), 
@@ -52,4 +61,5 @@ VALUES
 ('Aqcua Frizzante 50 cl',0.50),
 ('Coca Cola', '1.00'),
 ("Fanta", "1.00"); 
+
 
