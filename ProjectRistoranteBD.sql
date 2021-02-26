@@ -34,7 +34,8 @@ CREATE TABLE accounts
 
 CREATE TABLE Ristoranti
 (
-	Indirizzo VARCHAR ( 25 ) NOT NULL,
+	Ristorante_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	Indirizzo VARCHAR ( 25 ) NOT NULL
 );
 
 Insert Into Ristoranti (Indirizzo)
