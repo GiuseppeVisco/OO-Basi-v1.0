@@ -38,6 +38,13 @@ CREATE TABLE Ristoranti
 	Indirizzo VARCHAR ( 25 ) NOT NULL
 );
 
+CREATE TABLE Allergeni 
+(
+  id_allergene SMALLSERIAL PRIMARY KEY,
+  nome_allergene VARCHAR (30) NOT NULL
+);
+
+
 INSERT INTO "Ristoranti"("Indirizzo")
 	VALUES 
 	('Via Giulio Cesare 13'),
@@ -65,4 +72,20 @@ VALUES
 ('Coca Cola', '1.00'),
 ("Fanta", "1.00"); 
 
+INSERT INTO allergeni (nome_allergene)
+VALUES
+('Cereali e derivati'),
+('Crostacei'),
+('Uova'),
+('Pesce'),
+('Arachidi'),
+('Soia'),
+('Latte'),
+('Frutta a guscio'),
+('Sedano'),
+('Senape'),
+('Sesamo'),
+('Anidride solforosa e solfiti'),
+('Lupini'),
+('Molluschi')
 
