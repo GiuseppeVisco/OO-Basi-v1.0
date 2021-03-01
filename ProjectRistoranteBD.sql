@@ -1,46 +1,46 @@
-CREATE DATABASE `projectristoranteoodb`; 
+CREATE DATABASE IF NOT EXISTS `projectristoranteoodb`; 
 
-CREATE TABLE rider (
+CREATE TABLE IF NOT EXISTS rider (
   Nome VARCHAR(16) NOT NULL PRIMARY KEY,
   Veicolo VARCHAR(255) NOT NULL,
   Cap_Numero_Consegne_raggiunto BOOLEAN NOT NULL
   );
 
-CREATE TABLE Consegne 
+CREATE TABLE IF NOT EXISTS Consegne 
 (
-  idconsegne INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  idconsegne SERIAL PRIMARY KEY NOT NULL,
   Ristorante_di_Partenza VARCHAR( 40 ) NOT NULL,
   Contenuti_consegna TEXT NOT NULL,
   Costo_Totale FLOAT NOT NULL,
   Stato_Consegna ENUM ('In Consegna', 'Consegnato')	
 );
 
-Create TABLE menù
+Create TABLE IF NOT EXISTS menù
 (
-    id_piatto INT PRIMARY KEY NOT NULL AUTO_INCREMENT,  
+    id_piatto SERIAL PRIMARY KEY NOT NULL,  
     nome_piatto varchar( 45 ) UNIQUE NOT NULL, 
     Descrizione_Piatto TEXT,
     costo NUMERIC(5,2) NOT NULL
 );
 
-CREATE TABLE accounts 
+CREATE TABLE IF NOT EXISTS accounts 
 (
-	user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	user_id SERIAL PRIMARY KEY NOT NULL,
 	username VARCHAR ( 50 ) UNIQUE NOT NULL,
 	password VARCHAR ( 50 ) NOT NULL,
 	email VARCHAR ( 255 ) UNIQUE NOT NULL,
 	created_on TIMESTAMP NOT NULL
 );
 
-CREATE TABLE Ristoranti
+CREATE TABLE IF NOT EXISTS Ristoranti
 (
-	Ristorante_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	Ristorante_id SERIAL PRIMARY KEY NOT NULL,
 	Indirizzo VARCHAR ( 25 ) NOT NULL
 );
 
 CREATE TABLE Allergeni 
 (
-  id_allergene SMALLSERIAL PRIMARY KEY,
+  id_allergene SMALLSERIAL PRIMARY KEY NOT NULL,
   nome_allergene VARCHAR (30) NOT NULL
 );
 
@@ -62,15 +62,15 @@ VALUES
 INSERT INTO menù (nome_piatto,costo)
 VALUES
 ('Arancino','0.90'),
-('Fritatina',0.90),
-('Mozarella in carrozza',0.60),
-('Rustico al Wurstel',1.00),
-('Crochetta di patata',1.00),
-('Patate fritte',1.50),
-('Acqua Naturale 50 cl',0.50),
-('Aqcua Frizzante 50 cl',0.50),
+('Fritatina','0.90'),
+('Mozarella in carrozza','0.60'),
+('Rustico al Wurstel','1.00'),
+('Crochetta di patata','1.00'),
+('Patate fritte','1.50'),
+('Acqua Naturale 50 cl','0.50'),
+('Aqcua Frizzante 50 cl','0.50'),
 ('Coca Cola', '1.00'),
-("Fanta", "1.00"); 
+('Fanta', '1.00'); 
 
 INSERT INTO allergeni (nome_allergene)
 VALUES
