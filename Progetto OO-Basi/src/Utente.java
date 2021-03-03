@@ -6,12 +6,17 @@ public class Utente {
     private String Nome;
     private String Cognome;
     private String email;
-    
-	public Utente(String nome, String cognome,String email) {
+
+    private String password;
+    //Primo commit
+	public Utente(String nome, String cognome,String email,String password) {
+
 		super();
 		this.Nome = nome;
 		this.Cognome = cognome;
 		this.email = email;
+		this.password = password;
+
 	}
 
     public void setNome(String Nome) {
