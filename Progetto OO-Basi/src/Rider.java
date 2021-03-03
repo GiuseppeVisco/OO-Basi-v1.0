@@ -3,13 +3,13 @@ import java.util.*;
 
 public class Rider extends Utente {
 
+
+	private String password;
+
     private Veicolo veicolo;
     private Ordine[] conteggio = new Ordine[3];
     
 	public Rider(String nome, String cognome, String email, String password, Veicolo veicolo) {
-		super(nome, cognome, email,password);
-		this.veicolo = veicolo;
-	}
 
 
 

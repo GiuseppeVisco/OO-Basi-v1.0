@@ -7,6 +7,7 @@ public class Cliente extends Utente {
     private String indirizzo;
     private ArrayList<Ordine> ordine= new ArrayList<Ordine>();
     
+
 	public Cliente(String nome, String cognome, String email, String password, String carta_di_credito,
 			String indirizzo) {
 		super(nome, cognome, email,password);
