@@ -109,7 +109,11 @@ VALUES
 ('3','1'),
 ('3','3'),
 ('3','6'),
-('3','7');
+('3','7'),
+('4','1'),
+('4','3'),
+('4','7'),
+('4','12');
 -- Querry di ricerca per allergeni
 SELECT Menu.id_piatto, Menu.nome_piatto, Allergeni.id_allergene, Allergeni.nome_allergene
 FROM Menu INNER JOIN (Allergeni INNER JOIN AllergeniAssociati ON AllergeniAssociati.id_allergene=Allergeni.id_allergene) ON Menu.id_piatto=AllergeniAssociati.id_piatto;
