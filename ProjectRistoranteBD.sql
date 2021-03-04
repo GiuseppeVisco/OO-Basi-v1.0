@@ -87,5 +87,29 @@ VALUES
 ('Sesamo'),
 ('Anidride solforosa e solfiti'),
 ('Lupini'),
-('Molluschi')
-
+('Molluschi');
+CREATE TABLE IF NOT EXISTs AllergeniAssociati
+(
+	id_piatto SERIAL,
+	id_allergene Serial,
+	CONSTRAINT fk_allergene FOREIGN KEY(id_allergene) REFERENCES Allergeni(id_allergene) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_menu FOREIGN KEY(id_piatto) REFERENCES Menu(id_piatto) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT Allergeni_Associati_pkey PRIMARY KEY (id_Allergene, Id_piatto)
+);
+INSERT INTO AllergeniAssociati (id_Piatto,id_allergene)
+VALUES
+('1','1'),
+('1','3'),
+('1','6'),
+('1','7'),
+('2','1'),
+('2','3'),
+('2','6'),
+('2','7'),
+('3','1'),
+('3','3'),
+('3','6'),
+('3','7');
+-- Querry di ricerca per allergeni
+SELECT Menu.id_piatto, Menu.nome_piatto, Allergeni.id_allergene, Allergeni.nome_allergene
+FROM Menu INNER JOIN (Allergeni INNER JOIN AllergeniAssociati ON AllergeniAssociati.id_allergene=Allergeni.id_allergene) ON Menu.id_piatto=AllergeniAssociati.id_piatto;
