@@ -23,14 +23,23 @@ Create TABLE IF NOT EXISTS menù
     costo NUMERIC(5,2) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS accounts 
+CREATE TABLE IF NOT EXISTS utente 
 (
 	user_id SERIAL PRIMARY KEY NOT NULL,
-	username VARCHAR ( 50 ) UNIQUE NOT NULL,
-	password VARCHAR ( 50 ) NOT NULL,
 	email VARCHAR ( 255 ) UNIQUE NOT NULL,
-	created_on TIMESTAMP NOT NULL
+	passwordutente VARCHAR ( 50 ) NOT NULL,
+	created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	rider BOOLEAN NOT NULL DEFAULT false
 );
+
+INSERT INTO utente (email,passwordutente,rider)
+VALUES
+('bidey98441@onzmail.com','Lorem52','false'),
+('delissandramedeiy@dongrup.com','ipsum89','True'),
+('itufessag-8610@yopmail.com','dolor49','false'),
+('8ilyes.kamytlm5@warehouseofthebooks.com','sit47','false'),
+('1yakob@emsinau.com','amet65','true'),
+('7yuonsqaaz8@mailboxvip.com','consectetur29','true');
 
 CREATE TABLE IF NOT EXISTS Ristoranti
 (
