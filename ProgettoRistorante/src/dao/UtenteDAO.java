@@ -1,5 +1,5 @@
 package dao;
-import entit‡.Utente;
+import entit√†.Utente;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,7 +14,7 @@ public class UtenteDAO {
 	public boolean checkLogin(String em, String pw) {
 		boolean flag = false;
 			try {
-					Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+					Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","ProjectRistorante-OO-BD","Peron");
             
 					Statement st = con.createStatement();
 					ResultSet rs = st.executeQuery("SELECT email, passwordutente FROM utente");
@@ -49,7 +49,7 @@ public class UtenteDAO {
 		
 		int flag = 0;
 		try {
-				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","ProjectRistorante-OO-BD","Peron");
 		        Statement st = con.createStatement();
 		        ResultSet rs = st.executeQuery("SELECT email, rider FROM utente");
 		        while (rs.next()) {
