@@ -1,4 +1,7 @@
 CREATE DATABASE IF NOT EXISTS `projectristoranteoodb`; 
+-- username per la connessione: ProjectRistorante-OO-BD
+-- password per la connessione: Peron
+--case sensitive
 
 CREATE TABLE IF NOT EXISTS rider (
   Nome VARCHAR(16) NOT NULL PRIMARY KEY,
