@@ -1,70 +1,40 @@
 package controller;
+import javax.swing.*;
+
 import dao.*;
 import gui.*;
 
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import javax.swing.JOptionPane;
-
-import gui.FinestraPrincipale;
-
-import gui.HomePage_Rider;
-
 public class Controller {
-
-	FinestraPrincipale fp;
-	HomePage_Rider hpr;
-	HomePage_cliente hpc;
-	UtenteDAO b = new UtenteDAO();
+	
+	LoginFrame loginFrame;
+	OrderFrame orderFrame;
+	UtenteDAO utenteDAO = new UtenteDAO();
+	
 	
 	public static void main(String[] args) {
-		
-			Controller c = new Controller();
-			
-		        //Step 1 - Caricare il driver
-		        try {
-		            Class.forName("org.postgresql.Driver");
-		            }
 	
-		        catch (ClassNotFoundException e)
-		        {
-		            System.out.println("Class Not Found: \n"+e);
-		        }
+		Controller c = new Controller();
+		
+		
 	}
 	
 	public Controller() {
-			fp = new FinestraPrincipale(this);
-			fp.setVisible(true);
+		loginFrame = new LoginFrame(this);
+		loginFrame.setVisible(true);
+	}
+	
+	public void check(String username,String password) {
+		
+		boolean checked=utenteDAO.checkCredentials(username,password);
+		
+		if(checked==false) {
+			loginFrame.cleanFields();
+			JOptionPane.showMessageDialog(null, "Password o Username incorretti, riprovare.");
 		}
-		
-	public void Mactch(String em, String pw) {
-		
-		boolean ck = false;
-		boolean rt = true;
-				
-		ck = b.checkLogin(em, pw );
-		if (ck == true)
-			{
-				fp.setVisible(false);
-					if(rt == b.checkTipoUtente(em))
-						{
-							hpr = new HomePage_Rider(this);
-							hpr.setVisible(true);
-						}
-					else
-						{
-							hpc = new HomePage_cliente();
-							hpc.setVisible(true);
-						}
-			}
-			
-		else 
-			JOptionPane.showMessageDialog(null, "Email e password non corretti");
-		
+		else {
+			loginFrame.setVisible(false);
+			orderFrame = new OrderFrame();
+			orderFrame.setVisible(true);
+		}
 	}
 }
