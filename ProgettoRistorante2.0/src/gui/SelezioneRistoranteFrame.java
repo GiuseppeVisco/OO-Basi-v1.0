@@ -36,8 +36,8 @@ public class SelezioneRistoranteFrame extends JFrame {
 		
 		String[] ristorantiString = { "NomeRistorante1", "NomeRistorante2", "NomeRistorante3", "NomeRistorante4" };
 		JComboBox listaRistoranti = new JComboBox(ristorantiString);
-		//comboBox.setModel(new DefaultComboBoxModel(new String[] {"NomeRistorante1", "NomeRistorante2", "NomeRistorante3"}));
-		listaRistoranti.setToolTipText("cz<c");
+		//comboBox.setModel(new DefaultComboBoxModel(new String[] {""}));
+		listaRistoranti.setToolTipText("");
 		listaRistoranti.setBounds(101, 113, 179, 23);
 		contentPane.add(listaRistoranti);
 		
