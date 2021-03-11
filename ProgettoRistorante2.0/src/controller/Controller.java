@@ -46,7 +46,7 @@ public class Controller {
 	public void backToLogin()
 	{
 		selezioneRistoranteFrame.setVisible(false);
-		loginFrame = new LoginFrame(this);
+		loginFrame22 = new LoginFrame(this);
 		loginFrame.setVisible(true);
 	}
 }
