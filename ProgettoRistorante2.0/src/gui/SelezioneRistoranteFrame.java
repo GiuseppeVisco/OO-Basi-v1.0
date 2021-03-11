@@ -36,7 +36,7 @@ public class SelezioneRistoranteFrame extends JFrame {
 		
 		String[] ristorantiString = { "NomeRistorante1", "NomeRistorante2", "NomeRistorante3", "NomeRistorante4" };
 		JComboBox listaRistoranti = new JComboBox(ristorantiString);
-		//comboBox.setModel(new DefaultComboBoxModel(new String[] {""}));
+		//comboBox.setModel(new DefaultComboBoxModel(new String[] {"NomeRistorante1", "NomeRistorante2", "NomeRistorante3"}));
 		listaRistoranti.setToolTipText("");
 		listaRistoranti.setBounds(101, 113, 179, 23);
 		contentPane.add(listaRistoranti);
@@ -55,7 +55,7 @@ public class SelezioneRistoranteFrame extends JFrame {
 		btnNewButton.setBounds(290, 113, 103, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Indietro");
+		JButton btnNewButton_1 = new JButton("Log out");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.backToLogin();
