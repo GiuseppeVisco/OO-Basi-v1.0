@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.Controller;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
@@ -21,27 +24,10 @@ import java.awt.event.ActionEvent;
 public class SelezioneRistoranteFrame extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SelezioneRistoranteFrame frame = new SelezioneRistoranteFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public SelezioneRistoranteFrame() {
+	Controller controller;
+	
+	public SelezioneRistoranteFrame(Controller c) {
+		controller = c;
 		setTitle("Selezione Ristorante");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -64,12 +50,18 @@ public class SelezioneRistoranteFrame extends JFrame {
 		JButton btnNewButton = new JButton("Conferma");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btnNewButton.setBounds(290, 113, 103, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Indietro");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.backToLogin();				
+			}
+		});
 		btnNewButton_1.setBounds(10, 227, 89, 23);
 		contentPane.add(btnNewButton_1);
 	}

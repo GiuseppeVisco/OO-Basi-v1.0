@@ -37,9 +37,16 @@ public class Controller {
 		}
 		else {
 			loginFrame.setVisible(false);
-			selezioneRistoranteFrame = new SelezioneRistoranteFrame();
+			selezioneRistoranteFrame = new SelezioneRistoranteFrame(this);
 			//orderFrame = new OrderFrame();
 			selezioneRistoranteFrame.setVisible(true);
 		}
+	}
+	
+	public void backToLogin()
+	{
+		selezioneRistoranteFrame.setVisible(false);
+		loginFrame = new LoginFrame(this);
+		loginFrame.setVisible(true);
 	}
 }
