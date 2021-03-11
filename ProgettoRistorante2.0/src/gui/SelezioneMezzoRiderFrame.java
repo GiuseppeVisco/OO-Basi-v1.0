@@ -32,7 +32,7 @@ public class SelezioneMezzoRiderFrame extends JFrame {
 		contentPane.setLayout(null);
 	
 	
-	String[] veicoliString = { "Scooter", "Bicicletta elettrica", "Macchina" };
+	String[] veicoliString = { "Motorino", "Moto", "Bicicletta", "Automobile" };
 	JComboBox listaVeicoliBox = new JComboBox(veicoliString);
 	listaVeicoliBox.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
