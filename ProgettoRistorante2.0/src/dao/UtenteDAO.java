@@ -4,6 +4,7 @@ import java.sql.*;
 import controller.*;
 import gui.*;
 
+
 public class UtenteDAO {
 	
 	Controller controller;
@@ -19,18 +20,18 @@ public class UtenteDAO {
 			{
 			System.out.println("Class Not Found: \n"+e);
 			}
-	}
+	} 
 	
 	public boolean checkCredentials(String username,String password) {
 		boolean check = false;
 		try {
-				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/progetto","postgres","informatica");
+				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
         
 				Statement st = con.createStatement();
-				ResultSet rs = st.executeQuery("SELECT username, password FROM utente");
+				ResultSet rs = st.executeQuery("SELECT email, passwordutente FROM utente");
 					while (rs.next()) {
-						String usernameDB = rs.getString("username");
-						String passwordDB = rs.getString("password");
+						String usernameDB = rs.getString("email");
+						String passwordDB = rs.getString("passwordutente");
 							if ((username.equals(usernameDB)) && (password.equals(passwordDB))) {
 								check = true;
 								break;

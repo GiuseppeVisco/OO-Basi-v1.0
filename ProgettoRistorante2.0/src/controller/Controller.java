@@ -1,17 +1,21 @@
 package controller;
 import javax.swing.*;
 
+
 import dao.*;
 import gui.*;
 
 public class Controller {
 	
 	LoginFrame loginFrame;
+	SelezioneRistoranteFrame selezioneRistoranteFrame;
 	OrderFrame orderFrame;
 	UtenteDAO utenteDAO = new UtenteDAO();
 	
 	
 	public static void main(String[] args) {
+		
+		
 	
 		Controller c = new Controller();
 		
@@ -33,8 +37,9 @@ public class Controller {
 		}
 		else {
 			loginFrame.setVisible(false);
-			orderFrame = new OrderFrame();
-			orderFrame.setVisible(true);
+			selezioneRistoranteFrame = new SelezioneRistoranteFrame();
+			//orderFrame = new OrderFrame();
+			selezioneRistoranteFrame.setVisible(true);
 		}
 	}
 }
