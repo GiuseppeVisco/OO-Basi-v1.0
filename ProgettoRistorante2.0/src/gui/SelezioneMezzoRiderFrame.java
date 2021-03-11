@@ -23,6 +23,7 @@ public class SelezioneMezzoRiderFrame extends JFrame {
 
 	
 	public SelezioneMezzoRiderFrame(Controller c) {
+		controller = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -31,17 +32,17 @@ public class SelezioneMezzoRiderFrame extends JFrame {
 		contentPane.setLayout(null);
 	
 	
-	String[] mezziString = { "Scooter", "Bicicletta elettrica", "Macchina" };
-	JComboBox listaMezziBox = new JComboBox(mezziString);
-	listaMezziBox.addActionListener(new ActionListener() {
+	String[] veicoliString = { "Scooter", "Bicicletta elettrica", "Macchina" };
+	JComboBox listaVeicoliBox = new JComboBox(veicoliString);
+	listaVeicoliBox.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			
 		}
 	});
 	
-	listaMezziBox.setToolTipText("");
-	listaMezziBox.setBounds(101, 113, 179, 23);
-	contentPane.add(listaMezziBox);
+	listaVeicoliBox.setToolTipText("");
+	listaVeicoliBox.setBounds(101, 113, 179, 23);
+	contentPane.add(listaVeicoliBox);
 	
 	JLabel lblNewLabel = new JLabel("Scegli il mezzo di trasporto del rider");
 	lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -51,9 +52,8 @@ public class SelezioneMezzoRiderFrame extends JFrame {
 	JButton btnNewButton = new JButton("Conferma");
 	btnNewButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-		
-			
-
+					
+			controller.veicoloSelezionato(listaVeicoliBox.getSelectedIndex());
 		}
 	});
 	btnNewButton.setBounds(290, 113, 103, 23);

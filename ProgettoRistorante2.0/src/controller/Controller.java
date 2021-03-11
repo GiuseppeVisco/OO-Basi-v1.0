@@ -82,4 +82,30 @@ public class Controller {
 		default: JOptionPane.showMessageDialog(null, "Seleziona un ristorante");
 		}
 	}
+	
+public void veicoloSelezionato(int x) {
+		
+
+		switch (x) {
+		case 0: JOptionPane.showMessageDialog(null, "Hai selezionato Scooter");
+				selezioneMezzoRiderFrame.setVisible(false);
+				orderFrame = new OrderFrame();
+				orderFrame.setVisible(true);
+				//salva scelta su db tramite metodo DAO?
+		break;
+		case 1: JOptionPane.showMessageDialog(null, "Hai selezionato bicicletta elettrica");
+				selezioneMezzoRiderFrame.setVisible(false);
+				orderFrame = new OrderFrame();
+				orderFrame.setVisible(true);
+				//salva scelta su db tramite metodo DAO?
+		break;
+		case 2: JOptionPane.showMessageDialog(null, "Hai selezionato macchina");
+				selezioneMezzoRiderFrame.setVisible(false);
+				orderFrame = new OrderFrame();
+				orderFrame.setVisible(true);
+				//salva scelta su db tramite metodo DAO?
+		break;		
+		default: JOptionPane.showMessageDialog(null, "Seleziona un veicolo");
+		}
+	}
 }
