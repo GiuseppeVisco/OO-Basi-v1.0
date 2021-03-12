@@ -57,9 +57,13 @@ public class Controller {
 		riderFrame.setVisible(true);
 	}
 	
+	
+	
 	public void ristoranteSelezionato(String s) {
 		nuovaConsegna.setIndirizzoRistorante(s);
 	}
+	
+	
 	
 	public void checkAvailableRider() {
 		

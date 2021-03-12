@@ -25,13 +25,13 @@ public class UtenteDAO {
 	public boolean checkCredentials(String username,String password) {
 		boolean check = false;
 		try {
-				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/progetto","postgres","informatica");
         
 				Statement st = con.createStatement();
-				ResultSet rs = st.executeQuery("SELECT email, passwordutente FROM utente");
+				ResultSet rs = st.executeQuery("SELECT username, password FROM utente");
 					while (rs.next()) {
-						String usernameDB = rs.getString("email");
-						String passwordDB = rs.getString("passwordutente");
+						String usernameDB = rs.getString("username");
+						String passwordDB = rs.getString("password");
 							if ((username.equals(usernameDB)) && (password.equals(passwordDB))) {
 								check = true;
 								break;
