@@ -14,11 +14,25 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
+import javax.swing.JSlider;
+import javax.swing.JEditorPane;
+import javax.swing.JRadioButton;
+import javax.swing.JTabbedPane;
+import javax.swing.JToolBar;
+import javax.swing.JList;
+import javax.swing.border.TitledBorder;
+import javax.swing.AbstractListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.JScrollPane;
 
 public class OrderFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JComboBox prezzoBox;
+	private final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	/**
 	 * 
 	 * @wbp.nonvisual location=212,189
@@ -72,5 +86,32 @@ public class OrderFrame extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnNewButton.setBounds(192, 179, 94, 21);
 		contentPane.add(btnNewButton);
+		tabbedPane.setBounds(77, 11, 94, 50);
+		contentPane.add(tabbedPane);
+		
+		JList list = new JList();
+		list.setBounds(311, 253, 94, -97);
+		contentPane.add(list);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 161, 167, 89);
+		contentPane.add(scrollPane);
+		
+		JList list_1 = new JList();
+		scrollPane.setViewportView(list_1);
+		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list_1.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Panino", "Pizza", "Frittata", "cavallo", "pallo", "plol", "lplol", "epep", "pdep", "lma", "asee", "das", "feas", "dfaef"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		
+		JScrollBar scrollBar_1 = new JScrollBar();
+		scrollBar_1.setBounds(0, 0, 17, 48);
+		contentPane.add(scrollBar_1);
 	}
 }
