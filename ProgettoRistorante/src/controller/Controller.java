@@ -30,7 +30,7 @@ public class Controller {
 		
 	}
 	
-	
+	//Controller
 	
 	public void checkCr(String username,String password) {
 		
