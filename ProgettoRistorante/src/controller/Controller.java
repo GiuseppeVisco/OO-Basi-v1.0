@@ -10,16 +10,24 @@ public class Controller {
 	private RestaurantFrame restaurantFrame;
 	private UtenteDAO utenteDAO = new UtenteDAO();
 	private RiderFrame riderFrame;
+	private Consegna nuovaConsegna;
+	private ResearchFrame research;
 	
 	public static void main(String[] args) {
 	
 		Controller c = new Controller();
+		
+		
 	}
 	
 	public Controller() {
 		
 		loginFrame = new LoginFrame(this);
 		loginFrame.setVisible(true);
+		nuovaConsegna = new Consegna();
+		research  = new ResearchFrame(this);
+		research.setVisible(true);
+		
 	}
 	
 	
@@ -48,6 +56,13 @@ public class Controller {
 		riderFrame = new RiderFrame(this);
 		riderFrame.setVisible(true);
 	}
-// Richiamo l'ordine e gli setto il nome del ristorante? 
+	
+	public void ristoranteSelezionato(String s) {
+		nuovaConsegna.setIndirizzoRistorante(s);
+	}
+	
+	public void checkAvailableRider() {
+		
+	}
 	
 }

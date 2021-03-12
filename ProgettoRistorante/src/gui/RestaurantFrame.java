@@ -99,6 +99,7 @@ public class RestaurantFrame extends JFrame {
 				else if(button_6.isSelected()) {
 					indirizzoRistorante = button_6.getText();
 				}
+				controller.ristoranteSelezionato(indirizzoRistorante);
 				controller.openRiderFrame();
 			}
 		});
