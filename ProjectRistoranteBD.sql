@@ -74,15 +74,19 @@ VALUES
 INSERT INTO menù (nome_piatto,costo)
 VALUES
 ('Arancino','0.90'),
-('Fritatina','0.90'),
+('Frittatina','0.90'),
 ('Mozarella in carrozza','0.60'),
+('Mozzarelline impanate','2.00'),
 ('Rustico al Wurstel','1.00'),
+('Polpette di carne','1.00'),
+('Chicken nuggets','3.00'),
 ('Crochetta di patata','1.00'),
 ('Patate fritte','1.50'),
 ('Acqua Naturale 50 cl','0.50'),
 ('Aqcua Frizzante 50 cl','0.50'),
 ('Coca Cola', '1.00'),
 ('Fanta', '1.00'); 
+('Sprite', '1.00');
 
 INSERT INTO allergeni (nome_allergene)
 VALUES
