@@ -1,10 +1,26 @@
 package entity;
 
-import java.util.ArrayList;
 
 public class Prodotto {
-	private double prezzo;
-	private String nome;
-	ArrayList<Allergene> allergene = new ArrayList<Allergene>();
 	
+	private float prezzoProdotto;	
+	private String nomeProdotto;
+
+	
+	public float getPrezzoProdotto() {
+		return prezzoProdotto;
+	}
+
+	public void setPrezzoProdotto(float prezzoProdotto) {
+		this.prezzoProdotto = prezzoProdotto;
+	}
+
+
+	public String getNomeProdotto() {
+		return nomeProdotto;
+	}
+
+	public void setNomeProdotto(String nomeProdotto) {
+		this.nomeProdotto = nomeProdotto;
+	}	
 }

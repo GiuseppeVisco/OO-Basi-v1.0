@@ -1,10 +1,11 @@
 package entity;
 import controller.*;
+//import java.util.ArrayList;
 
 public class Ordine {
  private String negozioDiPartenza;
  private String veicoloRider;
- // lista prodotti selezionati
+// private ArrayList prodotti = new ArrayList();
 
  
  public String getNegozioDiPartenza() {
