@@ -11,9 +11,6 @@ import controller.Controller;
 import gui.MenuFrame;
 
 public class ProdottoDAO {
-	Controller controller;
-	Prodotto prodotto;	
-	MenuFrame menuFrame;
 	
 	public ProdottoDAO() {		
 		try {
@@ -27,7 +24,7 @@ public class ProdottoDAO {
 	public ArrayList<Prodotto> CaricaProdotti() {
 		ArrayList<Prodotto> listaProdotti = new ArrayList<>();		
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");    
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");    
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("SELECT nome_piatto, costo, descrizione_piatto FROM menù");			
 				while (rs.next()) {

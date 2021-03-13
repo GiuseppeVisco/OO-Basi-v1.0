@@ -63,6 +63,8 @@ public class RiderFrame extends JFrame {
 		JButton selectionButton = new JButton("SELEZIONA");
 		selectionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+//				controller.setRiderVehicle()
+//				Richiamo il dao e cerco un rider con quel veicolo che sia disponibile
 				controller.openMenuFrame();
 			}
 		});
