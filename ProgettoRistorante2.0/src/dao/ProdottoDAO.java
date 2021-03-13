@@ -29,15 +29,17 @@ public class ProdottoDAO {
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");    
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery("SELECT nome_piatto, costo FROM menù");			
+			ResultSet rs = st.executeQuery("SELECT nome_piatto, costo, descrizione_piatto FROM menù");			
 				while (rs.next()) {
 					Prodotto prodotto = new Prodotto();												
 					
 					String nomePiattoDB = rs.getString("nome_piatto");
 					float costoDB = rs.getFloat("costo");
+					String descrizioneDB = rs.getString("descrizione_piatto");
 					
 					prodotto.setNomeProdotto(nomePiattoDB);
 					prodotto.setPrezzoProdotto(costoDB);
+					prodotto.setDescrizione(descrizioneDB);
 					
 					listaProdotti.add(prodotto);					
 				}

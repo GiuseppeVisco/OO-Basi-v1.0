@@ -5,6 +5,7 @@ public class Prodotto {
 	
 	private float prezzoProdotto;	
 	private String nomeProdotto;
+	private String Descrizione;	
 
 	
 	public float getPrezzoProdotto() {
@@ -22,5 +23,13 @@ public class Prodotto {
 
 	public void setNomeProdotto(String nomeProdotto) {
 		this.nomeProdotto = nomeProdotto;
+	}
+
+	public String getDescrizione() {
+		return Descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		Descrizione = descrizione;
 	}	
 }
