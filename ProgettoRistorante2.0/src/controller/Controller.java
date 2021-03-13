@@ -4,7 +4,8 @@ import javax.swing.*;
 import entity.*;
 import dao.*;
 import gui.*;
-import dao.*;
+import java.util.ArrayList;
+
 
 public class Controller {
 	
@@ -16,8 +17,7 @@ public class Controller {
 	UtenteDAO utenteDAO = new UtenteDAO();
 	Ordine ordine = new Ordine();
 	ProdottoDAO prodottoDAO = new ProdottoDAO();
-	private Consegna nuovaConsegna;
-	//Prodotto prodotto = new Prodotto();
+	Consegna consegna = new Consegna();
 	
 	
 	public static void main(String[] args) {					
@@ -27,7 +27,7 @@ public class Controller {
 	public Controller() {
 		loginFrame = new LoginFrame(this);
 		loginFrame.setVisible(true);	
-		nuovaConsegna = new Consegna();
+		
 	}
 	
 	public void check(String username,String password) {		
@@ -37,6 +37,7 @@ public class Controller {
 			JOptionPane.showMessageDialog(null, "Password o Username incorretti, riprovare.");
 		}
 		else {
+			consegna.setUsernameUtente(username);			
 			openRestaurantFrame();
 	}
 }
@@ -53,7 +54,7 @@ public class Controller {
 	}
 	
 	public void ristoranteSelezionato(String s) {
-		nuovaConsegna.setIndirizzoRistorante(s);
+		consegna.setIndirizzoRistorante(s);
 	}
 	
 //Prendere l'id del rider in base al mezzo e alla disponibilità	
@@ -68,8 +69,22 @@ public class Controller {
 	
 	public void openMenuFrame() {
 		riderFrame.setVisible(false);
-		menuFrame = new MenuFrame();
+		menuFrame = new MenuFrame(this);
 		menuFrame.setVisible(true);
+	}
+	
+	public String getUsernameConsegna() {
+		String temp = consegna.getUsernameUtente();
+		return temp;
+	}
+	public String getIndirizzoConsegna() {
+		String temp = utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()); 
+		return temp;
+	}
+	
+	public String getNegozioConsegna() {
+		String temp = consegna.getIndirizzoRistorante();
+		return temp;
 	}
 
 }

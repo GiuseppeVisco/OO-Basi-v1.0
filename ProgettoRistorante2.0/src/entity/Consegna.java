@@ -7,6 +7,8 @@ public class Consegna {
 	
 	
 	Controller controller;
+	
+	String usernameUtente;
 	String indirizzoConsegna;
 	String idRider;
 	String indirizzoRistorante;
@@ -41,8 +43,16 @@ public class Consegna {
 	public String getIndirizzoRistorante() {
 		return indirizzoRistorante;
 	}
-	//Metodo set prodotti
+
+	public String getUsernameUtente() {
+		return usernameUtente;
+	}
+
+	public void setUsernameUtente(String usernameUtente) {
+		this.usernameUtente = usernameUtente;
+	}
 	
+	//Metodo set prodotti
 	//Metodo calcolo totale
 	
 }

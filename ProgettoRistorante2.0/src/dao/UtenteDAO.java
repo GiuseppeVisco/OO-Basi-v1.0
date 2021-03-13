@@ -1,15 +1,23 @@
 package dao;
 import entity.*;
+
 import java.sql.*;
 import controller.*;
 import gui.*;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class UtenteDAO {
-	
+	private PreparedStatement st;
 	Controller controller;
 	
-	public UtenteDAO() {	
+	public UtenteDAO() {
+		
 		try {
 
 			Class.forName("org.postgresql.Driver");
@@ -41,7 +49,6 @@ public class UtenteDAO {
 	            rs.close();
 	            st.close();
 	            con.close();
-
 			}
 		
    catch (SQLException e) {
@@ -51,4 +58,22 @@ public class UtenteDAO {
 		return check;
 	}
 	
+	public String ricavaIndirizzoResidenza(String username) {
+		String temp = "non trovato";
+		try {
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+    
+			st = con.prepareStatement("SELECT indirizzo from utente WHERE email = ?");
+			st.setString(1, username);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				temp = rs.getString("indirizzo");
+				
+			}
+	}
+	catch (SQLException e) {
+		System.out.println("Class Not Found: \n"+e);
+	}	
+	return temp;
+	}
 }
