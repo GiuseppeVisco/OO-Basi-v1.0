@@ -13,6 +13,8 @@ import controller.Controller;
 import entity.Consegna;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
@@ -84,24 +86,38 @@ public class RestaurantFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(button_1.isSelected()) {
 					indirizzoRistorante = button_1.getText();
+					controller.ristoranteSelezionato(indirizzoRistorante);
+					controller.openRiderFrame();
 				}
 				else if(button_2.isSelected()) {
 					indirizzoRistorante = button_2.getText();
+					controller.ristoranteSelezionato(indirizzoRistorante);
+					controller.openRiderFrame();
 				}
 				else if(button_3.isSelected()) {
 					indirizzoRistorante = button_3.getText();
+					controller.ristoranteSelezionato(indirizzoRistorante);
+					controller.openRiderFrame();
 				}
 				else if(button_4.isSelected()) {
 					indirizzoRistorante = button_4.getText();
+					controller.ristoranteSelezionato(indirizzoRistorante);
+					controller.openRiderFrame();
 				}
 				else if(button_5.isSelected()) {
 					indirizzoRistorante = button_5.getText();
+					controller.ristoranteSelezionato(indirizzoRistorante);
+					controller.openRiderFrame();
 				}
 				else if(button_6.isSelected()) {
 					indirizzoRistorante = button_6.getText();
+					controller.ristoranteSelezionato(indirizzoRistorante);
+					controller.openRiderFrame();
 				}
-				controller.ristoranteSelezionato(indirizzoRistorante);
-				controller.openRiderFrame();
+				else {
+					JOptionPane.showMessageDialog(null, "Selezionare un ristorante.");
+				}
+				
 			}
 		});
 		selectionButton.setFont(new Font("Tahoma", Font.BOLD, 10));
