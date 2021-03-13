@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 /gui/
+=======
+/controller/
+>>>>>>> branch 'Versione2.0' of https://github.com/GiuseppeVisco/OO-Basi-v1.0.git
 /dao/
 /entity/
+/gui/

@@ -9,13 +9,14 @@ import dao.*;
 public class Controller {
 	
 	LoginFrame loginFrame;
-	SelezioneRistoranteFrame selezioneRistoranteFrame;
-	SelezioneMezzoRiderFrame selezioneMezzoRiderFrame;
+	RestaurantFrame restaurantFrame;
+	RiderFrame riderFrame;
 	OrderFrame orderFrame;
 	MenuFrame menuFrame;
 	UtenteDAO utenteDAO = new UtenteDAO();
 	Ordine ordine = new Ordine();
 	ProdottoDAO prodottoDAO = new ProdottoDAO();
+	private Consegna nuovaConsegna;
 	//Prodotto prodotto = new Prodotto();
 	
 	
@@ -26,6 +27,7 @@ public class Controller {
 	public Controller() {
 		loginFrame = new LoginFrame(this);
 		loginFrame.setVisible(true);	
+		nuovaConsegna = new Consegna();
 	}
 	
 	public void check(String username,String password) {		
@@ -35,90 +37,39 @@ public class Controller {
 			JOptionPane.showMessageDialog(null, "Password o Username incorretti, riprovare.");
 		}
 		else {
-			loginFrame.setVisible(false);
-			selezioneRistoranteFrame = new SelezioneRistoranteFrame(this);
-			//orderFrame = new OrderFrame();
-			selezioneRistoranteFrame.setVisible(true);
-		}
+			openRestaurantFrame();
+	}
+}
+	public void openRestaurantFrame() {
+		loginFrame.setVisible(false);
+		restaurantFrame = new RestaurantFrame(this);
+		restaurantFrame.setVisible(true);
 	}
 	
 	public void backToLogin() {		
-		selezioneRistoranteFrame.setVisible(false);
+		restaurantFrame.setVisible(false);
 		loginFrame = new LoginFrame(this);
 		loginFrame.setVisible(true);
 	}
 	
-	public void ristoranteSelezionato(int x) {				
-		switch (x) {
-		case 0: JOptionPane.showMessageDialog(null, "Hai selezionato Ristorante 1.");
-				selezioneRistoranteFrame.setVisible(false);
-				selezioneMezzoRiderFrame = new SelezioneMezzoRiderFrame(this);
-				selezioneMezzoRiderFrame.setVisible(true);
-				ordine.setNegozioDiPartenza("Ristorante 1");											
-				//salva scelta su db tramite metodo DAO?
-		break;
-		case 1: JOptionPane.showMessageDialog(null, "Hai selezionato Ristorante 2.");
-				selezioneRistoranteFrame.setVisible(false);
-				selezioneMezzoRiderFrame = new SelezioneMezzoRiderFrame(this);
-				selezioneMezzoRiderFrame.setVisible(true);
-				ordine.setNegozioDiPartenza("Ristorante 2");				
-				//salva scelta su db tramite metodo DAO?
-		break;
-		case 2: JOptionPane.showMessageDialog(null, "Hai selezionato Ristorante 3.");
-				selezioneRistoranteFrame.setVisible(false);
-				selezioneMezzoRiderFrame = new SelezioneMezzoRiderFrame(this);
-				selezioneMezzoRiderFrame.setVisible(true);
-				ordine.setNegozioDiPartenza("Ristorante 3");
-				//salva scelta su db tramite metodo DAO?
-		break;
-		case 3: JOptionPane.showMessageDialog(null, "Hai selezionato Ristorante 4.");	
-				selezioneRistoranteFrame.setVisible(false);
-				selezioneMezzoRiderFrame = new SelezioneMezzoRiderFrame(this);
-				selezioneMezzoRiderFrame.setVisible(true);
-				ordine.setNegozioDiPartenza("Ristorante 4");
-				//salva scelta su db tramite metodo DAO?
-		break;
-		default: JOptionPane.showMessageDialog(null, "Seleziona un ristorante");
-		}
+	public void ristoranteSelezionato(String s) {
+		nuovaConsegna.setIndirizzoRistorante(s);
 	}
 	
-public void veicoloSelezionato(int x) {		
-		switch (x) {
-		case 0: JOptionPane.showMessageDialog(null, "Hai selezionato Motorino");
-				selezioneMezzoRiderFrame.setVisible(false);
-				menuFrame = new MenuFrame();
-				menuFrame.setVisible(true);
-				ordine.setVeicoloRider("Motorino");
-				//salva scelta su db tramite metodo DAO?
-		break;
-		case 1: JOptionPane.showMessageDialog(null, "Hai selezionato Moto");
-				selezioneMezzoRiderFrame.setVisible(false);
-				menuFrame = new MenuFrame();
-				menuFrame.setVisible(true);
-				ordine.setVeicoloRider("Moto");
-				//salva scelta su db tramite metodo DAO?
-		break;
-		case 2: JOptionPane.showMessageDialog(null, "Hai selezionato Bicicletta");
-				selezioneMezzoRiderFrame.setVisible(false);
-				menuFrame = new MenuFrame();
-				menuFrame.setVisible(true);;
-				ordine.setVeicoloRider("Bicicletta");
-				//salva scelta su db tramite metodo DAO?
-		break;
-		case 3: JOptionPane.showMessageDialog(null, "Hai selezionato Automobile");
-				selezioneMezzoRiderFrame.setVisible(false);
-				menuFrame = new MenuFrame();
-				menuFrame.setVisible(true);
-				ordine.setVeicoloRider("Automobile");
-				//salva scelta su db tramite metodo DAO?
-		break;		
-		default: JOptionPane.showMessageDialog(null, "Seleziona un veicolo");		
-		}		
-		//TEST PER VEDERE SE L'ORDINE VIENE AGGIORNATO
-		String f = ordine.getVeicoloRider();
-		String g = ordine.getNegozioDiPartenza();
-		System.out.println("Il negozio selezionato è: "+g);
-		System.out.println("Il veicolo dell'ordine è: "+f);
-		prodottoDAO.CaricaProdotti();		
-	}	
+//Prendere l'id del rider in base al mezzo e alla disponibilità	
+//	public void mezzoSelezionato(String s) {
+//		nuovaConsegna.setRider(s);
+//	}
+	public void openRiderFrame() {
+		restaurantFrame.setVisible(false);
+		riderFrame = new RiderFrame(this);
+		riderFrame.setVisible(true);
+	}
+	
+	public void openMenuFrame() {
+		riderFrame.setVisible(false);
+		menuFrame = new MenuFrame();
+		menuFrame.setVisible(true);
+	}
+
 }
