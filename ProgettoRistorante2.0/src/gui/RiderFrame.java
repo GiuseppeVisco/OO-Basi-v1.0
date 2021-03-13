@@ -15,6 +15,8 @@ import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RiderFrame extends JFrame {
 
@@ -38,7 +40,7 @@ public class RiderFrame extends JFrame {
 		riderLabel.setBounds(49, 25, 295, 25);
 		contentPane.add(riderLabel);
 		
-		JRadioButton riderButton_1 = new JRadioButton();
+		JRadioButton riderButton_1 = new JRadioButton("Automobile");
 		riderButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		riderButton_1.setBounds(49, 74, 103, 21);
 		contentPane.add(riderButton_1);
@@ -59,6 +61,11 @@ public class RiderFrame extends JFrame {
 		contentPane.add(riderButton_4);
 		
 		JButton selectionButton = new JButton("SELEZIONA");
+		selectionButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.openMenuFrame();
+			}
+		});
 		selectionButton.setFont(new Font("Tahoma", Font.BOLD, 10));
 		selectionButton.setBounds(288, 213, 102, 34);
 		contentPane.add(selectionButton);
