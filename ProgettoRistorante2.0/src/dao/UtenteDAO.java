@@ -25,7 +25,7 @@ public class UtenteDAO {
 	public boolean checkCredentials(String username,String password) {
 		boolean check = false;
 		try {
-				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");
+				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
         
 				Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery("SELECT email, passwordutente FROM utente");
