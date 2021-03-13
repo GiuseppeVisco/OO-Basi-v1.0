@@ -13,16 +13,11 @@ import java.sql.SQLException;
 
 
 public class UtenteDAO {
-<<<<<<< HEAD
 	private PreparedStatement st;
 	Controller controller;
-	
-	public UtenteDAO() {
 		
-=======
-	
 	public UtenteDAO() {	
->>>>>>> branch 'Versione2.0' of https://github.com/GiuseppeVisco/OO-Basi-v1.0.git
+
 		try {
 
 			Class.forName("org.postgresql.Driver");
@@ -38,7 +33,7 @@ public class UtenteDAO {
 	public boolean checkCredentials(String username,String password) {
 		boolean check = false;
 		try {
-				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");
+				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
         
 				Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery("SELECT email, passwordutente FROM utente");
