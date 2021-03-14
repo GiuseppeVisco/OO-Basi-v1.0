@@ -1,6 +1,7 @@
 package controller;
 import javax.swing.*;
 
+
 import entity.*;
 import dao.*;
 import gui.*;
@@ -18,10 +19,10 @@ public class Controller {
 	Ordine ordine = new Ordine();
 	ProdottoDAO prodottoDAO = new ProdottoDAO();
 	Consegna consegna = new Consegna();
-	
+	ConsegnaDAO consegnaDAO;
 	
 	public static void main(String[] args) {					
-		Controller c = new Controller();		
+		Controller c = new Controller();	
 	}
 	
 	public Controller() {
@@ -69,7 +70,7 @@ public class Controller {
 	
 	public void openMenuFrame() {
 		riderFrame.setVisible(false);
-		menuFrame = new MenuFrame(this);
+		menuFrame = new MenuFrame(this, consegna);
 		menuFrame.setVisible(true);
 	}
 	
@@ -85,6 +86,11 @@ public class Controller {
 	public String getNegozioConsegna() {
 		String temp = consegna.getIndirizzoRistorante();
 		return temp;
+	}
+	
+	public void aggiornaStoricoConsegne() {    //manca il get.idRider
+		consegnaDAO = new ConsegnaDAO();
+		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(), 2);
 	}
 
 }

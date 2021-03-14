@@ -13,7 +13,7 @@ public class Consegna {
 	String idRider;
 	String indirizzoRistorante;
 	ArrayList<Prodotto> ordine = new ArrayList<Prodotto>();
-	private double totale;
+	double totale;
 	
 //	public Consegna(Controller controller, Utente utente, Rider riderAssegnato, String indirizzoRistorante,
 //			ArrayList<Prodotto> ordine, double totale) {
@@ -50,6 +50,14 @@ public class Consegna {
 
 	public void setUsernameUtente(String usernameUtente) {
 		this.usernameUtente = usernameUtente;
+	}
+
+	public double getTotale() {
+		return totale;
+	}
+
+	public void setTotale(double totale) {
+		this.totale = totale;
 	}
 	
 	//Metodo set prodotti

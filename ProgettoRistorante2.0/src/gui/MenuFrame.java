@@ -8,21 +8,11 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.JTabbedPane;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.ListModel;
-import javax.swing.ListSelectionModel;
+
 import javax.swing.event.ListDataListener;
 import controller.Controller;
 import entity.Prodotto;
@@ -38,7 +28,8 @@ public class MenuFrame extends JFrame {
 	UtenteDAO utenteDAO;
 	
     public ArrayList<String> listaProdottiJl = new ArrayList<>();
-    public MenuFrame(Controller c) {
+    public MenuFrame(Controller c, Consegna d) {
+    	consegna = d;
     	controller = c;
     	setTitle("Men\u00F9");
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,9 +46,17 @@ public class MenuFrame extends JFrame {
         getContentPane().add(checkOutInternalFrame);
         checkOutInternalFrame.getContentPane().setLayout(null);
         
-        JButton btnNewButton = new JButton("Accetta");
-        btnNewButton.setBounds(699, 286, 89, 35);
-        checkOutInternalFrame.getContentPane().add(btnNewButton);
+        JButton accettaConsegnaButton = new JButton("Accetta");				//Bottone AccettaConsegna
+        accettaConsegnaButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		controller.aggiornaStoricoConsegne();
+        		JOptionPane.showMessageDialog(null, "L'ordine verrà consegnato al più presto.");
+        		System.exit(1);
+        	}
+        });
+        accettaConsegnaButton.setBounds(699, 286, 89, 35);
+        checkOutInternalFrame.getContentPane().add(accettaConsegnaButton);
         
 
         
@@ -209,9 +208,7 @@ public class MenuFrame extends JFrame {
         	}
         });
         rimuoviButton.setBounds(324, 220, 92, 23);
-        getContentPane().add(rimuoviButton);
-        
-       
+        getContentPane().add(rimuoviButton);               
         
         JButton confermaButton = new JButton("Conferma");				//BOTTONE CONFERMA
         confermaButton.addActionListener(new ActionListener() {
@@ -233,6 +230,7 @@ public class MenuFrame extends JFrame {
         					somma += prodottoDAO.restituisciPrezzo(prodotto);
         				}
         				textArea.setText(""+String.format("%.2f", somma)+"€");
+        				consegna.setTotale(somma);
         	checkOutInternalFrame.setVisible(true);
         	}
         });
