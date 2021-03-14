@@ -16,12 +16,14 @@ public class Controller {
 	UtenteDAO utenteDAO = new UtenteDAO();
 	Ordine ordine = new Ordine();
 	ProdottoDAO prodottoDAO = new ProdottoDAO();
-	private Consegna nuovaConsegna;
+	RiderDAO riderDAO = new RiderDAO();
+	private Consegna nuovaConsegna = new Consegna();
 	//Prodotto prodotto = new Prodotto();
 	
 	
 	public static void main(String[] args) {					
-		Controller c = new Controller();		
+		Controller c = new Controller();	
+
 	}
 	
 	public Controller() {
@@ -30,7 +32,7 @@ public class Controller {
 		nuovaConsegna = new Consegna();
 	}
 	
-	public void check(String username,String password) {		
+	public void checkCredentials(String username,String password) {		
 		boolean checked=utenteDAO.checkCredentials(username,password);				
 		if(checked==false) {
 			loginFrame.cleanFields();
@@ -56,14 +58,21 @@ public class Controller {
 		nuovaConsegna.setIndirizzoRistorante(s);
 	}
 	
-//Prendere l'id del rider in base al mezzo e alla disponibilità	
-//	public void mezzoSelezionato(String s) {
-//		nuovaConsegna.setRider(s);
-//	}
 	public void openRiderFrame() {
 		restaurantFrame.setVisible(false);
 		riderFrame = new RiderFrame(this);
 		riderFrame.setVisible(true);
+	}
+	
+	public void checkRiderAvailable(String s) {
+		boolean check=riderDAO.checkAvailability(s);
+		if(check) {
+			openMenuFrame();
+		}
+		else {
+			//Metodo che deseleziona i radio button?
+			JOptionPane.showMessageDialog(null, "Non ci sono rider disponibili con questo mezzo.");
+		}
 	}
 	
 	public void openMenuFrame() {

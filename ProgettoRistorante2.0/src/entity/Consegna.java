@@ -41,6 +41,7 @@ public class Consegna {
 	public String getIndirizzoRistorante() {
 		return indirizzoRistorante;
 	}
+	
 	//Metodo set prodotti
 	
 	//Metodo calcolo totale
