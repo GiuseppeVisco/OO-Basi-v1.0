@@ -118,8 +118,9 @@ public class MenuFrame extends JFrame {
         checkOutInternalFrame.getContentPane().add(idRiderConsegnaTxt);
         
         JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
         textArea.setText("?$");
-        textArea.setBounds(642, 249, 40, 22);
+        textArea.setBounds(642, 254, 40, 14);
         checkOutInternalFrame.getContentPane().add(textArea);
         
         JLabel lblNewLabel_3 = new JLabel("Totale");
@@ -218,15 +219,20 @@ public class MenuFrame extends JFrame {
         		usernameConsegnaTxt.setText(controller.getUsernameConsegna());
         		indirizzoConsegnaTxt.setText(controller.getIndirizzoConsegna());
         		negozioConsegnaTxt.setText(controller.getNegozioConsegna());
-
-        		
+       		
         				int x = listaCarrelloModel.getSize();
         				for(int i = 0; i < x; i++) {
         					String prodotto = listaCarrelloModel.elementAt(i).toString();
         					riepilogoCarrelloModel.addElement(prodotto);;
         			    }
-        				listaCarrelloModel.clear();      	
-                	
+        				listaCarrelloModel.clear();
+        				int y = riepilogoCarrelloModel.getSize();
+        				double somma = 0;
+        				for(int i = 0; i < y; i++) {
+        					String prodotto = riepilogoCarrelloModel.elementAt(i).toString();
+        					somma += prodottoDAO.restituisciPrezzo(prodotto);
+        				}
+        				textArea.setText(""+String.format("%.2f", somma)+"€");
         	checkOutInternalFrame.setVisible(true);
         	}
         });
@@ -274,7 +280,7 @@ public class MenuFrame extends JFrame {
         		if(prodottoSelezionato.equals(prodotto.getNomeProdotto())) {
         			ArrayList<String> listaAllergeni = new ArrayList<>();
         			listaAllergeni = allergeneDAO.fornisciAllergeni(prodottoSelezionato);        			
-        			descrizioneTxt.setText(prodotto.getDescrizione()+".\nPREZZO: ["+prodotto.getPrezzoProdotto()+"€]\nALLERGENI: "+listaAllergeni);	
+        			descrizioneTxt.setText(prodotto.getDescrizione()+".\nPREZZO: ["+String.format("%.2f", prodotto.getPrezzoProdotto())+"€]\nALLERGENI: "+listaAllergeni);	
         		}
         		}
         	}

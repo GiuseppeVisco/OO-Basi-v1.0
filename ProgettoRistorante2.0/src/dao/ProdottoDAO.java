@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,8 +12,9 @@ import controller.Controller;
 import gui.MenuFrame;
 
 public class ProdottoDAO {
-	
-	public ProdottoDAO() {		
+	private PreparedStatement st;
+	public ProdottoDAO() {	
+		
 		try {
 			Class.forName("org.postgresql.Driver");
 			}
@@ -51,4 +53,26 @@ public class ProdottoDAO {
 		}
 		return listaProdotti;
 	}
+	
+	public double restituisciPrezzo(String nomeProdotto) {
+		double temp = -1;
+		try {
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");    
+			st = con.prepareStatement("SELECT costo FROM menù WHERE nome_piatto = ?");
+			st.setString(1, nomeProdotto);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+			temp = rs.getDouble("costo");				
+			}
+			//- Release delle risorse
+			rs.close();
+			st.close();
+			con.close();
+	    }
+	    catch (SQLException e) {
+	    	System.out.println("Class Not Found: \n"+e);
+	    }
+		return temp;
+	}
 }
+
