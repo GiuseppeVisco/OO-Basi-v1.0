@@ -40,9 +40,10 @@ public class ProdottoDAO {
 					prodotto.setPrezzoProdotto(costoDB);
 					prodotto.setDescrizione(descrizioneDB);
 					
-					listaProdotti.add(prodotto);					
+					listaProdotti.add(prodotto);
+					
 				}
-       //- Release delle risorse
+				//- Release delle risorse
 				rs.close();
 				st.close();
 				con.close();

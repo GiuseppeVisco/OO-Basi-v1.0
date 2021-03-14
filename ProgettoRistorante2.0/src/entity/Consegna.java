@@ -7,7 +7,7 @@ public class Consegna {
 	
 	
 	Controller controller;
-	
+	String idConsegna;
 	String usernameUtente;
 	String indirizzoConsegna;
 	String idRider;
@@ -58,6 +58,26 @@ public class Consegna {
 
 	public void setTotale(double totale) {
 		this.totale = totale;
+	}
+
+	public String getIdConsegna() {
+		return idConsegna;
+	}
+
+	public void setIdConsegna(String idConsegna) {
+		this.idConsegna = idConsegna;
+	}
+
+	public String getIndirizzoConsegna() {
+		return indirizzoConsegna;
+	}
+
+	public String getIdRider() {
+		return idRider;
+	}
+
+	public void setIdRider(String idRider) {
+		this.idRider = idRider;
 	}
 	
 	//Metodo set prodotti
