@@ -40,19 +40,20 @@ CREATE TABLE IF NOT EXISTS utente
 	user_id SERIAL PRIMARY KEY NOT NULL,
 	email VARCHAR ( 255 ) UNIQUE NOT NULL,
 	passwordutente VARCHAR ( 50 ) NOT NULL,
+	indirizzo VARCHAR (50),
 	created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	admin BOOLEAN NOT NULL DEFAULT false
 );
 
-INSERT INTO utente (email,passwordutente,admin)
+INSERT INTO utente (email,passwordutente,indirizzo,admin)
 VALUES
-('bidey98441@onzmail.com','Lorem52','false'),
-('delissandramedeiy@dongrup.com','ipsum89','false'),
-('itufessag-8610@yopmail.com','dolor49','false'),
-('8ilyes.kamytlm5@warehouseofthebooks.com','sit47','false'),
-('1yakob@emsinau.com','amet65','false'),
-('7yuonsqaaz8@mailboxvip.com','consectetur29','false'),
-('micheleirace@gmail.com', 'mikeirace98', 'false'),
+('bidey98441@onzmail.com','Lorem52','Via chiaia','false'),
+('delissandramedeiy@dongrup.com','ipsum89','Via croce','false'),
+('itufessag-8610@yopmail.com','dolor49','Via palo','false'),
+('8ilyes.kamytlm5@warehouseofthebooks.com','sit47','Via miano','false'),
+('1yakob@emsinau.com','amet65','Via bosco','false'),
+('7yuonsqaaz8@mailboxvip.com','consectetur29','Via mare','false'),
+('micheleirace@gmail.com', 'mikeirace98','Via toledo', 'false'),
 ('testadmin@gmail.com','admin','true'),
 ('testadmin2@gmail.com','admin','true'),
 ('testadmin3@gmail.com','admin','true'),
