@@ -41,22 +41,30 @@ CREATE TABLE IF NOT EXISTS utente
 	email VARCHAR ( 255 ) UNIQUE NOT NULL,
 	passwordutente VARCHAR ( 50 ) NOT NULL,
 	created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	Admin BOOLEAN NOT NULL DEFAULT false
+	admin BOOLEAN NOT NULL DEFAULT false
 );
 
-INSERT INTO utente (email,passwordutente,rider)
+INSERT INTO utente (email,passwordutente,admin)
 VALUES
 ('bidey98441@onzmail.com','Lorem52','false'),
-('delissandramedeiy@dongrup.com','ipsum89','True'),
+('delissandramedeiy@dongrup.com','ipsum89','false'),
 ('itufessag-8610@yopmail.com','dolor49','false'),
 ('8ilyes.kamytlm5@warehouseofthebooks.com','sit47','false'),
-('1yakob@emsinau.com','amet65','true'),
-('7yuonsqaaz8@mailboxvip.com','consectetur29','true');
+('1yakob@emsinau.com','amet65','false'),
+('7yuonsqaaz8@mailboxvip.com','consectetur29','false'),
+('micheleirace@gmail.com', 'mikeirace98', 'false'),
+('testadmin@gmail.com','admin','true'),
+('testadmin2@gmail.com','admin','true'),
+('testadmin3@gmail.com','admin','true'),
+('testadmin4@gmail.com','admin','true'),
+('testadmin5@gmail.com','admin','true'),
+('testadmin6@gmail.com','admin','true');
 
 CREATE TABLE IF NOT EXISTS Ristoranti
 (
 	Ristorante_id SERIAL PRIMARY KEY NOT NULL,
-	Indirizzo VARCHAR ( 25 ) NOT NULL
+	Indirizzo VARCHAR ( 25 ) NOT NULL,
+	admin_id INTEGER
 );
 
 CREATE TABLE Allergeni 
@@ -66,11 +74,14 @@ CREATE TABLE Allergeni
 );
 
 
-INSERT INTO Ristoranti(Indirizzo)
+INSERT INTO Ristoranti(Indirizzo, admin_id)
 	VALUES 
-	('Via Giulio Cesare 13'),
-	('Via San Ciro 10'),
-	('Via Marina 5');
+	('Via Marina 18', 8),
+	('Via Roma 24', '9'),
+	('Via Terracina 89', '10'),
+	('Via Claudio 35', '11'),
+	('Via Foria 9','12'),
+	('Viale Augusto 67', '13');
 
 INSERT INTO rider (nome, veicolo, Cap_numero_consegne_raggiunto)
 VALUES
