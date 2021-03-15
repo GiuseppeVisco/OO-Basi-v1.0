@@ -21,6 +21,9 @@ import dao.ProdottoDAO;
 import java.util.ArrayList;
 import java.awt.Button;
 import dao.RicercaDAO;
+import java.awt.Font;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class MenuFrame extends JFrame {
 	ProdottoDAO prodottoDAO = new ProdottoDAO();
@@ -36,7 +39,7 @@ public class MenuFrame extends JFrame {
     	controller = c;
     	setTitle("Men\u00F9");
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 850, 523);
+		setBounds(500, 300, 955, 523);
 		
         ArrayList<Prodotto> temp = null;
         temp = prodottoDAO.CaricaProdotti();
@@ -45,22 +48,36 @@ public class MenuFrame extends JFrame {
         }
         
         JInternalFrame ricercaInternalFrame = new JInternalFrame("Ricerca");
-        ricercaInternalFrame.setBounds(10, 52, 625, 267);
+        ricercaInternalFrame.setBounds(20, 99, 645, 267);
         getContentPane().add(ricercaInternalFrame);
         ricercaInternalFrame.getContentPane().setLayout(null);
         
         JInternalFrame checkOutInternalFrame = new JInternalFrame("Check Out");
-        checkOutInternalFrame.setBounds(71, 28, 814, 412);
+        checkOutInternalFrame.setBounds(30, 37, 839, 412);
         getContentPane().add(checkOutInternalFrame);
         checkOutInternalFrame.getContentPane().setLayout(null);
         
+        JPanel panel_1 = new JPanel();
+        panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+        panel_1.setBounds(580, 239, 108, 35);
+        checkOutInternalFrame.getContentPane().add(panel_1);
+        panel_1.setLayout(null);
+        
         JTextArea totaleTxtArea = new JTextArea();
+        totaleTxtArea.setBounds(62, 11, 40, 19);
+        panel_1.add(totaleTxtArea);
         totaleTxtArea.setEditable(false);
         totaleTxtArea.setText("?$");
-        totaleTxtArea.setBounds(642, 254, 40, 14);
-        checkOutInternalFrame.getContentPane().add(totaleTxtArea);
+        
+        
+        JLabel lblNewLabel_3 = new JLabel("Totale");
+        lblNewLabel_3.setFont(new Font("Calibri", Font.PLAIN, 13));
+        lblNewLabel_3.setBounds(6, 16, 46, 14);
+        panel_1.add(lblNewLabel_3);
+        lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
         
         JButton accettaConsegnaButton = new JButton("Accetta");				//Bottone AccettaConsegna
+        accettaConsegnaButton.setFont(new Font("Calibri", Font.BOLD, 15));
         accettaConsegnaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         			controller.aggiornaStoricoConsegne();
@@ -68,7 +85,7 @@ public class MenuFrame extends JFrame {
         			System.exit(1);       		
         	}
         });
-        accettaConsegnaButton.setBounds(699, 286, 89, 35);
+        accettaConsegnaButton.setBounds(724, 286, 89, 35);
         checkOutInternalFrame.getContentPane().add(accettaConsegnaButton);
         
 
@@ -89,21 +106,25 @@ public class MenuFrame extends JFrame {
         checkOutInternalFrame.getContentPane().add(negozioConsegnaTxt);
         
         JLabel lblNewLabel_1 = new JLabel("Username");
+        lblNewLabel_1.setFont(new Font("Calibri", Font.PLAIN, 14));
         lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
         lblNewLabel_1.setBounds(95, 111, 136, 14);
         checkOutInternalFrame.getContentPane().add(lblNewLabel_1);
         
         JLabel lblNewLabel_1_1 = new JLabel("Indirizzo di consegna");
+        lblNewLabel_1_1.setFont(new Font("Calibri", Font.PLAIN, 14));
         lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
         lblNewLabel_1_1.setBounds(95, 144, 136, 14);
         checkOutInternalFrame.getContentPane().add(lblNewLabel_1_1);
         
         JLabel lblNewLabel_1_2 = new JLabel("Negozio di partenza");
+        lblNewLabel_1_2.setFont(new Font("Calibri", Font.PLAIN, 14));
         lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.RIGHT);
         lblNewLabel_1_2.setBounds(95, 177, 136, 14);
         checkOutInternalFrame.getContentPane().add(lblNewLabel_1_2);
         
         JLabel lblNewLabel_1_3 = new JLabel("Id Rider");
+        lblNewLabel_1_3.setFont(new Font("Calibri", Font.PLAIN, 14));
         lblNewLabel_1_3.setHorizontalAlignment(SwingConstants.RIGHT);
         lblNewLabel_1_3.setBounds(95, 210, 136, 14);
         checkOutInternalFrame.getContentPane().add(lblNewLabel_1_3);
@@ -122,24 +143,20 @@ public class MenuFrame extends JFrame {
         scrollPane_2.setViewportView(riepilogoCarrelloJList);
         
         JLabel lblNewLabel_2 = new JLabel("Riepilogo carrello");
-        lblNewLabel_2.setBounds(483, 83, 123, 14);
+        lblNewLabel_2.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 17));
+        lblNewLabel_2.setBounds(483, 75, 199, 22);
         checkOutInternalFrame.getContentPane().add(lblNewLabel_2);
         
         JTextArea idRiderConsegnaTxt = new JTextArea();
+        idRiderConsegnaTxt.setEditable(false);
         idRiderConsegnaTxt.setBounds(241, 205, 165, 19);
         checkOutInternalFrame.getContentPane().add(idRiderConsegnaTxt);
-        
-        
-        JLabel lblNewLabel_3 = new JLabel("Totale");
-        lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblNewLabel_3.setBounds(586, 254, 46, 14);
-        checkOutInternalFrame.getContentPane().add(lblNewLabel_3);
         checkOutInternalFrame.setVisible(false);
         
         getContentPane().setLayout(null);
         
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(164, 114, 150, 205);
+        scrollPane.setBounds(196, 110, 206, 205);
         getContentPane().add(scrollPane);
         
         JList<String> listaMenuJList = new JList(listaMenuModel);
@@ -147,18 +164,18 @@ public class MenuFrame extends JFrame {
         listaMenuJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         JScrollPane scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBounds(426, 114, 150, 205);
+        scrollPane_1.setBounds(514, 110, 206, 205);
         getContentPane().add(scrollPane_1);
         
         JPanel panel = new JPanel();
         panel.setBorder(new TitledBorder(null, "Descrizione Prodotto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        panel.setBounds(10, 173, 144, 146);
+        panel.setBounds(10, 173, 176, 146);
         getContentPane().add(panel);
         panel.setLayout(null);
        
         JTextPane descrizioneTxt = new JTextPane();
         descrizioneTxt.setEditable(false);
-        descrizioneTxt.setBounds(6, 16, 128, 124);
+        descrizioneTxt.setBounds(10, 16, 156, 124);
         panel.add(descrizioneTxt);        
         descrizioneTxt.setText("Seleziona un prodotto");
         
@@ -190,7 +207,7 @@ public class MenuFrame extends JFrame {
         	}
         });
                 
-        aggiungiButton.setBounds(327, 151, 97, 23);
+        aggiungiButton.setBounds(415, 147, 97, 23);
         getContentPane().add(aggiungiButton);
                
         JButton rimuoviButton = new JButton("< Rimuovi");
@@ -215,10 +232,11 @@ public class MenuFrame extends JFrame {
         		}
         	}
         });
-        rimuoviButton.setBounds(324, 220, 92, 23);
+        rimuoviButton.setBounds(412, 216, 92, 23);
         getContentPane().add(rimuoviButton);               
         
         JButton confermaButton = new JButton("Conferma");				//BOTTONE CONFERMA
+        confermaButton.setFont(new Font("Calibri", Font.BOLD, 15));
         confermaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		usernameConsegnaTxt.setText(controller.getUsernameConsegna());
@@ -248,10 +266,11 @@ public class MenuFrame extends JFrame {
         				}
         	}
         });
-        confermaButton.setBounds(455, 330, 105, 30);
+        confermaButton.setBounds(560, 326, 105, 40);
         getContentPane().add(confermaButton);
         
         JButton btnNewButton_1 = new JButton("Indietro");
+        btnNewButton_1.setFont(new Font("Calibri", Font.BOLD, 15));
         btnNewButton_1.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		checkOutInternalFrame.setVisible(false);
@@ -259,19 +278,20 @@ public class MenuFrame extends JFrame {
         		
         	}
         });
-        btnNewButton_1.setBounds(10, 286, 89, 35);
+        btnNewButton_1.setBounds(13, 286, 89, 35);
         checkOutInternalFrame.getContentPane().add(btnNewButton_1);
         
         JButton btnNewButton_3 = new JButton("Log Out");
+        btnNewButton_3.setFont(new Font("Calibri", Font.BOLD, 15));
         btnNewButton_3.setBounds(10, 414, 89, 23);
         getContentPane().add(btnNewButton_3);
         
         JLabel lblNewLabel = new JLabel("Men\u00F9 Principale");
-        lblNewLabel.setBounds(164, 89, 113, 23);
+        lblNewLabel.setBounds(240, 89, 113, 23);
         getContentPane().add(lblNewLabel);
         
         JLabel lblCarrello = new JLabel("Carrello");
-        lblCarrello.setBounds(426, 89, 81, 23);
+        lblCarrello.setBounds(584, 89, 81, 23);
         getContentPane().add(lblCarrello);
                 
         JButton descrizioneButton = new JButton("Descrizione");
@@ -293,7 +313,7 @@ public class MenuFrame extends JFrame {
         		}
         	}
         });
-        descrizioneButton.setBounds(174, 334, 103, 23);
+        descrizioneButton.setBounds(251, 326, 103, 40);
         getContentPane().add(descrizioneButton);
         
         JButton resettaButton = new JButton("Resetta");							//Bottone Resetta
@@ -310,7 +330,7 @@ public class MenuFrame extends JFrame {
         	}
         });
         resettaButton.setEnabled(false);
-        resettaButton.setBounds(10, 123, 89, 23);
+        resettaButton.setBounds(42, 139, 89, 23);
         getContentPane().add(resettaButton);
                 
         
@@ -320,20 +340,23 @@ public class MenuFrame extends JFrame {
         		ricercaInternalFrame.setVisible(true);
         	}
         });
-        ricercaButton.setBounds(10, 89, 89, 23);
+        ricercaButton.setBounds(42, 108, 89, 23);
         getContentPane().add(ricercaButton);
         
         JComboBox fasciaPrezzoBox = new JComboBox();
         fasciaPrezzoBox.setModel(new DefaultComboBoxModel(new String[] {"Standard", "Prezzo basso", "Prezzo medo", "Prezzo alto"}));
-        fasciaPrezzoBox.setBounds(44, 90, 128, 22);
+        fasciaPrezzoBox.setBounds(44, 90, 128, 31);
         ricercaInternalFrame.getContentPane().add(fasciaPrezzoBox);
         
         JLabel lblNewLabel_4 = new JLabel("Fascia di prezzo");
-        lblNewLabel_4.setBounds(44, 65, 128, 14);
+        lblNewLabel_4.setFont(new Font("Calibri", Font.BOLD, 14));
+        lblNewLabel_4.setHorizontalAlignment(SwingConstants.LEFT);
+        lblNewLabel_4.setBounds(44, 61, 128, 18);
         ricercaInternalFrame.getContentPane().add(lblNewLabel_4);
         
-        JLabel lblNewLabel_5 = new JLabel("Elimina prodotti con allergeni");
-        lblNewLabel_5.setBounds(246, 40, 171, 14);
+        JLabel lblNewLabel_5 = new JLabel("Elimina prodotti con allergeni:");
+        lblNewLabel_5.setFont(new Font("Calibri", Font.BOLD, 14));
+        lblNewLabel_5.setBounds(246, 36, 195, 18);
         ricercaInternalFrame.getContentPane().add(lblNewLabel_5);
         
         JCheckBox cerealiCheck = new JCheckBox("Cereali");
@@ -362,6 +385,7 @@ public class MenuFrame extends JFrame {
         ricercaInternalFrame.getContentPane().add(anidrideCheck);
         
         JButton cercaInternalButton = new JButton("Cerca");                   //BOTTONE INTERNAL CERCA
+        cercaInternalButton.setFont(new Font("Calibri", Font.BOLD, 15));
         cercaInternalButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
@@ -450,9 +474,8 @@ public class MenuFrame extends JFrame {
         		ricercaInternalFrame.setVisible(false);
         	}
         });
-        cercaInternalButton.setBounds(477, 113, 89, 23);
+        cercaInternalButton.setBounds(452, 103, 108, 46);
         ricercaInternalFrame.getContentPane().add(cercaInternalButton);
-        ricercaInternalFrame.setVisible(false);            
     }
 
     class MyListModel implements ListModel {

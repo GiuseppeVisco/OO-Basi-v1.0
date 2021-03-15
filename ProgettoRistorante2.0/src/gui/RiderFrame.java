@@ -17,6 +17,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.BevelBorder;
 
 public class RiderFrame extends JFrame {
 
@@ -30,38 +32,49 @@ public class RiderFrame extends JFrame {
 		group = new ButtonGroup();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 310);
+		setBounds(500, 300, 547, 313);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel riderLabel = new JLabel("Seleziona il mezzo di trasporto del rider:");
-		riderLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		riderLabel.setBounds(49, 25, 295, 25);
+		riderLabel.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 19));
+		riderLabel.setBounds(31, 31, 341, 25);
 		contentPane.add(riderLabel);
 		
+		JPanel panel = new JPanel();
+		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel.setBounds(76, 74, 115, 158);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
 		JRadioButton riderButton_1 = new JRadioButton("Automobile");
+		riderButton_1.setBounds(6, 16, 103, 21);
+		panel.add(riderButton_1);
 		riderButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		riderButton_1.setBounds(49, 74, 103, 21);
-		contentPane.add(riderButton_1);
+		
+		group.add(riderButton_1);
 		
 		JRadioButton riderButton_2 = new JRadioButton("Moto");
+		riderButton_2.setBounds(6, 53, 103, 21);
+		panel.add(riderButton_2);
 		riderButton_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		riderButton_2.setBounds(49, 111, 103, 21);
-		contentPane.add(riderButton_2);
+		group.add(riderButton_2);
 		
 		JRadioButton riderButton_3 = new JRadioButton("Motorino");
+		riderButton_3.setBounds(6, 93, 103, 21);
+		panel.add(riderButton_3);
 		riderButton_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		riderButton_3.setBounds(49, 151, 103, 21);
-		contentPane.add(riderButton_3);
+		group.add(riderButton_3);
 		
 		JRadioButton riderButton_4 = new JRadioButton("Bicicletta");
+		riderButton_4.setBounds(6, 131, 103, 21);
+		panel.add(riderButton_4);
 		riderButton_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		riderButton_4.setBounds(49, 189, 103, 21);
-		contentPane.add(riderButton_4);
+		group.add(riderButton_4);
 		
-		JButton selectionButton = new JButton("SELEZIONA");
+		JButton selectionButton = new JButton("CONTINUA");
 		selectionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(riderButton_1.isSelected()) {
@@ -88,13 +101,8 @@ public class RiderFrame extends JFrame {
 			}
 		});
 		selectionButton.setFont(new Font("Tahoma", Font.BOLD, 10));
-		selectionButton.setBounds(288, 213, 102, 34);
+		selectionButton.setBounds(308, 127, 117, 45);
 		contentPane.add(selectionButton);
-		
-		group.add(riderButton_1);
-		group.add(riderButton_2);
-		group.add(riderButton_3);
-		group.add(riderButton_4);
 	}
 
 }

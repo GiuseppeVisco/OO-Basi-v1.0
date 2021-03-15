@@ -13,7 +13,6 @@ public class Controller {
 	LoginFrame loginFrame;
 	RestaurantFrame restaurantFrame;
 	RiderFrame riderFrame;
-	OrderFrame orderFrame;
 	MenuFrame menuFrame;
 	UtenteDAO utenteDAO = new UtenteDAO();
 	Ordine ordine = new Ordine();

@@ -43,37 +43,18 @@ public class StoricoConsegneFrame2 extends JFrame {
 	private JTextField nomeTxt;
 	private JPanel panel;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					StoricoConsegneFrame2 frame = new StoricoConsegneFrame2();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
 	public StoricoConsegneFrame2(Consegna c) {
 consegna = c;
 		setTitle("Storico consegne");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 776, 365);
+		setBounds(500, 300, 955, 523);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 185, 740, 105);
+		scrollPane.setBounds(10, 185, 919, 268);
 		contentPane.add(scrollPane);
 		
 				
@@ -90,20 +71,20 @@ consegna = c;
 				));
 				
 				JLabel lblNewLabel = new JLabel("STORICO CONSEGNE");
-				lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
+				lblNewLabel.setFont(new Font("Lucida Sans", Font.BOLD, 19));
 				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				lblNewLabel.setBounds(249, 49, 210, 32);
+				lblNewLabel.setBounds(316, 51, 274, 52);
 				contentPane.add(lblNewLabel);
 				
 				panel = new JPanel();
 				panel.setBorder(new TitledBorder(null, "Ristorante in:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panel.setBounds(10, 110, 134, 52);
+				panel.setBounds(10, 110, 210, 52);
 				contentPane.add(panel);
 				panel.setLayout(null);
 				
 				
 				nomeTxt = new JTextField();
-				nomeTxt.setBounds(6, 16, 119, 25);
+				nomeTxt.setBounds(6, 16, 196, 25);
 				panel.add(nomeTxt);
 				nomeTxt.setEditable(false);
 				nomeTxt.setColumns(10);
