@@ -64,7 +64,7 @@ VALUES
 CREATE TABLE IF NOT EXISTS Ristoranti
 (
 	Ristorante_id SERIAL PRIMARY KEY NOT NULL,
-	Indirizzo VARCHAR ( 25 ) NOT NULL,
+	indirizzo_ristorante VARCHAR ( 25 ) NOT NULL,
 	admin_id INTEGER
 );
 
