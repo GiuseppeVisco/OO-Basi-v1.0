@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS rider (
 	ID_Rider SERIAL PRIMARY KEY,
 	  Nome VARCHAR(16) NOT NULL,
  	 Veicolo VARCHAR(255) NOT NULL,
-	  Cap_Numero_Consegne_raggiunto BOOLEAN NOT NULL
+	  Cap_Numero_Consegne_raggiunto BOOLEAN DEFAULT false,
+	Consegne_assegnate INT DEFAULT '0'
   );
 
 CREATE TYPE IF NOT EXISTS Stato AS ENUM ('In Consegna','Consegnato');
