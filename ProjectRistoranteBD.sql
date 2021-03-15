@@ -10,17 +10,20 @@ CREATE TABLE IF NOT EXISTS rider (
 	  Cap_Numero_Consegne_raggiunto BOOLEAN NOT NULL
   );
 
+CREATE TYPE IF NOT EXISTS Stato AS ENUM ('In Consegna','Consegnato');
+
 CREATE TABLE IF NOT EXISTS Consegne 
 (
 	Ristorante_di_partenza VARCHAR(40) NOT NULL,
 	Indirizzo_Consegna VARCHAR(40) Not Null,
 	Costo_Totale NUMERIC(5,2) Not NUll,
 	Mail_Utente VARCHAR(255) NOT NULL,
-	ID_Rider VARCHAR(40) NOT NULL,
+	ID_Rider serial NOT NULL,
 	ID_Consegna Serial Primary Key,
 	FOREIGN KEY (ID_Rider) REFERENCES Rider(ID_Rider),
 	FOREIGN KEY (Mail_Utente) REFERENCES utente(email),
-  	Stato_Consegna ENUM ('In Consegna', 'Consegnato')	
+  	Stato_Consegna Stato
+	--Stato_Consegna ENUM ('In Consegna', 'Consegnato')	
 );
 
 Create TABLE IF NOT EXISTS menù
@@ -39,6 +42,29 @@ CREATE TABLE IF NOT EXISTS utente
 	created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	rider BOOLEAN NOT NULL DEFAULT false
 );
+
+
+CREATE TABLE IF NOT EXISTS Composizione_Consegna
+(
+	id_ordine serial References Consegne(id_Consegna),
+	id_piatto serial references Menù(id_piatto),
+	Quantità numeric(10) not null
+);
+
+CREATE TABLE IF NOT EXISTS Composizione_Carrello
+(
+	id_ordine serial References Consegne(id_Consegna),
+	id_piatto serial references Menù(id_piatto),
+	Quantità numeric(10) not null
+);
+
+CREATE TABLE IF NOT EXISTS Carrello
+	(
+		id_Carrello serial  primary key,
+		Data_Creazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		user_id SERIAL REFERENCES Utente(user_id),
+		Completo bool DEFAULT 'false'
+	);
 
 INSERT INTO utente (email,passwordutente,rider)
 VALUES
@@ -62,7 +88,7 @@ CREATE TABLE Allergeni
 );
 
 
-INSERT INTO "Ristoranti"("Indirizzo")
+INSERT INTO Ristoranti(Indirizzo)
 	VALUES 
 	('Via Giulio Cesare 13'),
 	('Via San Ciro 10'),
