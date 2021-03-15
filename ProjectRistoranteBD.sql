@@ -44,29 +44,6 @@ CREATE TABLE IF NOT EXISTS utente
 	Admin BOOLEAN NOT NULL DEFAULT false
 );
 
-
-CREATE TABLE IF NOT EXISTS Composizione_Consegna
-(
-	id_ordine serial References Consegne(id_Consegna),
-	id_piatto serial references Menù(id_piatto),
-	Quantità numeric(10) not null
-);
-
-CREATE TABLE IF NOT EXISTS Composizione_Carrello
-(
-	id_ordine serial References Consegne(id_Consegna),
-	id_piatto serial references Menù(id_piatto),
-	Quantità numeric(10) not null
-);
-
-CREATE TABLE IF NOT EXISTS Carrello
-	(
-		id_Carrello serial  primary key,
-		Data_Creazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-		user_id SERIAL REFERENCES Utente(user_id),
-		Completo bool DEFAULT 'false'
-	);
-
 INSERT INTO utente (email,passwordutente,rider)
 VALUES
 ('bidey98441@onzmail.com','Lorem52','false'),
