@@ -28,7 +28,7 @@ public class ProdottoDAO {
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");    
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery("SELECT nome_piatto, costo, descrizione_piatto FROM menù");			
+			ResultSet rs = st.executeQuery("SELECT nome_piatto, costo, descrizione_piatto FROM menu");			
 				while (rs.next()) {
 					Prodotto prodotto = new Prodotto();												
 					
@@ -59,7 +59,7 @@ public class ProdottoDAO {
 		double temp = -1;
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");    
-			st = con.prepareStatement("SELECT costo FROM menù WHERE nome_piatto = ?");
+			st = con.prepareStatement("SELECT costo FROM menu WHERE nome_piatto = ?");
 			st.setString(1, nomeProdotto);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {

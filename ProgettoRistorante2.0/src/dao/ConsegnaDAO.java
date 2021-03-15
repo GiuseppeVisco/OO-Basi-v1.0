@@ -11,7 +11,6 @@ import controller.*;
 
 public class ConsegnaDAO {	
 	Controller controller;
-
 	private PreparedStatement st;
 	
 	public ConsegnaDAO() {
@@ -25,7 +24,7 @@ public class ConsegnaDAO {
 	
 	public void insertConsegna(String ristorantePartenza, String indirizzoConsegna, double costoTotale, String usernameUtente, int idRiderAssegnato) {
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
     
 			st = con.prepareStatement("INSERT INTO consegne(ristorante_di_partenza, indirizzo_consegna, costo_totale, mail_utente, id_rider) VALUES (?,?,?,?,?)");
 			st.setString(1, ristorantePartenza);

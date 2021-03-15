@@ -20,7 +20,6 @@ public class Controller {
 	ProdottoDAO prodottoDAO = new ProdottoDAO();
 	Consegna consegna = new Consegna();
 	ConsegnaDAO consegnaDAO;
-	StoricoConsegneFrame storicoConsegneFrame;
 	
 	public static void main(String[] args) {
 		
@@ -30,9 +29,7 @@ public class Controller {
 	public Controller() {
 		loginFrame = new LoginFrame(this);
 		loginFrame.setVisible(true);	
-		//prova storico consegne
-		storicoConsegneFrame = new StoricoConsegneFrame(this);
-		storicoConsegneFrame.setVisible(true);
+
 		
 	}
 	
