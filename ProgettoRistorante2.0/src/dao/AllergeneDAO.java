@@ -25,7 +25,7 @@ public class AllergeneDAO {
 	public ArrayList fornisciAllergeni(String nomeProdotto) {
 		ArrayList<String> allergeniList = new ArrayList<>();
 		try {			
-				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");    
+				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");    
 				st = con.prepareStatement("SELECT nome_allergene FROM allergeni NATURAL JOIN allergeniassociati NATURAL JOIN menu WHERE nome_piatto = ?");
 				st.setString(1, nomeProdotto);
 				ResultSet rs = st.executeQuery();

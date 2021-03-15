@@ -21,8 +21,9 @@ import java.awt.event.ActionEvent;
 public class RiderFrame extends JFrame {
 
 	private JPanel contentPane;
-	Controller controller;
-	ButtonGroup group;
+	private Controller controller;
+	private ButtonGroup group;
+	private String mezzoRider;
 	
 	public RiderFrame(Controller c) {
 		controller = c;
@@ -63,9 +64,27 @@ public class RiderFrame extends JFrame {
 		JButton selectionButton = new JButton("SELEZIONA");
 		selectionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				controller.setRiderVehicle()
-//				Richiamo il dao e cerco un rider con quel veicolo che sia disponibile
-				controller.openMenuFrame();
+				if(riderButton_1.isSelected()) {
+				mezzoRider=riderButton_1.getText();
+				controller.checkRiderAvailable(mezzoRider);
+				controller.setIdRider(mezzoRider);
+			}
+			if(riderButton_2.isSelected()) {
+				mezzoRider=riderButton_2.getText();
+				controller.checkRiderAvailable(mezzoRider);
+				controller.setIdRider(mezzoRider);
+			}
+			if(riderButton_3.isSelected()) {
+				mezzoRider=riderButton_3.getText();
+				controller.checkRiderAvailable(mezzoRider);
+				controller.setIdRider(mezzoRider);
+			}
+			if(riderButton_4.isSelected()) {
+				mezzoRider=riderButton_4.getText();
+				controller.checkRiderAvailable(mezzoRider);
+				//Inserire un if che lo fa partire solo se il mezzo è effettivamente disponibile?
+				controller.setIdRider(mezzoRider);
+			}
 			}
 		});
 		selectionButton.setFont(new Font("Tahoma", Font.BOLD, 10));

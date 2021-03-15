@@ -24,7 +24,7 @@ public class ConsegnaDAO {
 	
 	public void insertConsegna(String ristorantePartenza, String indirizzoConsegna, double costoTotale, String usernameUtente, int idRiderAssegnato) {
 		try {
-			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");
     
 			st = con.prepareStatement("INSERT INTO consegne(ristorante_di_partenza, indirizzo_consegna, costo_totale, mail_utente, id_rider) VALUES (?,?,?,?,?)");
 			st.setString(1, ristorantePartenza);
@@ -57,7 +57,7 @@ public class ConsegnaDAO {
 				String indirizzoConsegna = rs.getString("indirizzo_consegna");
 				double costoTotale = rs.getDouble("costo_totale");
 				String mailUtente = rs.getString("mail_utente");
-				String idRider = rs.getString("id_rider");
+				int idRider = rs.getInt("id_rider");
 				String idConsegna = rs.getString("id_consegna");
 				
 				consegna.setIndirizzoRistorante(ristorantePartenza);

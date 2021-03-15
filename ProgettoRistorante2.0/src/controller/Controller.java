@@ -20,9 +20,10 @@ public class Controller {
 	ProdottoDAO prodottoDAO = new ProdottoDAO();
 	Consegna consegna = new Consegna();
 	ConsegnaDAO consegnaDAO;
+	RiderDAO riderDAO = new RiderDAO();
 	
 	public static void main(String[] args) {
-		
+		//Creare una nuova consegna ogni volta che si richiama il main???
 		Controller c = new Controller();	
 	}
 	
@@ -33,7 +34,7 @@ public class Controller {
 		
 	}
 	
-	public void check(String username,String password) {		
+	public void checkCredentials(String username,String password) {		
 		boolean checked=utenteDAO.checkCredentials(username,password);				
 		if(checked==false) {
 			loginFrame.cleanFields();
@@ -44,6 +45,17 @@ public class Controller {
 			openRestaurantFrame();
 	}
 }
+	//UPDATE
+	public void checkRiderAvailable(String s) {
+		boolean check=riderDAO.checkAvailability(s);
+		if(check) {
+			this.setIdRider(s);
+			openMenuFrame();
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Non ci sono rider disponibili con questo mezzo.");
+		}
+	}
 	public void openRestaurantFrame() {
 		loginFrame.setVisible(false);
 		restaurantFrame = new RestaurantFrame(this);
@@ -59,11 +71,7 @@ public class Controller {
 	public void ristoranteSelezionato(String s) {
 		consegna.setIndirizzoRistorante(s);
 	}
-	
-//Prendere l'id del rider in base al mezzo e alla disponibilità	
-//	public void mezzoSelezionato(String s) {
-//		nuovaConsegna.setRider(s);
-//	}
+
 	public void openRiderFrame() {
 		restaurantFrame.setVisible(false);
 		riderFrame = new RiderFrame(this);
@@ -71,6 +79,11 @@ public class Controller {
 	}
 	
 	public void openMenuFrame() {
+		
+		//STAMPA IN CONSOLE L'ID DEL RIDER DISPONIBILE CON QUEL MEZZO, DA CANCELLARE
+		System.out.println(consegna.getIdRider());
+		
+		
 		riderFrame.setVisible(false);
 		menuFrame = new MenuFrame(this, consegna);
 		menuFrame.setVisible(true);
@@ -90,9 +103,21 @@ public class Controller {
 		return temp;
 	}
 	
-	public void aggiornaStoricoConsegne() {    //manca il get.idRider
-		consegnaDAO = new ConsegnaDAO();
-		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(), 2);
+	public int getIdRider() {
+		int id = riderDAO.getIdRider(getIndirizzoConsegna());
+		return id;
 	}
+	
+	public void aggiornaStoricoConsegne() {    
+		consegnaDAO = new ConsegnaDAO();
+		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider());
+	}
+
+	public void setIdRider(String mezzoRider) {
+		consegna.setIdRider(riderDAO.getIdRider(mezzoRider));
+		
+	}
+
+	
 
 }

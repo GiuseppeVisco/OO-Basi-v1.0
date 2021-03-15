@@ -10,7 +10,7 @@ public class Consegna {
 	String idConsegna;
 	String usernameUtente;
 	String indirizzoConsegna;
-	String idRider;
+	int idRider;
 	String indirizzoRistorante;
 	ArrayList<Prodotto> ordine = new ArrayList<Prodotto>();
 	double totale;
@@ -32,7 +32,7 @@ public class Consegna {
 		this.indirizzoConsegna = indirizzoConsegna;
 	}
 	
-	public void setRider(String idRider) {
+	public void setRider(int idRider) {
 		this.idRider = idRider;
 	}
 	
@@ -72,12 +72,12 @@ public class Consegna {
 		return indirizzoConsegna;
 	}
 
-	public String getIdRider() {
+	public int getIdRider() {
 		return idRider;
 	}
 
-	public void setIdRider(String idRider) {
-		this.idRider = idRider;
+	public void setIdRider(int i) {
+		this.idRider = i;
 	}
 	
 	//Metodo set prodotti

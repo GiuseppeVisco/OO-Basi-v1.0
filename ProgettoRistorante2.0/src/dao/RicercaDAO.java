@@ -24,9 +24,9 @@ public class RicercaDAO {
 	public ArrayList<String> trovaProdottoPerAllergeni(String nomeAllergene) {
 		ArrayList<String> listaProdottiDaEliminare = new ArrayList();
 		try {			
-			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");
 			
-			st = con.prepareStatement("SELECT menu.nome_piatto from menu NATURAL JOIN allergeniassociati NATURAL JOIN allergeni WHERE nome_allergene LIKE ?");
+			st = con.prepareStatement("SELECT menu.nome_piatto from menù NATURAL JOIN allergeniassociati NATURAL JOIN allergeni WHERE nome_allergene LIKE ?");
 			st.setString(1, nomeAllergene);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {

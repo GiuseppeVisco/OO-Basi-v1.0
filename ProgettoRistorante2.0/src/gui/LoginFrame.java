@@ -59,7 +59,7 @@ public class LoginFrame extends JFrame {
 		JButton loginButton = new JButton("LOGIN");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.check(usernameField.getText(),passwordField.getText());
+				controller.checkCredentials(usernameField.getText(),passwordField.getText());
 			}
 		});
 		loginButton.setFont(new Font("Tahoma", Font.BOLD, 12));
