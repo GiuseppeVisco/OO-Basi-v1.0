@@ -59,7 +59,7 @@ public class RestaurantFrame extends JFrame {
 		button_4.setBounds(56, 223, 137, 21);
 		contentPane.add(button_4);
 		
-		JRadioButton button_2 = new JRadioButton("Via roma 24");
+		JRadioButton button_2 = new JRadioButton("Via Roma 24");
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		button_2.setBounds(56, 132, 137, 21);
 		contentPane.add(button_2);

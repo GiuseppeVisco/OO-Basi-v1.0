@@ -83,7 +83,7 @@ public class RiderFrame extends JFrame {
 				mezzoRider=riderButton_4.getText();
 				controller.checkRiderAvailable(mezzoRider);
 				//Inserire un if che lo fa partire solo se il mezzo è effettivamente disponibile?
-				controller.setIdRider(mezzoRider);
+				controller.setIdRider(mezzoRider);				
 			}
 			}
 		});

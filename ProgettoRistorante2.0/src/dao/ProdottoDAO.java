@@ -26,9 +26,9 @@ public class ProdottoDAO {
 	public ArrayList<Prodotto> CaricaProdotti() {
 		ArrayList<Prodotto> listaProdotti = new ArrayList<>();		
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");    
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");    
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery("SELECT nome_piatto, costo, descrizione_piatto FROM menù");			
+			ResultSet rs = st.executeQuery("SELECT nome_piatto, costo, descrizione_piatto FROM menu");			
 				while (rs.next()) {
 					Prodotto prodotto = new Prodotto();												
 					

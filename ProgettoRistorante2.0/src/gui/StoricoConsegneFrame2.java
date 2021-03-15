@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,11 +19,15 @@ import javax.swing.table.DefaultTableModel;
 import dao.ConsegnaDAO;
 
 import entity.Consegna;
+import dao.RistoranteDAO;
 
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.BevelBorder;
 
 public class StoricoConsegneFrame2 extends JFrame {
 
@@ -33,27 +38,32 @@ public class StoricoConsegneFrame2 extends JFrame {
 	Calendar calendar = Calendar.getInstance();
 	DefaultTableModel model;
 	ConsegnaDAO consegnaDAO = new ConsegnaDAO();
+	RistoranteDAO ristoranteDAO = new RistoranteDAO();
+	Consegna consegna;
+	private JTextField nomeTxt;
+	private JPanel panel;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StoricoConsegneFrame2 frame = new StoricoConsegneFrame2();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					StoricoConsegneFrame2 frame = new StoricoConsegneFrame2();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public StoricoConsegneFrame2() {
+	public StoricoConsegneFrame2(Consegna c) {
+consegna = c;
 		setTitle("Storico consegne");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 776, 365);
@@ -68,6 +78,8 @@ public class StoricoConsegneFrame2 extends JFrame {
 		
 				
 				table = new JTable();		
+				table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+				table.setFont(new Font("Lucida Sans", Font.PLAIN, 11));
 				scrollPane.setViewportView(table);
 				table.setModel(new DefaultTableModel(
 					new Object[][] {
@@ -78,15 +90,28 @@ public class StoricoConsegneFrame2 extends JFrame {
 				));
 				
 				JLabel lblNewLabel = new JLabel("STORICO CONSEGNE");
-				lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
 				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				lblNewLabel.setBounds(277, 99, 144, 32);
+				lblNewLabel.setBounds(249, 49, 210, 32);
 				contentPane.add(lblNewLabel);
+				
+				panel = new JPanel();
+				panel.setBorder(new TitledBorder(null, "Ristorante in:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panel.setBounds(10, 110, 134, 52);
+				contentPane.add(panel);
+				panel.setLayout(null);
+				
+				
+				nomeTxt = new JTextField();
+				nomeTxt.setBounds(6, 16, 119, 25);
+				panel.add(nomeTxt);
+				nomeTxt.setEditable(false);
+				nomeTxt.setColumns(10);
+				nomeTxt.setText(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));													
 				model = (DefaultTableModel) table.getModel();
-																	
 				
 				 ArrayList<Consegna> temp = null;
-			        temp = consegnaDAO.listaConsegne();
+			        temp = consegnaDAO.listaConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));			        
 			        for(Consegna consegna :temp) { 
 			        	model.addRow(new Object[] {"["+consegna.getIdConsegna()+"]",consegna.getUsernameUtente(), consegna.getIndirizzoRistorante(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), ""+consegna.getTotale()+"€" });
 			        }

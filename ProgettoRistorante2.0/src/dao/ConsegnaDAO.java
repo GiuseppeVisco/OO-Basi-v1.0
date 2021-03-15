@@ -24,8 +24,8 @@ public class ConsegnaDAO {
 	
 	public void insertConsegna(String ristorantePartenza, String indirizzoConsegna, double costoTotale, String usernameUtente, int idRiderAssegnato) {
 		try {
-			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");
-    
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+
 			st = con.prepareStatement("INSERT INTO consegne(ristorante_di_partenza, indirizzo_consegna, costo_totale, mail_utente, id_rider) VALUES (?,?,?,?,?)");
 			st.setString(1, ristorantePartenza);
 			st.setString(2, indirizzoConsegna);
@@ -45,11 +45,12 @@ public class ConsegnaDAO {
 		}	
 	}
 	
-	public ArrayList<Consegna> listaConsegne () {
+	public ArrayList<Consegna> listaConsegne (String ristoranteAssegnato) {
 		ArrayList<Consegna> listaStorico = new ArrayList();
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
-			st = con.prepareStatement("SELECT * from consegne");
+			st = con.prepareStatement("SELECT * from consegne WHERE ristorante_di_partenza LIKE ?");
+			st.setString(1, ristoranteAssegnato);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				Consegna consegna = new Consegna();

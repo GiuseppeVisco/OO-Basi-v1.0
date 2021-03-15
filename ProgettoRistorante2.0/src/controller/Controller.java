@@ -21,6 +21,7 @@ public class Controller {
 	Consegna consegna = new Consegna();
 	ConsegnaDAO consegnaDAO;
 	RiderDAO riderDAO = new RiderDAO();
+	StoricoConsegneFrame2 storicoConsegneFrame;
 	
 	public static void main(String[] args) {
 		//Creare una nuova consegna ogni volta che si richiama il main???
@@ -41,8 +42,17 @@ public class Controller {
 			JOptionPane.showMessageDialog(null, "Password o Username incorretti, riprovare.");
 		}
 		else {
+			boolean isAdmin = false;
+			if(isAdmin != utenteDAO.checkTipoUtente(username)) {
+				consegna.setUsernameUtente(username);
+				storicoConsegneFrame = new StoricoConsegneFrame2(consegna);
+				loginFrame.setVisible(false);
+				storicoConsegneFrame.setVisible(true);
+			}
+			else {
 			consegna.setUsernameUtente(username);			
 			openRestaurantFrame();
+			}
 	}
 }
 	//UPDATE
@@ -104,7 +114,8 @@ public class Controller {
 	}
 	
 	public int getIdRider() {
-		int id = riderDAO.getIdRider(getIndirizzoConsegna());
+		//int id = riderDAO.getIdRider(getIndirizzoConsegna());
+		int id = consegna.getIdRider();
 		return id;
 	}
 	
@@ -114,8 +125,7 @@ public class Controller {
 	}
 
 	public void setIdRider(String mezzoRider) {
-		consegna.setIdRider(riderDAO.getIdRider(mezzoRider));
-		
+		consegna.setIdRider(riderDAO.getIdRider(mezzoRider));		
 	}
 
 	

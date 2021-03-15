@@ -29,7 +29,7 @@ public class RiderDAO {
 		boolean check = false;
 		
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
     
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("SELECT veicolo, cap_numero_consegne_raggiunto FROM rider");
@@ -60,7 +60,7 @@ catch (SQLException e) {
 		int id_rider = 0;
 		
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
     
 			PreparedStatement st = con.prepareStatement("SELECT id_rider FROM rider WHERE cap_numero_consegne_raggiunto = 'false' and veicolo =?");
 			st.setString(1, veicoloRider);
@@ -80,7 +80,7 @@ catch (SQLException e) {
 catch (SQLException e) {
     System.out.println("Class Not Found: \n"+e);
 }
-	
+
 	return id_rider;
 	}
 

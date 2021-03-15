@@ -33,7 +33,7 @@ public class UtenteDAO {
 	public boolean checkCredentials(String username,String password) {
 		boolean check = false;
 		try {
-				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
         
 				Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery("SELECT email, passwordutente FROM utente");
@@ -75,5 +75,34 @@ public class UtenteDAO {
 		System.out.println("Class Not Found: \n"+e);
 	}	
 	return temp;
+	}
+	
+	
+	
+	
+	public boolean checkTipoUtente(String em) {
+
+		int flag = 0;
+		try {
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+		    Statement st = con.createStatement();
+		    ResultSet rs = st.executeQuery("SELECT email, admin FROM utente");
+		    while (rs.next()) {
+		        String Emaill = rs.getString("email");
+		        boolean isAdmin = rs.getBoolean("admin");
+		        if ((em.equals(Emaill)) && (isAdmin == false)) 
+		        	flag = 1;		        			        	
+	        }
+		    rs.close();
+     	    st.close();
+     	    con.close();
+		}
+	    catch (SQLException e) {
+	    	System.out.println("Class Not Found: \n"+e);
+	        }
+	   	if (flag == 1)
+	   		return false;
+	    else 
+	    	return true;
 	}
 }
