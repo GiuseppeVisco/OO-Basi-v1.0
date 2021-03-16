@@ -28,6 +28,7 @@ public class RicercaDAO {
 			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 			
 			st = con.prepareStatement("SELECT nome_piatto from menù NATURAL JOIN allergeniassociati NATURAL JOIN allergeni WHERE nome_allergene LIKE ? ");
+
 			st.setString(1, nomeAllergene);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
@@ -52,7 +53,7 @@ public class RicercaDAO {
 	public ArrayList<String> trovaProdottoPerPrezzoBasso() {
 		ArrayList<String> listaProdottiDaAggiungere = new ArrayList();
 		try {			
-			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 			
 			st = con.prepareStatement("SELECT nome_piatto from menù  WHERE costo > 0 and costo < 3 ");
 			ResultSet rs = st.executeQuery();
@@ -69,6 +70,7 @@ public class RicercaDAO {
 			con.close();
 		}
 		catch (SQLException e) {
+			System.out.println("Class Not Found: \n"+e);
 		}	
 		
 		return listaProdottiDaAggiungere;
@@ -78,7 +80,7 @@ public class RicercaDAO {
 	public ArrayList<String> trovaProdottoPerPrezzoMedio() {
 		ArrayList<String> listaProdottiDaAggiungere2 = new ArrayList();
 		try {			
-			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 			
 			st = con.prepareStatement("SELECT nome_piatto from menù where costo >= 3 and costo < 6 ");
 			ResultSet rs = st.executeQuery();
@@ -105,7 +107,7 @@ public class RicercaDAO {
 	public ArrayList<String> trovaProdottoPerPrezzoAlto() {
 		ArrayList<String> listaProdottiDaAggiungere3 = new ArrayList();
 		try {			
-			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 			
 			st = con.prepareStatement("SELECT menù.nome_piatto from menù  WHERE costo >= 6");
 			ResultSet rs = st.executeQuery();

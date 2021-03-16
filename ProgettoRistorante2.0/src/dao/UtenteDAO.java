@@ -80,29 +80,27 @@ public class UtenteDAO {
 	
 	
 	
-	public boolean checkTipoUtente(String em) {
+	public boolean checkTipoUtente(String email) {
 
-		int flag = 0;
+		boolean isAdmin = false;
+		
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
-		    Statement st = con.createStatement();
-		    ResultSet rs = st.executeQuery("SELECT email, admin FROM utente");
-		    while (rs.next()) {
-		        String Emaill = rs.getString("email");
-		        boolean isAdmin = rs.getBoolean("admin");
-		        if ((em.equals(Emaill)) && (isAdmin == false)) 
-		        	flag = 1;		        			        	
-	        }
-		    rs.close();
+			PreparedStatement st = con.prepareStatement("SELECT admin FROM utente WHERE email = ?");    			        	
+			st.setString(1, email);
+			ResultSet rs = st.executeQuery();
+		    
+			while (rs.next()) {
+				isAdmin = rs.getBoolean("admin");				
+				}
+			
      	    st.close();
      	    con.close();
 		}
 	    catch (SQLException e) {
 	    	System.out.println("Class Not Found: \n"+e);
 	        }
-	   	if (flag == 1)
-	   		return false;
-	    else 
-	    	return true;
+		return isAdmin;
+
 	}
 }

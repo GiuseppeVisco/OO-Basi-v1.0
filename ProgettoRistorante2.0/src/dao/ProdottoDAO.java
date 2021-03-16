@@ -58,7 +58,9 @@ public class ProdottoDAO {
 	public double restituisciPrezzo(String nomeProdotto) {
 		double temp = -1;
 		try {
+
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");    
+
 			st = con.prepareStatement("SELECT costo FROM menù WHERE nome_piatto = ?");
 			st.setString(1, nomeProdotto);
 			ResultSet rs = st.executeQuery();

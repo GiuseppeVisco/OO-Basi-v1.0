@@ -36,6 +36,7 @@ public class RistoranteDAO {
 		}
 		
 		catch (SQLException e) {
+			System.out.println("Class Not Found: \n"+e);
 		}
 		
 		return temp;

@@ -45,7 +45,7 @@ public class Controller {
 		}
 		else {
 			boolean isAdmin = false;
-			if(isAdmin != utenteDAO.checkTipoUtente(username)) {
+			if(utenteDAO.checkTipoUtente(username)) {
 				consegna.setUsernameUtente(username);
 				storicoConsegneFrame = new StoricoConsegneFrame2(consegna);
 				loginFrame.setVisible(false);
@@ -61,7 +61,7 @@ public class Controller {
 	public void checkRiderAvailable(String s) {
 		boolean check=riderDAO.checkAvailability(s);
 		if(check) {
-			this.setIdRider(s);
+			this.setIdRiderConsegna(s);
 			openMenuFrame();
 		}
 		else {
@@ -115,20 +115,26 @@ public class Controller {
 		return temp;
 	}
 	
-	public int getIdRider() {
-		//int id = riderDAO.getIdRider(getIndirizzoConsegna());
-		int id = consegna.getIdRider();
-		return id;
-	}
+
 	
 	public void aggiornaStoricoConsegne() {    
 		consegnaDAO = new ConsegnaDAO();
 		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider());
 	}
-
-	public void setIdRider(String mezzoRider) {
+	public void updateRiderCount() {
+		riderDAO.updateCount(getIdRiderConsegna());
+	}
+	
+	public int getIdRiderConsegna() {
+//		int id=riderDAO.getIdRider(getIndirizzoConsegna());
+		//int id = riderDAO.getIdRider(getIndirizzoConsegna());
+		int id = consegna.getIdRider();
+		return id;
+	}
+	public void setIdRiderConsegna(String mezzoRider) {
 		consegna.setIdRider(riderDAO.getIdRider(mezzoRider));		
 	}
+
 	
 	public String  ricavaDescrizioneProdotto(JList<String> tempJlist) {
 		String prodottoSelezionato = tempJlist.getSelectedValue();
@@ -175,3 +181,6 @@ public class Controller {
 		return listaProdotti;
 	}
 }
+
+
+

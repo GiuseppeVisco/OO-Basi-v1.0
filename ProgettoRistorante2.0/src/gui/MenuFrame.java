@@ -82,6 +82,7 @@ public class MenuFrame extends JFrame {
         accettaConsegnaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         			controller.aggiornaStoricoConsegne();
+        			controller.updateRiderCount();
         			JOptionPane.showMessageDialog(null, "L'ordine verrà consegnato al più presto.");
         			System.exit(1); 
         	}
@@ -243,7 +244,7 @@ public class MenuFrame extends JFrame {
         		usernameConsegnaTxt.setText(controller.getUsernameConsegna());
         		indirizzoConsegnaTxt.setText(controller.getIndirizzoConsegna());
         		negozioConsegnaTxt.setText(controller.getNegozioConsegna());
-        		idRiderConsegnaTxt.setText("["+controller.getIdRider()+"]");
+        		idRiderConsegnaTxt.setText("["+controller.getIdRiderConsegna()+"]");
        		
         				int x = listaCarrelloModel.getSize();
         				for(int i = 0; i < x; i++) {
