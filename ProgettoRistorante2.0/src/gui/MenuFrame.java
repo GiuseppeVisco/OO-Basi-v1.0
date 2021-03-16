@@ -1,6 +1,7 @@
 package gui;
 import dao.UtenteDAO;
 
+
 import entity.Consegna;
 import controller.Controller;
 import java.awt.BorderLayout;
@@ -82,7 +83,7 @@ public class MenuFrame extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         			controller.aggiornaStoricoConsegne();
         			JOptionPane.showMessageDialog(null, "L'ordine verrà consegnato al più presto.");
-        			System.exit(1);       		
+        			System.exit(1); 
         	}
         });
         accettaConsegnaButton.setBounds(724, 286, 89, 35);
@@ -182,9 +183,9 @@ public class MenuFrame extends JFrame {
         JList<String> listaCarrelloJList = new JList(listaCarrelloModel);
         scrollPane_1.setViewportView(listaCarrelloJList);
         
-        JButton aggiungiButton = new JButton("Aggiungi >");
+        JButton aggiungiButton = new JButton("Aggiungi >");           //Bottone aggiungi
         aggiungiButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {       		
+        	public void actionPerformed(ActionEvent e) {    		
         		int isSelected = listaMenuJList.getSelectedIndex();
         		if(isSelected == -1) {
         			return;
@@ -259,7 +260,7 @@ public class MenuFrame extends JFrame {
         				if(somma > 0) {
         				totaleTxtArea.setText(""+String.format("%.2f", somma)+"€");
         				consegna.setTotale(somma);
-        	checkOutInternalFrame.setVisible(true);
+        				checkOutInternalFrame.setVisible(true);
         				}
         				else {
         					JOptionPane.showMessageDialog(null, "Inserisci qualcosa nel carrello");
@@ -294,23 +295,10 @@ public class MenuFrame extends JFrame {
         lblCarrello.setBounds(584, 89, 81, 23);
         getContentPane().add(lblCarrello);
                 
-        JButton descrizioneButton = new JButton("Descrizione");
+        JButton descrizioneButton = new JButton("Descrizione");          //Bottone descrizione
         descrizioneButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		int isSelected = listaMenuJList.getSelectedIndex();
-        		if(isSelected == -1) {
-        			return;
-        		}        		
-        		String prodottoSelezionato = listaMenuJList.getSelectedValue();
-        		ArrayList<Prodotto> temp2 = null;
-        		temp2 = prodottoDAO.CaricaProdotti();
-        		for(Prodotto prodotto: temp2) {
-        		if(prodottoSelezionato.equals(prodotto.getNomeProdotto())) {
-        			ArrayList<String> listaAllergeni = new ArrayList<>();
-        			listaAllergeni = allergeneDAO.fornisciAllergeni(prodottoSelezionato);        			
-        			descrizioneTxt.setText(prodotto.getDescrizione()+".\nPREZZO: ["+String.format("%.2f", prodotto.getPrezzoProdotto())+"€]\nALLERGENI: "+listaAllergeni);	
-        		}
-        		}
+        	public void actionPerformed(ActionEvent e) {        		
+        		descrizioneTxt.setText(controller.ricavaDescrizioneProdotto(listaMenuJList));
         	}
         });
         descrizioneButton.setBounds(251, 326, 103, 40);
@@ -325,8 +313,7 @@ public class MenuFrame extends JFrame {
                 for(Prodotto prodotto :temp) {
                 	listaProdottiJl.add(prodotto.getNomeProdotto());
                 }
-        		resettaButton.setEnabled(false);
-        		
+        		resettaButton.setEnabled(false);       		
         	}
         });
         resettaButton.setEnabled(false);
@@ -344,7 +331,7 @@ public class MenuFrame extends JFrame {
         getContentPane().add(ricercaButton);
         
         JComboBox fasciaPrezzoBox = new JComboBox();
-        fasciaPrezzoBox.setModel(new DefaultComboBoxModel(new String[] {"Standard", "Prezzo basso", "Prezzo medo", "Prezzo alto"}));
+        fasciaPrezzoBox.setModel(new DefaultComboBoxModel(new String[] {"Standard", "Prezzo basso", "Prezzo medio", "Prezzo alto"}));
         fasciaPrezzoBox.setBounds(44, 90, 128, 31);
         ricercaInternalFrame.getContentPane().add(fasciaPrezzoBox);
         
@@ -387,48 +374,23 @@ public class MenuFrame extends JFrame {
         JButton cercaInternalButton = new JButton("Cerca");                   //BOTTONE INTERNAL CERCA
         cercaInternalButton.setFont(new Font("Calibri", Font.BOLD, 15));
         cercaInternalButton.addActionListener(new ActionListener() {
+        	
         	public void actionPerformed(ActionEvent e) {
-        		
-        		ArrayList<String> temp = null;
-        		ArrayList<String> temp2 = null;
-        		ArrayList<String> temp3 = null;
-    			int x = fasciaPrezzoBox.getSelectedIndex(); 
-        		switch(x) {
-        		case 0: break;
-        		case 1: temp = ricercaDAO.trovaProdottoPerPrezzoBasso();
-        					listaProdottiJl.clear();
-    						for(String s :temp) {
-    							listaProdottiJl.add(s);
-    						}
-        				break;
-        		case 2: temp2 = ricercaDAO.trovaProdottoPerPrezzoMedio();
-        				listaProdottiJl.clear();
-						for(String s :temp2) {
-							listaProdottiJl.add(s);
-						}
-						break;
-        		case 3: temp3 = ricercaDAO.trovaProdottoPerPrezzoAlto();
-        				listaProdottiJl.clear();
-						for(String s :temp3) {
-							
-							listaProdottiJl.add(s);
-						}
-						break;
-        		}
+        		int x = fasciaPrezzoBox.getSelectedIndex(); 
+        		listaProdottiJl = controller.ricercaPerPrezzo(x, listaProdottiJl);  
         		
         		if(cerealiCheck.isSelected()) {		
         			ArrayList<String> temp4 = null;
-        			temp4 = ricercaDAO.trovaProdottoPerAllergeni("Cereali e derivati");
+        			temp4 = ricercaDAO.trovaProdottoPerAllergeni("cereali e derivati");
         			for(String s :temp4) {
         				listaProdottiJl.remove(s);
-
         			}
         			cerealiCheck.setSelected(false);
         		}
         		if(uovaCheck.isSelected()) {
         			ArrayList<String> temp5 = null;
-        			temp5 = ricercaDAO.trovaProdottoPerAllergeni("Uova");
-        			for(String s :temp5) {
+        			temp5 = ricercaDAO.trovaProdottoPerAllergeni("uova");
+        			for(String s :temp5) {        				
         				listaProdottiJl.remove(s);
         			}
         			uovaCheck.setSelected(false);
@@ -473,6 +435,7 @@ public class MenuFrame extends JFrame {
         		resettaButton.setEnabled(true);
         		ricercaInternalFrame.setVisible(false);
         	}
+ 
         });
         cercaInternalButton.setBounds(452, 103, 108, 46);
         ricercaInternalFrame.getContentPane().add(cercaInternalButton);

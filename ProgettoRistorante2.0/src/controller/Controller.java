@@ -2,6 +2,7 @@ package controller;
 import javax.swing.*;
 
 
+
 import entity.*;
 import dao.*;
 import gui.*;
@@ -21,6 +22,8 @@ public class Controller {
 	ConsegnaDAO consegnaDAO;
 	RiderDAO riderDAO = new RiderDAO();
 	StoricoConsegneFrame2 storicoConsegneFrame;
+	AllergeneDAO allergeneDAO = new AllergeneDAO();
+	RicercaDAO ricercaDAO = new RicercaDAO();
 	
 	public static void main(String[] args) {
 		//Creare una nuova consegna ogni volta che si richiama il main???
@@ -126,7 +129,49 @@ public class Controller {
 	public void setIdRider(String mezzoRider) {
 		consegna.setIdRider(riderDAO.getIdRider(mezzoRider));		
 	}
-
 	
+	public String  ricavaDescrizioneProdotto(JList<String> tempJlist) {
+		String prodottoSelezionato = tempJlist.getSelectedValue();
+		String testoDescrizione = "";
+		ArrayList<Prodotto> temp2 = null;
+		temp2 = prodottoDAO.CaricaProdotti();
+		for(Prodotto prodotto: temp2) {
+		if(prodottoSelezionato.equals(prodotto.getNomeProdotto())) {
+			ArrayList<String> listaAllergeni = new ArrayList<>();
+			listaAllergeni = allergeneDAO.fornisciAllergeni(prodottoSelezionato);
+			 testoDescrizione = (prodotto.getDescrizione()+".\nPREZZO: ["+String.format("%.2f", prodotto.getPrezzoProdotto())+"€]\nALLERGENI: "+listaAllergeni);
+			}		
+		}
+		return testoDescrizione;
+	}
+	
+	
+	public ArrayList<String> ricercaPerPrezzo(int x, ArrayList<String> listaProdotti) {
+		ArrayList<String> temp = null;
+		ArrayList<String> temp2 = null;
+		ArrayList<String> temp3 = null;
 
+		switch(x) {
+		case 0: break;
+		case 1: temp = ricercaDAO.trovaProdottoPerPrezzoBasso();
+				listaProdotti.clear();
+				for(String s :temp) {
+				listaProdotti.add(s);
+				}
+				break;
+		case 2: temp2 = ricercaDAO.trovaProdottoPerPrezzoMedio();
+				listaProdotti.clear();
+				for(String s :temp2) {
+				listaProdotti.add(s);
+				}
+				break;
+		case 3: temp3 = ricercaDAO.trovaProdottoPerPrezzoAlto();
+				listaProdotti.clear();
+				for(String s :temp3) {							
+				listaProdotti.add(s);
+				}
+				break;
+		}
+		return listaProdotti;
+	}
 }

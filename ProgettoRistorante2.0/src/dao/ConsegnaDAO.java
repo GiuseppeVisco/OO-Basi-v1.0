@@ -42,6 +42,7 @@ public class ConsegnaDAO {
 		}
 
 		catch (SQLException e) {
+			System.out.println("Class Not Found: \n"+e);
 		}	
 	}
 	
