@@ -23,7 +23,7 @@ public class ConsegnaDAO {
 			}
 	}
 	
-	//SALVARE LA CONSEGNA COME ONSEGNA E NON COME ATTRIBUTI SINGOLI?
+	//INSERIRE LA CONSEGNA COME CONSEGNA E NON COME ATTRIBUTI SINGOLI?
 	public void insertConsegna(String ristorantePartenza, String indirizzoConsegna, double costoTotale, String usernameUtente, int idRiderAssegnato) {
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
