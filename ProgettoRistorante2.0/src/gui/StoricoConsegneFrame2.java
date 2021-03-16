@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import controller.Controller;
 import dao.ConsegnaDAO;
 
 import entity.Consegna;
@@ -30,7 +32,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.BevelBorder;
 
 public class StoricoConsegneFrame2 extends JFrame {
-
+	Controller c;
 	private JPanel contentPane;
 	private JTable table;
 	DateFormat dateFormat = new SimpleDateFormat("DD/MM/YY");
@@ -44,7 +46,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 	private JPanel panel;
 
 	public StoricoConsegneFrame2(Consegna c) {
-consegna = c;
+		consegna = c;
 		setTitle("Storico consegne");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 300, 955, 523);

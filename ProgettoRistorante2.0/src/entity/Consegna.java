@@ -14,18 +14,7 @@ public class Consegna {
 	String indirizzoRistorante;
 	ArrayList<Prodotto> ordine = new ArrayList<Prodotto>();
 	double totale;
-	
-//	public Consegna(Controller controller, Utente utente, Rider riderAssegnato, String indirizzoRistorante,
-//			ArrayList<Prodotto> ordine, double totale) {
-//		super();
-//		this.controller = controller;
-//		this.utente = utente;
-//		this.riderAssegnato = riderAssegnato;
-//		this.indirizzoRistorante = indirizzoRistorante;
-//		this.ordine = ordine;
-//		this.totale = totale;
-//	}
-//  Creare un costruttore che richiede tutti i parametri e inserirli soltanto alla fine ?
+
 	
 
 	public void setIndirizzoConsegna(String indirizzoConsegna) {

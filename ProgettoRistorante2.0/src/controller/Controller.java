@@ -42,7 +42,7 @@ public class Controller {
 		}
 		else {
 			boolean isAdmin = false;
-			if(isAdmin != utenteDAO.checkTipoUtente(username)) {
+			if(utenteDAO.checkTipoUtente(username)) {
 				consegna.setUsernameUtente(username);
 				storicoConsegneFrame = new StoricoConsegneFrame2(consegna);
 				loginFrame.setVisible(false);
@@ -112,12 +112,7 @@ public class Controller {
 		return temp;
 	}
 	
-	public int getIdRider() {
-//		int id=riderDAO.getIdRider(getIndirizzoConsegna());
-		//int id = riderDAO.getIdRider(getIndirizzoConsegna());
-		int id = consegna.getIdRider();
-		return id;
-	}
+
 	
 	public void aggiornaStoricoConsegne() {    
 		consegnaDAO = new ConsegnaDAO();
@@ -127,6 +122,12 @@ public class Controller {
 		riderDAO.updateCount(getIdRider());
 	}
 	
+	public int getIdRider() {
+//		int id=riderDAO.getIdRider(getIndirizzoConsegna());
+		//int id = riderDAO.getIdRider(getIndirizzoConsegna());
+		int id = consegna.getIdRider();
+		return id;
+	}
 	public void setIdRider(String mezzoRider) {
 		consegna.setIdRider(riderDAO.getIdRider(mezzoRider));		
 	}
