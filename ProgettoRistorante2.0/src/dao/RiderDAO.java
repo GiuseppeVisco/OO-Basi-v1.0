@@ -29,14 +29,14 @@ public class RiderDAO {
 		boolean check = false;
 		
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
     
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery("SELECT veicolo, cap_numero_consegne_raggiunto FROM rider");
+			ResultSet rs = st.executeQuery("SELECT veicolo, consegne_assegnate FROM rider");
 				while (rs.next()) {
 					String veicoloDB = rs.getString("veicolo");
-					boolean completoDB = rs.getBoolean("cap_numero_consegne_raggiunto");
-						if ((mezzoRider.equals(veicoloDB)) && (completoDB==false)) {
+					int completoDB = rs.getInt("consegne_assegnate");
+						if ((mezzoRider.equals(veicoloDB)) && (completoDB < 3)) {
 							check = true;
 							break;
 							}
@@ -45,24 +45,23 @@ public class RiderDAO {
             rs.close();
             st.close();
             con.close();
-
 		}
-	
 catch (SQLException e) {
     System.out.println("Class Not Found: \n"+e);
 }
-	
 	return check;
 }
+	
+	
 	//In base al veicolo scelto del rider ritorna l'id del primo rider disponibile con quel mezzo
 	public int getIdRider(String veicoloRider) {
 		
 		int id_rider = 0;
 		
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
     
-			PreparedStatement st = con.prepareStatement("SELECT id_rider FROM rider WHERE cap_numero_consegne_raggiunto = 'false' and veicolo =?");
+			PreparedStatement st = con.prepareStatement("SELECT id_rider FROM rider WHERE consegne_assegnate < 3 and veicolo =?");
 			st.setString(1, veicoloRider);
 			st.setMaxRows(1);
 			ResultSet rs = st.executeQuery();
@@ -74,14 +73,28 @@ catch (SQLException e) {
             rs.close();
             st.close();
             con.close();
-            
 		}
-	
 catch (SQLException e) {
     System.out.println("Class Not Found: \n"+e);
-}
-
+		}
 	return id_rider;
 	}
+	
+	public void updateCount(int idRider) {
+		
+		try {
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
+    
+			PreparedStatement st = con.prepareStatement("update rider set consegne_assegnate = consegne_assegnate+1 WHERE id_rider = ?");
+			st.setInt(1, idRider);
+			st.executeQuery();
 
+        //- Release delle risorse
+            st.close();
+            con.close();
+		}
+catch (SQLException e) {
+    System.out.println("Class Not Found: \n"+e);
+		}
 	}
+}

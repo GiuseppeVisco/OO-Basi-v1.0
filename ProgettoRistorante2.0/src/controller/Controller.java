@@ -113,6 +113,7 @@ public class Controller {
 	}
 	
 	public int getIdRider() {
+//		int id=riderDAO.getIdRider(getIndirizzoConsegna());
 		//int id = riderDAO.getIdRider(getIndirizzoConsegna());
 		int id = consegna.getIdRider();
 		return id;
@@ -122,7 +123,10 @@ public class Controller {
 		consegnaDAO = new ConsegnaDAO();
 		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider());
 	}
-
+	public void updateRiderCount() {
+		riderDAO.updateCount(getIdRider());
+	}
+	
 	public void setIdRider(String mezzoRider) {
 		consegna.setIdRider(riderDAO.getIdRider(mezzoRider));		
 	}

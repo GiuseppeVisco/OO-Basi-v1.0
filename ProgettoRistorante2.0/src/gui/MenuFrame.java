@@ -81,6 +81,7 @@ public class MenuFrame extends JFrame {
         accettaConsegnaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         			controller.aggiornaStoricoConsegne();
+        			controller.updateRiderCount();
         			JOptionPane.showMessageDialog(null, "L'ordine verrà consegnato al più presto.");
         			System.exit(1);       		
         	}

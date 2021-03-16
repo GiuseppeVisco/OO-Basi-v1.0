@@ -32,12 +32,10 @@ public class LoginFrame extends JFrame {
 	Controller controller;
 	private JPanel panel;
 
-	/**
-	 * Create the frame.
-	 */
+
 	public LoginFrame(Controller c) {
-		setTitle("Log In");
 		controller =c;
+		setTitle("Log In");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 300, 955, 523);
 		contentPane = new JPanel();

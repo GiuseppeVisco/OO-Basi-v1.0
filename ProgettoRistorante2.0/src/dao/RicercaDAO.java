@@ -26,7 +26,7 @@ public class RicercaDAO {
 		try {			
 			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/projectristoranteoodb","postgres","informatica");
 			
-			st = con.prepareStatement("SELECT menu.nome_piatto from menù NATURAL JOIN allergeniassociati NATURAL JOIN allergeni WHERE nome_allergene LIKE ?");
+			st = con.prepareStatement("SELECT menù.nome_piatto from menù NATURAL JOIN allergeniassociati NATURAL JOIN allergeni WHERE nome_allergene LIKE ?");
 			st.setString(1, nomeAllergene);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
@@ -51,9 +51,9 @@ public class RicercaDAO {
 	public ArrayList<String> trovaProdottoPerPrezzoBasso() {
 		ArrayList<String> listaProdottiDaAggiungere = new ArrayList();
 		try {			
-			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
 			
-			st = con.prepareStatement("SELECT nome_piatto from menu  WHERE costo > 0 and costo < 3 ");
+			st = con.prepareStatement("SELECT nome_piatto from menù  WHERE costo > 0 and costo < 3 ");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				String temp = "";
@@ -77,9 +77,9 @@ public class RicercaDAO {
 	public ArrayList<String> trovaProdottoPerPrezzoMedio() {
 		ArrayList<String> listaProdottiDaAggiungere2 = new ArrayList();
 		try {			
-			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
 			
-			st = con.prepareStatement("SELECT nome_piatto from menu where costo >= 3 and costo < 6 ");
+			st = con.prepareStatement("SELECT nome_piatto from menù where costo >= 3 and costo < 6 ");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				String temp = "";
@@ -103,9 +103,9 @@ public class RicercaDAO {
 	public ArrayList<String> trovaProdottoPerPrezzoAlto() {
 		ArrayList<String> listaProdottiDaAggiungere3 = new ArrayList();
 		try {			
-			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
 			
-			st = con.prepareStatement("SELECT menu.nome_piatto from menu  WHERE costo >= 6");
+			st = con.prepareStatement("SELECT menù.nome_piatto from menù  WHERE costo >= 6");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				String temp = "";
