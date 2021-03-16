@@ -130,7 +130,4 @@ public class Controller {
 	public void setIdRider(String mezzoRider) {
 		consegna.setIdRider(riderDAO.getIdRider(mezzoRider));		
 	}
-
-	
-
 }

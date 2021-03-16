@@ -11,6 +11,7 @@ import controller.*;
 
 public class ConsegnaDAO {	
 	Controller controller;
+	Consegna consegna = new Consegna();
 	private PreparedStatement st;
 	
 	public ConsegnaDAO() {
@@ -22,6 +23,7 @@ public class ConsegnaDAO {
 			}
 	}
 	
+	//SALVARE LA CONSEGNA COME ONSEGNA E NON COME ATTRIBUTI SINGOLI?
 	public void insertConsegna(String ristorantePartenza, String indirizzoConsegna, double costoTotale, String usernameUtente, int idRiderAssegnato) {
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
@@ -53,7 +55,6 @@ public class ConsegnaDAO {
 			st.setString(1, ristoranteAssegnato);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				Consegna consegna = new Consegna();
 				String ristorantePartenza = rs.getString("ristorante_di_partenza");
 				String indirizzoConsegna = rs.getString("indirizzo_consegna");
 				double costoTotale = rs.getDouble("costo_totale");
