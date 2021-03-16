@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
@@ -28,6 +29,10 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.BevelBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class StoricoConsegneFrame2 extends JFrame {
 
@@ -44,7 +49,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 	private JPanel panel;
 
 	public StoricoConsegneFrame2(Consegna c) {
-consegna = c;
+		consegna = c;
 		setTitle("Storico consegne");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 300, 955, 523);
@@ -66,7 +71,7 @@ consegna = c;
 					new Object[][] {
 					},
 					new String[] {
-							"Id Consegna", "Email Utente", "Indirizzo Ristorante", "Indirizzo di consegna", "Rider ID", "Totale pagato"
+							"Id Consegna", "Email Utente", "Indirizzo Ristorante", "Indirizzo di consegna", "Rider ID", "Totale pagato","Stato consegna"
 					}
 				));
 				
@@ -77,6 +82,7 @@ consegna = c;
 				contentPane.add(lblNewLabel);
 				
 				panel = new JPanel();
+				panel.setBackground(Color.CYAN);
 				panel.setBorder(new TitledBorder(null, "Ristorante in:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				panel.setBounds(10, 110, 210, 52);
 				contentPane.add(panel);
@@ -84,17 +90,28 @@ consegna = c;
 				
 				
 				nomeTxt = new JTextField();
+				nomeTxt.setBackground(Color.WHITE);
 				nomeTxt.setBounds(6, 16, 196, 25);
 				panel.add(nomeTxt);
 				nomeTxt.setEditable(false);
 				nomeTxt.setColumns(10);
 				nomeTxt.setText(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));													
-				model = (DefaultTableModel) table.getModel();
 				
+				JButton btnNewButton = new JButton("Conferma consegne effettuate");
+				btnNewButton.setFont(new Font("Calibri", Font.BOLD, 15));
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						consegnaDAO.resettaConsegneAssegnate(); //resetta a 0 tutte le consegne attive dei rider
+						consegnaDAO.aggiornaStatoConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));  //setta a "consegnato" tutte le consegne del ristorante dell'admin
+					}
+				});
+				btnNewButton.setBounds(701, 134, 228, 40);
+				contentPane.add(btnNewButton);
+				model = (DefaultTableModel) table.getModel();
 				 ArrayList<Consegna> temp = null;
-			        temp = consegnaDAO.listaConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));			        
-			        for(Consegna consegna :temp) { 
-			        	model.addRow(new Object[] {"["+consegna.getIdConsegna()+"]",consegna.getUsernameUtente(), consegna.getIndirizzoRistorante(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), ""+consegna.getTotale()+"€" });
+			     temp = consegnaDAO.listaConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
+			     for(Consegna consegna :temp) { 			        	
+			        	model.addRow(new Object[] {"["+consegna.getIdConsegna()+"]",consegna.getUsernameUtente(), consegna.getIndirizzoRistorante(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
 			        }
 	}
 }

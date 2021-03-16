@@ -27,12 +27,13 @@ public class Controller {
 	
 	public static void main(String[] args) {
 		//Creare una nuova consegna ogni volta che si richiama il main???
-		Controller c = new Controller();	
+		Controller c = new Controller();
+		
 	}
 	
 	public Controller() {
 		loginFrame = new LoginFrame(this);
-		loginFrame.setVisible(true);	
+		loginFrame.setVisible(true);
 
 		
 	}

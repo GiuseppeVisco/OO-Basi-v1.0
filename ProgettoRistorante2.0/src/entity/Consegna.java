@@ -14,6 +14,7 @@ public class Consegna {
 	String indirizzoRistorante;
 	ArrayList<Prodotto> ordine = new ArrayList<Prodotto>();
 	double totale;
+	String statoConsegna;
 	
 //	public Consegna(Controller controller, Utente utente, Rider riderAssegnato, String indirizzoRistorante,
 //			ArrayList<Prodotto> ordine, double totale) {
@@ -78,6 +79,14 @@ public class Consegna {
 
 	public void setIdRider(int i) {
 		this.idRider = i;
+	}
+
+	public String getStatoConsegna() {
+		return statoConsegna;
+	}
+
+	public void setStatoConsegna(String statoConsegna) {
+		this.statoConsegna = statoConsegna;
 	}
 	
 	//Metodo set prodotti

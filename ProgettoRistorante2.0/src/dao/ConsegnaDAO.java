@@ -12,7 +12,9 @@ import controller.*;
 public class ConsegnaDAO {	
 	Controller controller;
 	Consegna consegna = new Consegna();
+	RistoranteDAO ristoranteDAO = new RistoranteDAO();
 	private PreparedStatement st;
+	private PreparedStatement st2;
 	
 	public ConsegnaDAO() {
 		try {
@@ -28,12 +30,13 @@ public class ConsegnaDAO {
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 
-			st = con.prepareStatement("INSERT INTO consegne(ristorante_di_partenza, indirizzo_consegna, costo_totale, mail_utente, id_rider) VALUES (?,?,?,?,?)");
+			st = con.prepareStatement("INSERT INTO consegne(ristorante_di_partenza, indirizzo_consegna, costo_totale, mail_utente, id_rider, stato_consegna) VALUES (?,?,?,?,?,?)");
 			st.setString(1, ristorantePartenza);
 			st.setString(2, indirizzoConsegna);
 			st.setDouble(3, costoTotale);
 			st.setString(4, usernameUtente);
 			st.setInt(5, idRiderAssegnato);
+			st.setString(6,"In consegna");
 			
 			ResultSet rs = st.executeQuery();
 			
@@ -62,13 +65,15 @@ public class ConsegnaDAO {
 				String mailUtente = rs.getString("mail_utente");
 				int idRider = rs.getInt("id_rider");
 				String idConsegna = rs.getString("id_consegna");
-				
+				String statoConsegna = rs.getString("stato_consegna");
+				Consegna consegna = new Consegna();
 				consegna.setIndirizzoRistorante(ristorantePartenza);
 				consegna.setIndirizzoConsegna(indirizzoConsegna);
 				consegna.setTotale(costoTotale);
 				consegna.setUsernameUtente(mailUtente);
 				consegna.setRider(idRider);
 				consegna.setIdConsegna(idConsegna);
+				consegna.setStatoConsegna(statoConsegna);
 				
 				listaStorico.add(consegna);
 				
@@ -82,5 +87,40 @@ public class ConsegnaDAO {
 			System.out.println("Class Not Found: \n"+e);
 		}
 		return listaStorico;
+	}
+	
+	public void aggiornaStatoConsegne(String s) {
+		try {			
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			st = con.prepareStatement("update consegne set stato_consegna = 'Consegnato' where ristorante_di_partenza like ?");
+			st.setString(1, s);
+			ResultSet rs = st.executeQuery();
+
+			// Release delle risorse
+						rs.close();
+						st.close();
+						con.close();
+			}
+		catch (SQLException e) {
+			System.out.println("Class Not Found: \n"+e);
+		}
+	}
+	
+	
+	public void resettaConsegneAssegnate() {
+		try {
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			st = con.prepareStatement("update rider set consegne_assegnate = '0'");
+			
+			ResultSet rs = st.executeQuery();
+
+			// Release delle risorse
+						rs.close();
+						st.close();
+						con.close();
+			}
+		catch (SQLException e) {
+			System.out.println("Class Not Found: \n"+e);
+		}
 	}
 }
