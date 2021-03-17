@@ -66,7 +66,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 				
 				storicoTable = new JTable();		
 				storicoTable.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				storicoTable.setFont(new Font("Lucida Sans", Font.PLAIN, 11));
+				storicoTable.setFont(new Font("Lucida Sans", Font.BOLD, 12));
 				scrollPane.setViewportView(storicoTable);
 				storicoTable.setModel(new DefaultTableModel(
 					new Object[][] {
@@ -83,7 +83,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 				contentPane.add(lblNewLabel);
 				
 				panel = new JPanel();
-				panel.setBackground(Color.CYAN);
+				panel.setBackground(Color.LIGHT_GRAY);
 				panel.setBorder(new TitledBorder(null, "Ristorante in:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				panel.setBounds(0, 11, 210, 52);
 				contentPane.add(panel);
@@ -112,6 +112,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 				contentPane.add(confermaConsegneButton);
 				
 				JButton rimuoviConsegnaButton = new JButton("Rimuovi consegna");
+				rimuoviConsegnaButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 				rimuoviConsegnaButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(storicoTable.getSelectedColumn() == 0) {
@@ -129,15 +130,16 @@ public class StoricoConsegneFrame2 extends JFrame {
 				rimuoviConsegnaButton.setBounds(447, 363, 236, 40);
 				contentPane.add(rimuoviConsegnaButton);
 				
-				JPanel panel_1 = new JPanel();
-				panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-				panel_1.setBounds(10, 352, 236, 110);
-				contentPane.add(panel_1);
-				panel_1.setLayout(null);
+				JPanel idResearchPanel = new JPanel();
+				idResearchPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+				idResearchPanel.setBounds(10, 352, 236, 124);
+				contentPane.add(idResearchPanel);
+				idResearchPanel.setLayout(null);
 				
 				ricercaPerIdButton = new JButton("Cerca per Id rider");
-				ricercaPerIdButton.setBounds(0, 42, 236, 40);
-				panel_1.add(ricercaPerIdButton);
+				ricercaPerIdButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+				ricercaPerIdButton.setBounds(45, 42, 148, 40);
+				idResearchPanel.add(ricercaPerIdButton);
 				ricercaPerIdButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						cercaPerIdRider();
@@ -147,23 +149,25 @@ public class StoricoConsegneFrame2 extends JFrame {
 				cercaIdRiderTxt = new JTextField();
 				cercaIdRiderTxt.setHorizontalAlignment(SwingConstants.CENTER);
 				cercaIdRiderTxt.setBounds(91, 16, 59, 20);
-				panel_1.add(cercaIdRiderTxt);
+				idResearchPanel.add(cercaIdRiderTxt);
 				cercaIdRiderTxt.setColumns(10);
 				
 				JButton resetButton = new JButton("Reset");
+				resetButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 				resetButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						model.setRowCount(0);
 						aggiungiRighe();
 					}
 				});
-				resetButton.setBounds(137, 87, 89, 23);
-				panel_1.add(resetButton);
+				resetButton.setBounds(74, 92, 89, 23);
+				idResearchPanel.add(resetButton);
 				
 				JLabel lblNewLabel_1 = new JLabel("ID");
+				lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 				lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 				lblNewLabel_1.setBounds(35, 19, 46, 14);
-				panel_1.add(lblNewLabel_1);
+				idResearchPanel.add(lblNewLabel_1);
 
 				 model = (DefaultTableModel) storicoTable.getModel();
 				 aggiungiRighe();
@@ -192,8 +196,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 			JOptionPane.showMessageDialog(null, "Errore, inserire un valore numerico");
 			flag = 1;
 		}
-		ArrayList<Consegna> temp = null;
-		temp = consegnaDAO.cercaPerIdRider(idRider, ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
+		ArrayList<Consegna> temp = consegnaDAO.cercaPerIdRider(idRider, ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
 		for(Consegna consegna :temp) { 			        	
         	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getIndirizzoRistorante(), consegna.getUsernameUtente(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), consegna.getVeicoloUtilizzato(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
         }

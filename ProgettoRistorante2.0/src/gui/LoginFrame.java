@@ -23,7 +23,6 @@ public class LoginFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
-	
 	Controller controller;
 	private JPanel panel;
 

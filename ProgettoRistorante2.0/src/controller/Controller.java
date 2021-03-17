@@ -16,7 +16,6 @@ public class Controller {
 	RiderFrame riderFrame;
 	MenuFrame menuFrame;
 	UtenteDAO utenteDAO = new UtenteDAO();
-	Ordine ordine = new Ordine();
 	ProdottoDAO prodottoDAO = new ProdottoDAO();
 	Consegna consegna = new Consegna();
 	ConsegnaDAO consegnaDAO;
@@ -24,18 +23,21 @@ public class Controller {
 	StoricoConsegneFrame2 storicoConsegneFrame;
 	AllergeneDAO allergeneDAO = new AllergeneDAO();
 	RicercaDAO ricercaDAO = new RicercaDAO();
+	ClosingFrame closingFrame;
 	
 	public static void main(String[] args) {
-		//Creare una nuova consegna ogni volta che si richiama il main???
+		
 		Controller c = new Controller();
 		
 	}
 	
 	public Controller() {
+		openLoginFrame();
+	}
+	
+	public void openLoginFrame() {
 		loginFrame = new LoginFrame(this);
-		loginFrame.setVisible(true);
-
-		
+		loginFrame.setVisible(true);	
 	}
 	
 	public void checkCredentials(String username,String password) {		
@@ -57,7 +59,7 @@ public class Controller {
 			}
 	}
 }
-	//UPDATE
+
 	public void checkRiderAvailable(String s) {
 		boolean check=riderDAO.checkAvailability(s);
 		if(check) {
@@ -90,11 +92,7 @@ public class Controller {
 		riderFrame.setVisible(true);
 	}
 	
-	public void openMenuFrame() {
-		
-		//STAMPA IN CONSOLE L'ID DEL RIDER DISPONIBILE CON QUEL MEZZO, DA CANCELLARE
-		System.out.println(consegna.getIdRider());
-		
+	public void openMenuFrame() {		
 		
 		riderFrame.setVisible(false);
 		menuFrame = new MenuFrame(this);
@@ -126,8 +124,6 @@ public class Controller {
 	}
 	
 	public int getIdRiderConsegna() {
-//		int id=riderDAO.getIdRider(getIndirizzoConsegna());
-		//int id = riderDAO.getIdRider(getIndirizzoConsegna());
 		int id = consegna.getIdRider();
 		return id;
 	}
@@ -184,9 +180,20 @@ public class Controller {
 		}
 		return listaProdotti;
 	}
+
 	
 	public void setTotaleConsegna(double totale) {
 		consegna.setTotale(totale);
+	}
+
+	public void openClosingFrame() {
+		menuFrame.setVisible(false);
+		closingFrame = new ClosingFrame(this);
+		closingFrame.setVisible(true);
+	}
+	
+	public void closeClosingFrame() {
+		closingFrame.setVisible(false);
 	}
 }
 

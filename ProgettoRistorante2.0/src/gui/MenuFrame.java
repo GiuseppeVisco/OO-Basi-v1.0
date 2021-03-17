@@ -33,12 +33,12 @@ public class MenuFrame extends JFrame {
 		setBounds(500, 300, 955, 523);
 		               
         JInternalFrame ricercaInternalFrame = new JInternalFrame("Ricerca");
-        ricercaInternalFrame.setBounds(20, 99, 645, 267);
+        ricercaInternalFrame.setBounds(223, 149, 645, 267);
         getContentPane().add(ricercaInternalFrame);
         ricercaInternalFrame.getContentPane().setLayout(null);
         
         JInternalFrame checkOutInternalFrame = new JInternalFrame("Check Out");
-        checkOutInternalFrame.setBounds(30, 37, 839, 412);
+        checkOutInternalFrame.setBounds(80, 25, 839, 412);
         getContentPane().add(checkOutInternalFrame);
         checkOutInternalFrame.getContentPane().setLayout(null);
         
@@ -53,12 +53,22 @@ public class MenuFrame extends JFrame {
         panel_1.add(totaleTxtArea);
         totaleTxtArea.setEditable(false);
         totaleTxtArea.setText("?$");
+
                 
         JLabel totaleLabel = new JLabel("Totale");
         totaleLabel.setFont(new Font("Calibri", Font.PLAIN, 13));
         totaleLabel.setBounds(6, 16, 46, 14);
         panel_1.add(totaleLabel);
         totaleLabel.setHorizontalAlignment(SwingConstants.RIGHT);              
+
+        
+        
+        JLabel lblNewLabel_3 = new JLabel("Totale");
+        lblNewLabel_3.setFont(new Font("Calibri", Font.PLAIN, 13));
+        lblNewLabel_3.setBounds(6, 16, 46, 14);
+        panel_1.add(lblNewLabel_3);
+        lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
+              
         
         JTextArea usernameConsegnaTxt = new JTextArea();
         usernameConsegnaTxt.setEditable(false);
@@ -150,12 +160,20 @@ public class MenuFrame extends JFrame {
         JList<String> listaCarrelloJList = new JList<String>(listaCarrelloModel);
        scrollPane_1.setViewportView(listaCarrelloJList);
         
+
         JLabel menuPrincipaleLabel = new JLabel("Men\u00F9 Principale");
         menuPrincipaleLabel.setBounds(240, 89, 113, 23);
         getContentPane().add(menuPrincipaleLabel);
+                     
+        JLabel lblNewLabel = new JLabel("Men\u00F9 Principale");
+        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+        lblNewLabel.setBounds(241, 77, 113, 23);
+        getContentPane().add(lblNewLabel);
+
         
         JLabel lblCarrello = new JLabel("Carrello");
-        lblCarrello.setBounds(584, 89, 81, 23);
+        lblCarrello.setFont(new Font("Tahoma", Font.BOLD, 12));
+        lblCarrello.setBounds(584, 77, 81, 23);
         getContentPane().add(lblCarrello);
                                                
         JComboBox<String> fasciaPrezzoBox = new JComboBox<String>();
@@ -180,41 +198,47 @@ public class MenuFrame extends JFrame {
         ricercaInternalFrame.getContentPane().add(eliminaProdottoLabel);
         
         JCheckBox cerealiCheck = new JCheckBox("Cereali");
+        cerealiCheck.setFont(new Font("Tahoma", Font.PLAIN, 12));
         cerealiCheck.setSelected(false);
         cerealiCheck.setBounds(246, 61, 152, 23);
         ricercaInternalFrame.getContentPane().add(cerealiCheck);
         
         JCheckBox uovaCheck = new JCheckBox("Uova");
+        uovaCheck.setFont(new Font("Tahoma", Font.PLAIN, 12));
         uovaCheck.setBounds(246, 87, 152, 23);
         ricercaInternalFrame.getContentPane().add(uovaCheck);
         
         JCheckBox arachidiCheck = new JCheckBox("Arachidi");
+        arachidiCheck.setFont(new Font("Tahoma", Font.PLAIN, 12));
         arachidiCheck.setBounds(246, 113, 152, 23);
         ricercaInternalFrame.getContentPane().add(arachidiCheck);
         
         JCheckBox soiaCheck = new JCheckBox("Soia");
+        soiaCheck.setFont(new Font("Tahoma", Font.PLAIN, 12));
         soiaCheck.setBounds(246, 139, 152, 23);
         ricercaInternalFrame.getContentPane().add(soiaCheck);
         
         JCheckBox latteCheck = new JCheckBox("Latte");
+        latteCheck.setFont(new Font("Tahoma", Font.PLAIN, 12));
         latteCheck.setBounds(246, 165, 152, 23);
         ricercaInternalFrame.getContentPane().add(latteCheck);
         
         JCheckBox anidrideCheck = new JCheckBox("Anidride solforosa e solfiti");
+        anidrideCheck.setFont(new Font("Tahoma", Font.PLAIN, 12));
         anidrideCheck.setBounds(246, 191, 160, 23);
         ricercaInternalFrame.getContentPane().add(anidrideCheck);
         
         
         //////////////// BOTTONI //////////////////////
         
+
         JButton accettaConsegnaButton = new JButton("Accetta");				//Bottone AccettaConsegna
         accettaConsegnaButton.setFont(new Font("Calibri", Font.BOLD, 15));
         accettaConsegnaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         			controller.aggiornaStoricoConsegne();
         			controller.updateRiderCount();
-        			JOptionPane.showMessageDialog(null, "L'ordine verrà consegnato al più presto.");
-        			System.exit(1); 
+        			controller.openClosingFrame();
         	}
         });
         accettaConsegnaButton.setBounds(724, 286, 89, 35);

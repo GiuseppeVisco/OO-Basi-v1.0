@@ -22,7 +22,7 @@ public class RistoranteDAO {
 		public String  ricavaRistoranteAdmin(String emailAdmin) {
 			String temp = "";
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");    
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");    
 			st = con.prepareStatement("SELECT indirizzo_ristorante FROM utente JOIN ristoranti ON user_id = admin_id WHERE email LIKE ? ");
 			st.setString(1, emailAdmin);			
 			ResultSet rs = st.executeQuery();
