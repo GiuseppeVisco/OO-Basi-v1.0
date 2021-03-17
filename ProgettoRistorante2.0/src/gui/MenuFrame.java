@@ -325,9 +325,14 @@ public class MenuFrame extends JFrame {
         getContentPane().add(ricercaButton);
         
         JComboBox fasciaPrezzoBox = new JComboBox();
-        fasciaPrezzoBox.setModel(new DefaultComboBoxModel(new String[] {"Standard", "Prezzo basso", "Prezzo medio", "Prezzo alto"}));
+        fasciaPrezzoBox.setModel(new DefaultComboBoxModel(new String[] {"", "Prezzo basso", "Prezzo medio", "Prezzo alto"}));
         fasciaPrezzoBox.setBounds(44, 90, 128, 31);
         ricercaInternalFrame.getContentPane().add(fasciaPrezzoBox);
+        
+        JComboBox tipoProdottoBox = new JComboBox();
+        tipoProdottoBox.setModel(new DefaultComboBoxModel(new String[] {"", "Snack", "Primi", "Secondi", "Bevande"}));
+        tipoProdottoBox.setBounds(44, 165, 128, 31);
+        ricercaInternalFrame.getContentPane().add(tipoProdottoBox);
         
         JLabel lblNewLabel_4 = new JLabel("Fascia di prezzo");
         lblNewLabel_4.setFont(new Font("Calibri", Font.BOLD, 14));
@@ -365,13 +370,24 @@ public class MenuFrame extends JFrame {
         anidrideCheck.setBounds(246, 191, 160, 23);
         ricercaInternalFrame.getContentPane().add(anidrideCheck);
         
+        
+        
+        
         JButton cercaInternalButton = new JButton("Cerca");                   //BOTTONE INTERNAL CERCA
         cercaInternalButton.setFont(new Font("Calibri", Font.BOLD, 15));
         cercaInternalButton.addActionListener(new ActionListener() {
         	
         	public void actionPerformed(ActionEvent e) {
         		int x = fasciaPrezzoBox.getSelectedIndex(); 
-        		listaProdottiJl = controller.ricercaPerPrezzo(x, listaProdottiJl);  
+        		int y = tipoProdottoBox.getSelectedIndex();
+        		listaProdottiJl = controller.ricercaPerPrezzo(x, listaProdottiJl);
+        		fasciaPrezzoBox.setSelectedIndex(0);
+        		if (y != 0) {
+        		ArrayList<String> temp = new ArrayList<String>();
+        		temp = ricercaDAO.trovaProdottoPerTipo(y);
+        		listaProdottiJl.removeAll(temp);
+        		tipoProdottoBox.setSelectedIndex(0);
+        		}
         		
         		if(cerealiCheck.isSelected()) {		
         			ArrayList<String> temp4 = null;
@@ -433,6 +449,14 @@ public class MenuFrame extends JFrame {
         });
         cercaInternalButton.setBounds(452, 103, 108, 46);
         ricercaInternalFrame.getContentPane().add(cercaInternalButton);
+        
+
+        
+        JLabel lblNewLabel_4_1 = new JLabel("Tipo prodotto");
+        lblNewLabel_4_1.setHorizontalAlignment(SwingConstants.LEFT);
+        lblNewLabel_4_1.setFont(new Font("Calibri", Font.BOLD, 14));
+        lblNewLabel_4_1.setBounds(44, 143, 128, 18);
+        ricercaInternalFrame.getContentPane().add(lblNewLabel_4_1);
     }
 
     class MyListModel implements ListModel {

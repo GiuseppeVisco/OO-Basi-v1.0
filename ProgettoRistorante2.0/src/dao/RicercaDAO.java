@@ -20,7 +20,7 @@ public class RicercaDAO {
 			System.out.println("Class Not Found: \n"+e);
 			}
 	}
-	
+
 	public ArrayList<String> trovaProdottoPerAllergeni(String nomeAllergene) {
 
 		ArrayList<String> listaProdottiDaEliminare = new ArrayList<String>();
@@ -128,6 +128,34 @@ public class RicercaDAO {
 		}	
 		
 		return listaProdottiDaAggiungere3;
+	}
+
+	
+	public ArrayList<String> trovaProdottoPerTipo(int codiceProdotto) {
+		ArrayList<String> listaProdottiDaAggiungere4 = new ArrayList<String>();
+		try {			
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			
+			st = con.prepareStatement("SELECT menù.nome_piatto from menù  WHERE codice_prodotto != ?");
+			st.setInt(1, codiceProdotto);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				String temp = "";
+				temp = rs.getString("nome_piatto");
+				
+				listaProdottiDaAggiungere4.add(temp);
+			}
+			
+			//- Release delle risorse
+			rs.close();
+			st.close();
+			con.close();
+		}
+		catch (SQLException e) {
+			System.out.println("Class Not Found: \n"+e);
+		}	
+		
+		return listaProdottiDaAggiungere4;		
 	}
 	
 }

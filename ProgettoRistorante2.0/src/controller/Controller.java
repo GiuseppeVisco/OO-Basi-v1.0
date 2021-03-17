@@ -184,6 +184,16 @@ public class Controller {
 		}
 		return listaProdotti;
 	}
+	
+	public ArrayList<String> ricercaPerTipo(int x, ArrayList<String> listaProdotti) {
+		ArrayList<String> temp = null;
+		ArrayList<String> temp2 = null;
+		ArrayList<String> temp3 = null;
+		ArrayList<String> temp4 = null;
+
+
+		return listaProdotti;
+	}
 }
 
 
