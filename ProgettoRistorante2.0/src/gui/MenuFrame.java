@@ -47,7 +47,7 @@ public class MenuFrame extends JFrame {
         ricercaInternalFrame.getContentPane().setLayout(null);
         
         JInternalFrame checkOutInternalFrame = new JInternalFrame("Check Out");
-        checkOutInternalFrame.setBounds(92, 471, 839, 412);
+        checkOutInternalFrame.setBounds(80, 25, 839, 412);
         getContentPane().add(checkOutInternalFrame);
         checkOutInternalFrame.getContentPane().setLayout(null);
         
@@ -76,8 +76,7 @@ public class MenuFrame extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         			controller.aggiornaStoricoConsegne();
         			controller.updateRiderCount();
-        			JOptionPane.showMessageDialog(null, "L'ordine verrà consegnato al più presto.");
-        			System.exit(1); 
+        			controller.openClosingFrame();
         	}
         });
         accettaConsegnaButton.setBounds(724, 286, 89, 35);
@@ -276,11 +275,6 @@ public class MenuFrame extends JFrame {
         btnNewButton_1.setBounds(13, 286, 89, 35);
         checkOutInternalFrame.getContentPane().add(btnNewButton_1);
         
-        JButton btnNewButton_3 = new JButton("Log Out");
-        btnNewButton_3.setFont(new Font("Calibri", Font.BOLD, 15));
-        btnNewButton_3.setBounds(10, 414, 89, 23);
-        getContentPane().add(btnNewButton_3);
-        
         JLabel lblNewLabel = new JLabel("Men\u00F9 Principale");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
         lblNewLabel.setBounds(241, 77, 113, 23);
@@ -327,7 +321,6 @@ public class MenuFrame extends JFrame {
         getContentPane().add(ricercaButton);
         
         JComboBox fasciaPrezzoBox = new JComboBox();
-        fasciaPrezzoBox.setFont(new Font("Tahoma", Font.PLAIN, 12));
         fasciaPrezzoBox.setModel(new DefaultComboBoxModel(new String[] {"Standard", "Prezzo basso", "Prezzo medio", "Prezzo alto"}));
         fasciaPrezzoBox.setBounds(44, 90, 128, 31);
         ricercaInternalFrame.getContentPane().add(fasciaPrezzoBox);

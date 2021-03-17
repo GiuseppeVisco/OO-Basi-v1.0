@@ -16,7 +16,6 @@ public class Controller {
 	RiderFrame riderFrame;
 	MenuFrame menuFrame;
 	UtenteDAO utenteDAO = new UtenteDAO();
-	Ordine ordine = new Ordine();
 	ProdottoDAO prodottoDAO = new ProdottoDAO();
 	Consegna consegna = new Consegna();
 	ConsegnaDAO consegnaDAO;
@@ -24,6 +23,7 @@ public class Controller {
 	StoricoConsegneFrame2 storicoConsegneFrame;
 	AllergeneDAO allergeneDAO = new AllergeneDAO();
 	RicercaDAO ricercaDAO = new RicercaDAO();
+	ClosingFrame closingFrame;
 	
 	public static void main(String[] args) {
 		
@@ -32,10 +32,12 @@ public class Controller {
 	}
 	
 	public Controller() {
+		openLoginFrame();
+	}
+	
+	public void openLoginFrame() {
 		loginFrame = new LoginFrame(this);
-		loginFrame.setVisible(true);
-
-		
+		loginFrame.setVisible(true);	
 	}
 	
 	public void checkCredentials(String username,String password) {		
@@ -177,6 +179,16 @@ public class Controller {
 				break;
 		}
 		return listaProdotti;
+	}
+
+	public void openClosingFrame() {
+		menuFrame.setVisible(false);
+		closingFrame = new ClosingFrame(this);
+		closingFrame.setVisible(true);
+	}
+	
+	public void closeClosingFrame() {
+		closingFrame.setVisible(false);
 	}
 }
 
