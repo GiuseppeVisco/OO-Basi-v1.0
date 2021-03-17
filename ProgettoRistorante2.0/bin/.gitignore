@@ -1,4 +1,3 @@
-/controller/
-/gui/
 /dao/
-/entity/
+/gui/
+/controller/

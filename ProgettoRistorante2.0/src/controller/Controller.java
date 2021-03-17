@@ -26,7 +26,7 @@ public class Controller {
 	RicercaDAO ricercaDAO = new RicercaDAO();
 	
 	public static void main(String[] args) {
-		//Creare una nuova consegna ogni volta che si richiama il main???
+		
 		Controller c = new Controller();
 		
 	}
@@ -57,7 +57,7 @@ public class Controller {
 			}
 	}
 }
-	//UPDATE
+
 	public void checkRiderAvailable(String s) {
 		boolean check=riderDAO.checkAvailability(s);
 		if(check) {
@@ -90,11 +90,7 @@ public class Controller {
 		riderFrame.setVisible(true);
 	}
 	
-	public void openMenuFrame() {
-		
-		//STAMPA IN CONSOLE L'ID DEL RIDER DISPONIBILE CON QUEL MEZZO, DA CANCELLARE
-		System.out.println(consegna.getIdRider());
-		
+	public void openMenuFrame() {		
 		
 		riderFrame.setVisible(false);
 		menuFrame = new MenuFrame(this, consegna);
@@ -126,8 +122,6 @@ public class Controller {
 	}
 	
 	public int getIdRiderConsegna() {
-//		int id=riderDAO.getIdRider(getIndirizzoConsegna());
-		//int id = riderDAO.getIdRider(getIndirizzoConsegna());
 		int id = consegna.getIdRider();
 		return id;
 	}
