@@ -14,7 +14,6 @@ public class ConsegnaDAO {
 	Consegna consegna = new Consegna();
 	RistoranteDAO ristoranteDAO = new RistoranteDAO();
 	private PreparedStatement st;
-	private PreparedStatement st2;
 	
 	public ConsegnaDAO() {
 		try {
@@ -52,7 +51,7 @@ public class ConsegnaDAO {
 	}
 	
 	public ArrayList<Consegna> listaConsegne (String ristoranteAssegnato) {
-		ArrayList<Consegna> listaStorico = new ArrayList();
+		ArrayList<Consegna> listaStorico = new ArrayList<Consegna>();
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 			st = con.prepareStatement("SELECT * from consegne WHERE ristorante_di_partenza LIKE ?");
@@ -89,11 +88,11 @@ public class ConsegnaDAO {
 		return listaStorico;
 	}
 	
-	public void aggiornaStatoConsegne(String s) {
+	public void aggiornaStatoConsegne(String ristorantePartenza) {
 		try {			
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 			st = con.prepareStatement("update consegne set stato_consegna = 'Consegnato' where ristorante_di_partenza like ?");
-			st.setString(1, s);
+			st.setString(1, ristorantePartenza);
 			ResultSet rs = st.executeQuery();
 
 			// Release delle risorse
@@ -122,5 +121,64 @@ public class ConsegnaDAO {
 		catch (SQLException e) {
 			System.out.println("Class Not Found: \n"+e);
 		}
+	}
+	
+	public void cancellaConsegna(int idConsegna) {
+		try {
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			st = con.prepareStatement("delete from consegne where id_consegna = ?");
+			st.setInt(1, idConsegna);
+			
+			ResultSet rs = st.executeQuery();
+
+			// Release delle risorse
+						rs.close();
+						st.close();
+						con.close();
+			}
+		catch (SQLException e) {
+			System.out.println("Class Not Found: \n"+e);
+		}
+		
+	}
+	
+	public ArrayList<Consegna> cercaPerIdRider(int riderId, String ristoranteAssegnato) {
+		ArrayList<Consegna> listaStoricoPerIdRider = new ArrayList<Consegna>();
+		try {
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			st = con.prepareStatement("SELECT * from consegne WHERE ristorante_di_partenza LIKE ? AND id_rider = ?");
+			st.setString(1, ristoranteAssegnato);
+			st.setInt(2, riderId);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				String ristorantePartenza = rs.getString("ristorante_di_partenza");
+				String indirizzoConsegna = rs.getString("indirizzo_consegna");
+				double costoTotale = rs.getDouble("costo_totale");
+				String mailUtente = rs.getString("mail_utente");
+				int idRider = rs.getInt("id_rider");
+				String idConsegna = rs.getString("id_consegna");
+				String statoConsegna = rs.getString("stato_consegna");
+				Consegna consegna = new Consegna();
+				consegna.setIndirizzoRistorante(ristorantePartenza);
+				consegna.setIndirizzoConsegna(indirizzoConsegna);
+				consegna.setTotale(costoTotale);
+				consegna.setUsernameUtente(mailUtente);
+				consegna.setRider(idRider);
+				consegna.setIdConsegna(idConsegna);
+				consegna.setStatoConsegna(statoConsegna);
+				
+				listaStoricoPerIdRider.add(consegna);
+				
+			}
+		// Release delle risorse
+			rs.close();
+			st.close();
+			con.close();
+		}
+		catch (SQLException e) {
+			System.out.println("Class Not Found: \n"+e);
+		}
+		return listaStoricoPerIdRider;
+		
 	}
 }

@@ -23,7 +23,7 @@ public class RicercaDAO {
 	
 	public ArrayList<String> trovaProdottoPerAllergeni(String nomeAllergene) {
 
-		ArrayList<String> listaProdottiDaEliminare = new ArrayList();
+		ArrayList<String> listaProdottiDaEliminare = new ArrayList<String>();
 		try {			
 			Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 			
@@ -51,7 +51,7 @@ public class RicercaDAO {
 	
 	
 	public ArrayList<String> trovaProdottoPerPrezzoBasso() {
-		ArrayList<String> listaProdottiDaAggiungere = new ArrayList();
+		ArrayList<String> listaProdottiDaAggiungere = new ArrayList<String>();
 		try {			
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 			
@@ -78,7 +78,7 @@ public class RicercaDAO {
 	
 	
 	public ArrayList<String> trovaProdottoPerPrezzoMedio() {
-		ArrayList<String> listaProdottiDaAggiungere2 = new ArrayList();
+		ArrayList<String> listaProdottiDaAggiungere2 = new ArrayList<String>();
 		try {			
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 			
@@ -105,7 +105,7 @@ public class RicercaDAO {
 	
 	
 	public ArrayList<String> trovaProdottoPerPrezzoAlto() {
-		ArrayList<String> listaProdottiDaAggiungere3 = new ArrayList();
+		ArrayList<String> listaProdottiDaAggiungere3 = new ArrayList<String>();
 		try {			
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 			

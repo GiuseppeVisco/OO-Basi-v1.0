@@ -2,25 +2,18 @@ package gui;
 import dao.UtenteDAO;
 
 
+
 import entity.Consegna;
 import controller.Controller;
-import java.awt.BorderLayout;
 import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.EventQueue;
-
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import javax.swing.event.ListDataListener;
-import controller.Controller;
 import entity.Prodotto;
 import dao.AllergeneDAO;
 import dao.ProdottoDAO;
 import java.util.ArrayList;
-import java.awt.Button;
 import dao.RicercaDAO;
 import java.awt.Font;
 import javax.swing.border.LineBorder;

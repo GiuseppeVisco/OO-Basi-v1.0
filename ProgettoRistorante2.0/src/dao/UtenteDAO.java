@@ -1,9 +1,8 @@
 package dao;
-import entity.*;
 
-import java.sql.*;
+
 import controller.*;
-import gui.*;
+
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.Connection;

@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import entity.Prodotto;
 import java.util.ArrayList;
-import controller.Controller;
-import gui.MenuFrame;
+
 
 public class ProdottoDAO {
 	private PreparedStatement st;

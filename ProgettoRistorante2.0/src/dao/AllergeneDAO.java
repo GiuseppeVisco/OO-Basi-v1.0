@@ -1,11 +1,10 @@
 package dao;
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
-import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -22,7 +21,7 @@ public class AllergeneDAO {
 			}
 	}
 	
-	public ArrayList fornisciAllergeni(String nomeProdotto) {
+	public ArrayList<String> fornisciAllergeni(String nomeProdotto) {
 		ArrayList<String> allergeniList = new ArrayList<>();
 		try {			
 				Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");        

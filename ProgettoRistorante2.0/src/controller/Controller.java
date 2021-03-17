@@ -45,7 +45,6 @@ public class Controller {
 			JOptionPane.showMessageDialog(null, "Password o Username incorretti, riprovare.");
 		}
 		else {
-			boolean isAdmin = false;
 			if(utenteDAO.checkTipoUtente(username)) {
 				consegna.setUsernameUtente(username);
 				storicoConsegneFrame = new StoricoConsegneFrame2(consegna);
