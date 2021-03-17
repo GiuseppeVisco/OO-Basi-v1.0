@@ -60,7 +60,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 185, 673, 268);
+		scrollPane.setBounds(10, 110, 919, 231);
 		contentPane.add(scrollPane);
 		
 				
@@ -72,20 +72,20 @@ public class StoricoConsegneFrame2 extends JFrame {
 					new Object[][] {
 					},
 					new String[] {
-							"Id Consegna", "Email Utente", "Indirizzo Ristorante", "Indirizzo di consegna", "Rider ID", "Totale pagato","Stato consegna"
+							"Id Consegna", "Indirizzo Ristorante", "Email Utente", "Indirizzo di consegna", "Rider ID", "Veicolo Utilizzato","Totale pagato", "Stato consegna"
 					}
 				));
 				
 				JLabel lblNewLabel = new JLabel("STORICO CONSEGNE");
 				lblNewLabel.setFont(new Font("Lucida Sans", Font.BOLD, 19));
 				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				lblNewLabel.setBounds(316, 51, 274, 52);
+				lblNewLabel.setBounds(314, 11, 274, 52);
 				contentPane.add(lblNewLabel);
 				
 				panel = new JPanel();
 				panel.setBackground(Color.CYAN);
 				panel.setBorder(new TitledBorder(null, "Ristorante in:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panel.setBounds(10, 110, 210, 52);
+				panel.setBounds(0, 11, 210, 52);
 				contentPane.add(panel);
 				panel.setLayout(null);
 				
@@ -108,7 +108,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 						aggiungiRighe();					     
 					}
 				});
-				confermaConsegneButton.setBounds(693, 412, 236, 40);
+				confermaConsegneButton.setBounds(693, 365, 236, 40);
 				contentPane.add(confermaConsegneButton);
 				
 				JButton rimuoviConsegnaButton = new JButton("Rimuovi consegna");
@@ -126,12 +126,12 @@ public class StoricoConsegneFrame2 extends JFrame {
 		
 					}
 				});
-				rimuoviConsegnaButton.setBounds(693, 361, 236, 40);
+				rimuoviConsegnaButton.setBounds(447, 363, 236, 40);
 				contentPane.add(rimuoviConsegnaButton);
 				
 				JPanel panel_1 = new JPanel();
 				panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-				panel_1.setBounds(693, 197, 236, 110);
+				panel_1.setBounds(10, 352, 236, 110);
 				contentPane.add(panel_1);
 				panel_1.setLayout(null);
 				
@@ -175,7 +175,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 		 ArrayList<Consegna> temp = null;
 	     temp = consegnaDAO.listaConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
 	     for(Consegna consegna :temp) { 			        	
-	        	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getUsernameUtente(), consegna.getIndirizzoRistorante(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
+	        	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getIndirizzoRistorante(), consegna.getUsernameUtente(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), consegna.getVeicoloUtilizzato(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
 	        }		
 	}
 	
@@ -195,7 +195,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 		ArrayList<Consegna> temp = null;
 		temp = consegnaDAO.cercaPerIdRider(idRider, ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
 		for(Consegna consegna :temp) { 			        	
-        	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getUsernameUtente(), consegna.getIndirizzoRistorante(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
+        	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getIndirizzoRistorante(), consegna.getUsernameUtente(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), consegna.getVeicoloUtilizzato(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
         }
 		if(flag == 0 && model.getRowCount() == 0) {
 			 JOptionPane.showMessageDialog(null, "Il rider selezionato non ha effettuato consegne in questo ristorante");

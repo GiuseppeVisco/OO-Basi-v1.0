@@ -75,22 +75,26 @@ public class RiderFrame extends JFrame {
 				mezzoRider=riderButton_1.getText();
 				controller.checkRiderAvailable(mezzoRider);
 				controller.setIdRiderConsegna(mezzoRider);
+				controller.setVeicoloUtilizzato(mezzoRider);
 			}
 			if(riderButton_2.isSelected()) {
 				mezzoRider=riderButton_2.getText();
 				controller.checkRiderAvailable(mezzoRider);
 				controller.setIdRiderConsegna(mezzoRider);
+				controller.setVeicoloUtilizzato(mezzoRider);
 			}
 			if(riderButton_3.isSelected()) {
 				mezzoRider=riderButton_3.getText();
 				controller.checkRiderAvailable(mezzoRider);
 				controller.setIdRiderConsegna(mezzoRider);
+				controller.setVeicoloUtilizzato(mezzoRider);
 			}
 			if(riderButton_4.isSelected()) {
 				mezzoRider=riderButton_4.getText();
 				controller.checkRiderAvailable(mezzoRider);
 				//Inserire un if che lo fa partire solo se il mezzo è effettivamente disponibile?
-				controller.setIdRiderConsegna(mezzoRider);				
+				controller.setIdRiderConsegna(mezzoRider);
+				controller.setVeicoloUtilizzato(mezzoRider);
 			}
 			}
 		});

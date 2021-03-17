@@ -119,7 +119,7 @@ public class Controller {
 	
 	public void aggiornaStoricoConsegne() {    
 		consegnaDAO = new ConsegnaDAO();
-		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider());
+		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider(), consegna.getVeicoloUtilizzato());
 	}
 	public void updateRiderCount() {
 		riderDAO.updateCount(getIdRiderConsegna());
@@ -133,6 +133,10 @@ public class Controller {
 	}
 	public void setIdRiderConsegna(String mezzoRider) {
 		consegna.setIdRider(riderDAO.getIdRider(mezzoRider));		
+	}
+	
+	public void setVeicoloUtilizzato(String veicolo) {
+		consegna.setVeicoloUtilizzato(veicolo);
 	}
 
 	

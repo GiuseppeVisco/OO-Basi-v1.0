@@ -25,17 +25,18 @@ public class ConsegnaDAO {
 	}
 	
 	//SALVARE LA CONSEGNA COME ONSEGNA E NON COME ATTRIBUTI SINGOLI?
-	public void insertConsegna(String ristorantePartenza, String indirizzoConsegna, double costoTotale, String usernameUtente, int idRiderAssegnato) {
+	public void insertConsegna(String ristorantePartenza, String indirizzoConsegna, double costoTotale, String usernameUtente, int idRiderAssegnato, String veicoloRider) {
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
 
-			st = con.prepareStatement("INSERT INTO consegne(ristorante_di_partenza, indirizzo_consegna, costo_totale, mail_utente, id_rider, stato_consegna) VALUES (?,?,?,?,?,?)");
+			st = con.prepareStatement("INSERT INTO consegne(ristorante_di_partenza, indirizzo_consegna, costo_totale, mail_utente, id_rider, stato_consegna, veicolo_utilizzato) VALUES (?,?,?,?,?,?,?)");
 			st.setString(1, ristorantePartenza);
 			st.setString(2, indirizzoConsegna);
 			st.setDouble(3, costoTotale);
 			st.setString(4, usernameUtente);
 			st.setInt(5, idRiderAssegnato);
 			st.setString(6,"In consegna");
+			st.setString(7, veicoloRider);
 			
 			ResultSet rs = st.executeQuery();
 			
@@ -65,6 +66,7 @@ public class ConsegnaDAO {
 				int idRider = rs.getInt("id_rider");
 				String idConsegna = rs.getString("id_consegna");
 				String statoConsegna = rs.getString("stato_consegna");
+				String veicoloUtilizzato = rs.getString("veicolo_utilizzato");
 				Consegna consegna = new Consegna();
 				consegna.setIndirizzoRistorante(ristorantePartenza);
 				consegna.setIndirizzoConsegna(indirizzoConsegna);
@@ -73,6 +75,7 @@ public class ConsegnaDAO {
 				consegna.setRider(idRider);
 				consegna.setIdConsegna(idConsegna);
 				consegna.setStatoConsegna(statoConsegna);
+				consegna.setVeicoloUtilizzato(veicoloUtilizzato);
 				
 				listaStorico.add(consegna);
 				
@@ -151,6 +154,7 @@ public class ConsegnaDAO {
 			st.setInt(2, riderId);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
+				
 				String ristorantePartenza = rs.getString("ristorante_di_partenza");
 				String indirizzoConsegna = rs.getString("indirizzo_consegna");
 				double costoTotale = rs.getDouble("costo_totale");
@@ -158,7 +162,10 @@ public class ConsegnaDAO {
 				int idRider = rs.getInt("id_rider");
 				String idConsegna = rs.getString("id_consegna");
 				String statoConsegna = rs.getString("stato_consegna");
+				String veicoloUtilizzato = rs.getString("veicolo_utilizzato");
+				
 				Consegna consegna = new Consegna();
+				
 				consegna.setIndirizzoRistorante(ristorantePartenza);
 				consegna.setIndirizzoConsegna(indirizzoConsegna);
 				consegna.setTotale(costoTotale);
@@ -166,6 +173,7 @@ public class ConsegnaDAO {
 				consegna.setRider(idRider);
 				consegna.setIdConsegna(idConsegna);
 				consegna.setStatoConsegna(statoConsegna);
+				consegna.setVeicoloUtilizzato(veicoloUtilizzato);
 				
 				listaStoricoPerIdRider.add(consegna);
 				
