@@ -21,10 +21,12 @@ CREATE TABLE IF NOT EXISTS Consegne
 	Mail_Utente VARCHAR(255) NOT NULL,
 	ID_Rider serial NOT NULL,
 	ID_Consegna Serial Primary Key,
+	veicolo_utilizzato VARCHAR(20),
+	stato_consegna VARCHAR(15),
 	FOREIGN KEY (ID_Rider) REFERENCES Rider(ID_Rider),
 	FOREIGN KEY (Mail_Utente) REFERENCES utente(email),
-  	Stato_Consegna Stato
-	--Stato_Consegna ENUM ('In Consegna', 'Consegnato')	
+  										--Stato_Consegna Stato
+										--Stato_Consegna ENUM ('In Consegna', 'Consegnato')	
 );
 
 Create TABLE IF NOT EXISTS menù
