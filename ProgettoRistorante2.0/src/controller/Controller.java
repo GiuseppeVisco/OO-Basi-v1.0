@@ -97,7 +97,7 @@ public class Controller {
 		
 		
 		riderFrame.setVisible(false);
-		menuFrame = new MenuFrame(this, consegna);
+		menuFrame = new MenuFrame(this);
 		menuFrame.setVisible(true);
 	}
 	
@@ -183,6 +183,10 @@ public class Controller {
 				break;
 		}
 		return listaProdotti;
+	}
+	
+	public void setTotaleConsegna(double totale) {
+		consegna.setTotale(totale);
 	}
 }
 
