@@ -5,13 +5,11 @@ CREATE DATABASE IF NOT EXISTS `projectristoranteoodb`;
 
 CREATE TABLE IF NOT EXISTS rider (
 	ID_Rider SERIAL PRIMARY KEY,
-	  Nome VARCHAR(16) NOT NULL,
- 	 Veicolo VARCHAR(255) NOT NULL,
+	  Nome VARCHAR(25) NOT NULL,
+ 	 Veicolo VARCHAR(16) NOT NULL,
 	  Cap_Numero_Consegne_raggiunto BOOLEAN DEFAULT false,
-	Consegne_assegnate INT DEFAULT '0'
+	Consegne_assegnate INT DEFAULT 0
   );
-
-CREATE TYPE IF NOT EXISTS Stato AS ENUM ('In Consegna','Consegnato');
 
 CREATE TABLE IF NOT EXISTS Consegne 
 (
@@ -86,12 +84,16 @@ INSERT INTO Ristoranti(Indirizzo, admin_id)
 	('Via Foria 9','12'),
 	('Viale Augusto 67', '13');
 
-INSERT INTO rider (nome, veicolo, Cap_numero_consegne_raggiunto)
+INSERT INTO rider (nome, veicolo)
 VALUES
-('Aldo', 'moto', false), 
-('Ben', 'automobile', false), 
-('Carlo', 'Bicicletta', false), 
-('Dario', 'Nessuno', false); 
+('Donatello Allegro','Bicicletta'),
+('Marco Bartolomeo','Automobile'),
+('Arianna Romano','Moto'),
+('Genoveffa Pavia','Bicicletta'),
+('Viola Landolfi','Automobile'),
+('Gianpaolo Tiraboschi','Moto'),
+('Tonio Nascimbene','Motorino'),
+('Anastasia Basso','Motorino');
 
 
 INSERT INTO menù (nome_piatto,Descrizione_Piatto,costo)
@@ -187,5 +189,5 @@ VALUES
 ('12','11'),
 ('12','12');
 -- Querry di ricerca per allergeni
-SELECT Menu.id_piatto, Menu.nome_piatto, Allergeni.id_allergene, Allergeni.nome_allergene
-FROM Menu INNER JOIN (Allergeni INNER JOIN AllergeniAssociati ON AllergeniAssociati.id_allergene=Allergeni.id_allergene) ON Menu.id_piatto=AllergeniAssociati.id_piatto;
+--SELECT Menu.id_piatto, Menu.nome_piatto, Allergeni.id_allergene, Allergeni.nome_allergene
+--FROM Menu INNER JOIN (Allergeni INNER JOIN AllergeniAssociati ON AllergeniAssociati.id_allergene=Allergeni.id_allergene) ON Menu.id_piatto=AllergeniAssociati.id_piatto;
