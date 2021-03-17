@@ -67,19 +67,19 @@ CREATE TABLE IF NOT EXISTS Allergeni_Associati
 
 INSERT INTO Utente (Email,Password_Utente,Indirizzo,Admin)
 VALUES
-('bidey98441@onzmail.com','Lorem52','Via chiaia','false'),
-('delissandramedeiy@dongrup.com','ipsum89','Via croce','false'),
-('itufessag-8610@yopmail.com','dolor49','Via palo','false'),
-('8ilyes.kamytlm5@warehouseofthebooks.com','sit47','Via miano','false'),
-('1yakob@emsinau.com','amet65','Via Bosco','false'),
-('7yuonsqaaz8@mailboxvip.com','consectetur29','Via Mare','false'),
-('micheleirace@gmail.com', 'mikeirace98','Via Toledo', 'false'),
-('testadmin@gmail.com','admin','Viale Basso','true'),
-('testadmin2@gmail.com','admin','Piazza Magellano','true'),
-('testadmin3@gmail.com','admin','Via Vicinale Romagnoli','true'),
-('testadmin4@gmail.com','admin','Piazza Umberto','true'),
-('testadmin5@gmail.com','admin','Via Nuova','true'),
-('testadmin6@gmail.com','admin','Piazza Carlo Magno','true');
+('bidey98441@onzmail.com','Lorem52','Via Chiaia 8','false'),
+('delissandramedeiy@dongrup.com','ipsum89','Via Croce 10','false'),
+('itufessag-8610@yopmail.com','dolor49','Via Palo 62','false'),
+('8ilyes.kamytlm5@warehouseofthebooks.com','sit47','Via Miano 36','false'),
+('1yakob@emsinau.com','amet65','Via Bosco 6','false'),
+('7yuonsqaaz8@mailboxvip.com','consectetur29','Via Mare 41','false'),
+('micheleirace@gmail.com', 'mikeirace98','Via Toledo 34', 'false'),
+('Marina-Admin@gmail.com','admin','Via Marina 18','true'),
+('Roma-Admin@gmail.com','admin','Via Roma 24','true'),
+('Terracina-Admin@gmail.com','admin','Via Terracina 89','true'),
+('Claudio-Admin@gmail.com','admin','Via Claudio 35','true'),
+('Foria-Admin@gmail.com','admin','Via Foria 9','true'),
+('Augusto-Admin@gmail.com','admin','Viale Augusto 67','true');
 
 
 INSERT INTO Ristoranti(Indirizzo_ristorante, Admin_Id)
