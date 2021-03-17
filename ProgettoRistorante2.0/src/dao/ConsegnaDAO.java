@@ -127,6 +127,7 @@ public class ConsegnaDAO {
 	}
 	
 	public void cancellaConsegna(int idConsegna) {
+		
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
 			st = con.prepareStatement("delete from consegne where id_consegna = ?");

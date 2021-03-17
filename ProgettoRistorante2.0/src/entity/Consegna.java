@@ -17,18 +17,6 @@ public class Consegna {
 	String statoConsegna;
 	String veicoloUtilizzato;
 	
-//	public Consegna(Controller controller, Utente utente, Rider riderAssegnato, String indirizzoRistorante,
-//			ArrayList<Prodotto> ordine, double totale) {
-//		super();
-//		this.controller = controller;
-//		this.utente = utente;
-//		this.riderAssegnato = riderAssegnato;
-//		this.indirizzoRistorante = indirizzoRistorante;
-//		this.ordine = ordine;
-//		this.totale = totale;
-//	}
-//  Creare un costruttore che richiede tutti i parametri e inserirli soltanto alla fine ?
-	
 
 	public void setIndirizzoConsegna(String indirizzoConsegna) {
 		this.indirizzoConsegna = indirizzoConsegna;
@@ -97,8 +85,5 @@ public class Consegna {
 	public void setVeicoloUtilizzato(String veicoloUtilizzato) {
 		this.veicoloUtilizzato = veicoloUtilizzato;
 	}
-	
-	//Metodo set prodotti
-	//Metodo calcolo totale
 	
 }

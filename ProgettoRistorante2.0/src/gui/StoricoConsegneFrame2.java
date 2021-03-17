@@ -66,7 +66,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 				
 				storicoTable = new JTable();		
 				storicoTable.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				storicoTable.setFont(new Font("Lucida Sans", Font.PLAIN, 11));
+				storicoTable.setFont(new Font("Lucida Sans", Font.BOLD, 12));
 				scrollPane.setViewportView(storicoTable);
 				storicoTable.setModel(new DefaultTableModel(
 					new Object[][] {
@@ -83,7 +83,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 				contentPane.add(lblNewLabel);
 				
 				panel = new JPanel();
-				panel.setBackground(Color.CYAN);
+				panel.setBackground(Color.LIGHT_GRAY);
 				panel.setBorder(new TitledBorder(null, "Ristorante in:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				panel.setBounds(0, 11, 210, 52);
 				contentPane.add(panel);
@@ -112,6 +112,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 				contentPane.add(confermaConsegneButton);
 				
 				JButton rimuoviConsegnaButton = new JButton("Rimuovi consegna");
+				rimuoviConsegnaButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 				rimuoviConsegnaButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(storicoTable.getSelectedColumn() == 0) {
@@ -192,8 +193,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 			JOptionPane.showMessageDialog(null, "Errore, inserire un valore numerico");
 			flag = 1;
 		}
-		ArrayList<Consegna> temp = null;
-		temp = consegnaDAO.cercaPerIdRider(idRider, ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
+		ArrayList<Consegna> temp = consegnaDAO.cercaPerIdRider(idRider, ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
 		for(Consegna consegna :temp) { 			        	
         	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getIndirizzoRistorante(), consegna.getUsernameUtente(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), consegna.getVeicoloUtilizzato(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
         }

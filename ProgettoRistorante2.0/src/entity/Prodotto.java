@@ -7,7 +7,6 @@ public class Prodotto {
 	private float prezzoProdotto;	
 	private String nomeProdotto;
 	private String Descrizione;
-	ArrayList<Allergene> allergene = new ArrayList<Allergene>();
 
 	
 	public float getPrezzoProdotto() {
