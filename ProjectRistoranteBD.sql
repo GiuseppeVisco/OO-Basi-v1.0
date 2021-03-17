@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS `projectristoranteoodb`;
 -- password per la connessione: Peron
 --case sensitive
 
-CREATE TABLE IF NOT EXISTS rider (
+CREATE TABLE IF NOT EXISTS Rider (
 	ID_Rider SERIAL PRIMARY KEY,
 	  Nome VARCHAR(25) NOT NULL,
  	 Veicolo VARCHAR(16) NOT NULL,
@@ -19,65 +19,72 @@ CREATE TABLE IF NOT EXISTS Consegne
 	Mail_Utente VARCHAR(255) NOT NULL,
 	ID_Rider serial NOT NULL,
 	ID_Consegna Serial Primary Key,
-	veicolo_utilizzato VARCHAR(20),
-	stato_consegna VARCHAR(15),
+	Veicolo_utilizzato VARCHAR(20),
+	Stato_consegna VARCHAR(15),
 	FOREIGN KEY (ID_Rider) REFERENCES Rider(ID_Rider),
-	FOREIGN KEY (Mail_Utente) REFERENCES utente(email),
-  										--Stato_Consegna Stato
-										--Stato_Consegna ENUM ('In Consegna', 'Consegnato')	
+	FOREIGN KEY (Mail_Utente) REFERENCES Utente(Email)
 );
 
-Create TABLE IF NOT EXISTS menù
+Create TABLE IF NOT EXISTS Menù
 (
-    id_piatto SERIAL PRIMARY KEY NOT NULL,  
-    nome_piatto varchar( 45 ) UNIQUE NOT NULL, 
+    Id_piatto SERIAL PRIMARY KEY NOT NULL,  
+    Nome_piatto varchar( 45 ) UNIQUE NOT NULL, 
     Descrizione_Piatto TEXT,
-    costo NUMERIC(5,2) NOT NULL
+    Costo NUMERIC(5,2) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS utente 
+CREATE TABLE IF NOT EXISTS Utente 
 (
-	user_id SERIAL PRIMARY KEY NOT NULL,
-	email VARCHAR ( 255 ) UNIQUE NOT NULL,
-	passwordutente VARCHAR ( 50 ) NOT NULL,
-	indirizzo VARCHAR (50),
-	created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	admin BOOLEAN NOT NULL DEFAULT false
+	User_Id SERIAL PRIMARY KEY NOT NULL,
+	Email VARCHAR ( 255 ) UNIQUE NOT NULL,
+	Password_Utente VARCHAR ( 50 ) NOT NULL,
+	Indirizzo VARCHAR (50),
+	Created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	Admin BOOLEAN NOT NULL
 );
 
-INSERT INTO utente (email,passwordutente,indirizzo,admin)
+CREATE TABLE IF NOT EXISTS Ristoranti
+(
+	Ristorante_id SERIAL PRIMARY KEY NOT NULL,
+	Indirizzo_ristorante VARCHAR ( 25 ) NOT NULL,
+	Admin_id INTEGER REFERENCES Utente(User_Id)
+);
+
+CREATE TABLE IF NOT EXISTS Allergeni 
+(
+  Id_allergene SMALLSERIAL PRIMARY KEY NOT NULL,
+  Nome_allergene VARCHAR (30) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS Allergeni_Associati
+(
+	Id_Piatto INT,
+	Id_Allergene INT,
+	CONSTRAINT fk_allergene FOREIGN KEY(Id_allergene) REFERENCES Allergeni(Id_allergene) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_menu FOREIGN KEY(Id_piatto) REFERENCES Menù(Id_piatto) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT Allergeni_Associati_pkey PRIMARY KEY (id_Allergene, Id_piatto)
+);
+
+
+INSERT INTO Utente (Email,Password_Utente,Indirizzo,Admin)
 VALUES
 ('bidey98441@onzmail.com','Lorem52','Via chiaia','false'),
 ('delissandramedeiy@dongrup.com','ipsum89','Via croce','false'),
 ('itufessag-8610@yopmail.com','dolor49','Via palo','false'),
 ('8ilyes.kamytlm5@warehouseofthebooks.com','sit47','Via miano','false'),
-('1yakob@emsinau.com','amet65','Via bosco','false'),
-('7yuonsqaaz8@mailboxvip.com','consectetur29','Via mare','false'),
-('micheleirace@gmail.com', 'mikeirace98','Via toledo', 'false'),
-('testadmin@gmail.com','admin','true'),
-('testadmin2@gmail.com','admin','true'),
-('testadmin3@gmail.com','admin','true'),
-('testadmin4@gmail.com','admin','true'),
-('testadmin5@gmail.com','admin','true'),
-('testadmin6@gmail.com','admin','true');
-
-CREATE TABLE IF NOT EXISTS Ristoranti
-(
-	Ristorante_id SERIAL PRIMARY KEY NOT NULL,
-	indirizzo_ristorante VARCHAR ( 25 ) NOT NULL,
-	admin_id INTEGER
-);
-
-CREATE TABLE Allergeni 
-(
-  id_allergene SMALLSERIAL PRIMARY KEY NOT NULL,
-  nome_allergene VARCHAR (30) NOT NULL
-);
+('1yakob@emsinau.com','amet65','Via Bosco','false'),
+('7yuonsqaaz8@mailboxvip.com','consectetur29','Via Mare','false'),
+('micheleirace@gmail.com', 'mikeirace98','Via Toledo', 'false'),
+('testadmin@gmail.com','admin','Viale Basso','true'),
+('testadmin2@gmail.com','admin','Piazza Magellano','true'),
+('testadmin3@gmail.com','admin','Via Vicinale Romagnoli','true'),
+('testadmin4@gmail.com','admin','Piazza Umberto','true'),
+('testadmin5@gmail.com','admin','Via Nuova','true'),
+('testadmin6@gmail.com','admin','Piazza Carlo Magno','true');
 
 
-INSERT INTO Ristoranti(Indirizzo, admin_id)
+INSERT INTO Ristoranti(Indirizzo_ristorante, Admin_Id)
 	VALUES 
-	('Via Marina 18', 8),
+	('Via Marina 18', '8'),
 	('Via Roma 24', '9'),
 	('Via Terracina 89', '10'),
 	('Via Claudio 35', '11'),
@@ -96,7 +103,7 @@ VALUES
 ('Anastasia Basso','Motorino');
 
 
-INSERT INTO menù (nome_piatto,Descrizione_Piatto,costo)
+INSERT INTO Menù (Nome_Piatto,Descrizione_Piatto,Costo)
 VALUES
 ('Arancino','Arancino','0.90'),
 ('Frittatina','Frittatina','0.90'),
@@ -110,13 +117,14 @@ VALUES
 ('Patate fritte','Potatine fritte fatte a mano e salsa a scelta','1.50'),
 ('Cistecca Classica','Sfilatino riempito con straccietti di carne bovina, scamorza e cipolla','6.50'),
 ('Cistecca Mediterranea','Sfilatino riempito con straccietti di carne bovina, scamorza, rucola e pomodoro','7.00'),
+('Hamburger Classico','Hamburger di chianina con formaggio, pomodoro, insalata, cipolle, Ketchup e Maionese','7.50'),
 ('Acqua Naturale 50 cl','Acqua Naturale 50 cl','0.50'),
 ('Aqcua Frizzante 50 cl','Aqcua Frizzante 50 cl','0.50'),
 ('Coca Cola','Coca Cola','1.00'),
-('Fanta','Fanta','1.00'); 
+('Fanta','Fanta','1.00'), 
 ('Sprite','Sprite', '1.00');
 
-INSERT INTO allergeni (nome_allergene)
+INSERT INTO Allergeni (Nome_Allergene)
 VALUES
 ('Cereali e derivati'),
 ('Crostacei'),
@@ -132,15 +140,8 @@ VALUES
 ('Anidride solforosa e solfiti'),
 ('Lupini'),
 ('Molluschi');
-CREATE TABLE IF NOT EXISTs AllergeniAssociati
-(
-	id_piatto SERIAL,
-	id_allergene Serial,
-	CONSTRAINT fk_allergene FOREIGN KEY(id_allergene) REFERENCES Allergeni(id_allergene) ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT fk_menu FOREIGN KEY(id_piatto) REFERENCES Menu(id_piatto) ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT Allergeni_Associati_pkey PRIMARY KEY (id_Allergene, Id_piatto)
-);
-INSERT INTO AllergeniAssociati (id_Piatto,id_allergene)
+
+INSERT INTO Allergeni_Associati (Id_Piatto,Id_Allergene)
 VALUES
 ('1','1'),
 ('1','3'),
@@ -187,7 +188,14 @@ VALUES
 ('12','1'),
 ('12','7'),
 ('12','11'),
-('12','12');
+('12','12'),
+('13','1'),
+('13','3'),
+('13','5'),
+('13','6'),
+('13','7'),
+('13','10'),
+('13','11');
 -- Querry di ricerca per allergeni
 --SELECT Menu.id_piatto, Menu.nome_piatto, Allergeni.id_allergene, Allergeni.nome_allergene
 --FROM Menu INNER JOIN (Allergeni INNER JOIN AllergeniAssociati ON AllergeniAssociati.id_allergene=Allergeni.id_allergene) ON Menu.id_piatto=AllergeniAssociati.id_piatto;
