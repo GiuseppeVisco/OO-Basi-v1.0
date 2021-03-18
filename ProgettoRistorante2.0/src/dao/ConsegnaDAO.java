@@ -154,30 +154,19 @@ public class ConsegnaDAO {
 			st.setString(1, ristoranteAssegnato);
 			st.setInt(2, riderId);
 			ResultSet rs = st.executeQuery();
-			while (rs.next()) {
-				
-				String ristorantePartenza = rs.getString("ristorante_di_partenza");
-				String indirizzoConsegna = rs.getString("indirizzo_consegna");
-				double costoTotale = rs.getDouble("costo_totale");
-				String mailUtente = rs.getString("mail_utente");
-				int idRider = rs.getInt("id_rider");
-				String idConsegna = rs.getString("id_consegna");
-				String statoConsegna = rs.getString("stato_consegna");
-				String veicoloUtilizzato = rs.getString("veicolo_utilizzato");
-				
+			while (rs.next()) {				
 				Consegna consegna = new Consegna();
 				
-				consegna.setIndirizzoRistorante(ristorantePartenza);
-				consegna.setIndirizzoConsegna(indirizzoConsegna);
-				consegna.setTotale(costoTotale);
-				consegna.setUsernameUtente(mailUtente);
-				consegna.setRider(idRider);
-				consegna.setIdConsegna(idConsegna);
-				consegna.setStatoConsegna(statoConsegna);
-				consegna.setVeicoloUtilizzato(veicoloUtilizzato);
+				consegna.setIndirizzoRistorante(rs.getString("ristorante_di_partenza"));
+				consegna.setIndirizzoConsegna(rs.getString("indirizzo_consegna"));
+				consegna.setTotale(rs.getDouble("costo_totale"));
+				consegna.setUsernameUtente(rs.getString("mail_utente"));
+				consegna.setRider(rs.getInt("id_rider"));
+				consegna.setIdConsegna(rs.getString("id_consegna"));
+				consegna.setStatoConsegna(rs.getString("stato_consegna"));
+				consegna.setVeicoloUtilizzato(rs.getString("veicolo_utilizzato"));
 				
 				listaStoricoPerIdRider.add(consegna);
-				
 			}
 		// Release delle risorse
 			rs.close();
