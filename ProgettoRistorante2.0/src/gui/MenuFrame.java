@@ -19,7 +19,7 @@ public class MenuFrame extends JFrame {
     public ArrayList<String> listaProdottiJl = new ArrayList<>();
     public MenuFrame(Controller c) {
     	controller = c;
-    	riempiMenu();
+    	listaProdottiJl = controller.RiempiMenuu(listaProdottiJl);
     	
     	setTitle("Men\u00F9");
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -521,14 +521,6 @@ public class MenuFrame extends JFrame {
 			else {
 				JOptionPane.showMessageDialog(null, "Inserisci qualcosa nel carrello");
 			}		
-   }
-
-   
-   
-   
-   public void riempiMenu() {
-	   listaProdottiJl = controller.RiempiMenuu(listaProdottiJl);
-
    }
 
 }   
