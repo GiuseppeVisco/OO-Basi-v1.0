@@ -30,15 +30,10 @@ public class ProdottoDAO {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("SELECT nome_piatto, costo, descrizione_piatto FROM menù");			
 				while (rs.next()) {
-					Prodotto prodotto = new Prodotto();												
-					
-					String nomePiattoDB = rs.getString("nome_piatto");
-					float costoDB = rs.getFloat("costo");
-					String descrizioneDB = rs.getString("descrizione_piatto");
-					
-					prodotto.setNomeProdotto(nomePiattoDB);
-					prodotto.setPrezzoProdotto(costoDB);
-					prodotto.setDescrizione(descrizioneDB);
+					Prodotto prodotto = new Prodotto();																	
+					prodotto.setNomeProdotto(rs.getString("nome_piatto"));
+					prodotto.setPrezzoProdotto(rs.getFloat("costo"));
+					prodotto.setDescrizione(rs.getString("descrizione_piatto"));
 					
 					listaProdotti.add(prodotto);
 					
