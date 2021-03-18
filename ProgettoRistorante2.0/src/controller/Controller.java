@@ -260,7 +260,7 @@ public class Controller {
 	}
 	
 	
-	public ArrayList<String> RiempiMenuu(ArrayList<String> listaProdottiJl) {
+	public ArrayList<String> riempiMenu(ArrayList<String> listaProdottiJl) {
 		   ArrayList<Prodotto> temp = null;
 	       temp = prodottoDAO.CaricaProdotti();
 	       for(Prodotto prodotto :temp) {
@@ -270,8 +270,8 @@ public class Controller {
 	}
 	
 	public double fornisciPrezzo(String prodotto) {
-		double x = prodottoDAO.restituisciPrezzo(prodotto);
-		return x;
+		double prezzo = prodottoDAO.restituisciPrezzo(prodotto);
+		return prezzo;
 	}
 	
 	public ArrayList<String> ricercaProdottoPerTipo(int y) {
