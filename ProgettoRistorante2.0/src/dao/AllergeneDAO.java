@@ -30,8 +30,8 @@ public class AllergeneDAO {
 				st.setString(1, nomeProdotto);
 				ResultSet rs = st.executeQuery();
 				while (rs.next()) {
-					String temp = rs.getString("nome_allergene");
-					allergeniList.add(temp);
+					String nomeAllergene = rs.getString("nome_allergene");
+					allergeniList.add(nomeAllergene);
 				}
 				//- Release delle risorse
 				rs.close();
