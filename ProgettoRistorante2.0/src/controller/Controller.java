@@ -100,9 +100,10 @@ public class Controller {
 	}
 	
 	public String getUsernameConsegna() {
-		String temp = consegna.getUsernameUtente();
-		return temp;
+		String username = consegna.getUsernameUtente();
+		return username;
 	}
+	
 	public String getIndirizzoConsegna() {
 		String temp = utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()); 
 		return temp;
@@ -116,9 +117,9 @@ public class Controller {
 
 	
 	public void aggiornaStoricoConsegne() {    
-		consegnaDAO = new ConsegnaDAO();
 		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider(), consegna.getVeicoloUtilizzato());
 	}
+	
 	public void updateRiderCount() {
 		riderDAO.updateCount(getIdRiderConsegna());
 	}
