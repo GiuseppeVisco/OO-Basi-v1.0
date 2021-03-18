@@ -17,9 +17,10 @@ public class MenuFrame extends JFrame {
 	Controller controller;
 	
     public ArrayList<String> listaProdottiJl = new ArrayList<>();
+    
     public MenuFrame(Controller c) {
     	controller = c;
-    	listaProdottiJl = controller.RiempiMenuu(listaProdottiJl);
+    	listaProdottiJl = controller.riempiMenu(listaProdottiJl);
     	
     	setTitle("Men\u00F9");
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -244,7 +245,7 @@ public class MenuFrame extends JFrame {
         		switchCarrello(listaMenuJList, listaCarrelloModel);
         	}
         });                
-        aggiungiButton.setBounds(415, 147, 97, 23);
+        aggiungiButton.setBounds(415, 147, 92, 23);
         getContentPane().add(aggiungiButton);
 
         
@@ -328,15 +329,15 @@ public class MenuFrame extends JFrame {
         	
         	public void actionPerformed(ActionEvent e) {
         		
-        		int x = fasciaPrezzoBox.getSelectedIndex(); 
-        		int y = tipoProdottoBox.getSelectedIndex();
+        		int prezzoIndex = fasciaPrezzoBox.getSelectedIndex(); 
+        		int prodottoIndex = tipoProdottoBox.getSelectedIndex();
         		
-        		listaProdottiJl = controller.ricercaPerPrezzo(x, listaProdottiJl);
+        		listaProdottiJl = controller.ricercaPerPrezzo(prezzoIndex, listaProdottiJl);
         		fasciaPrezzoBox.setSelectedIndex(0);        		
         		
-        		if (y != 0) {
+        		if (prodottoIndex != 0) {
         			ArrayList<String> temp = new ArrayList<String>();
-        			temp = controller.ricercaProdottoPerTipo(y);
+        			temp = controller.ricercaProdottoPerTipo(prodottoIndex);
         			listaProdottiJl.removeAll(temp);
         			tipoProdottoBox.setSelectedIndex(0);
         		}
@@ -515,7 +516,6 @@ public class MenuFrame extends JFrame {
 		if(somma > 0) {
 			totaleTxtArea.setText(""+String.format("%.2f", somma)+"€");
 			controller.setTotaleConsegna(somma);
-			//consegna.setTotale(somma);
 			checkOutInternalFrame.setVisible(true);
 			}
 			else {
