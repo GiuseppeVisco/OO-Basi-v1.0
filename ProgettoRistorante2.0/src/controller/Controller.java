@@ -1,7 +1,6 @@
 package controller;
 import javax.swing.*;
-
-
+import javax.swing.table.DefaultTableModel;
 
 import entity.*;
 import dao.*;
@@ -18,11 +17,12 @@ public class Controller {
 	UtenteDAO utenteDAO = new UtenteDAO();
 	ProdottoDAO prodottoDAO = new ProdottoDAO();
 	Consegna consegna = new Consegna();
-	ConsegnaDAO consegnaDAO;
+	ConsegnaDAO consegnaDAO = new ConsegnaDAO();
 	RiderDAO riderDAO = new RiderDAO();
 	StoricoConsegneFrame2 storicoConsegneFrame;
 	AllergeneDAO allergeneDAO = new AllergeneDAO();
 	RicercaDAO ricercaDAO = new RicercaDAO();
+	RistoranteDAO ristoranteDAO = new RistoranteDAO();
 	ClosingFrame closingFrame;
 	
 	public static void main(String[] args) {
@@ -49,7 +49,7 @@ public class Controller {
 		else {
 			if(utenteDAO.checkTipoUtente(username)) {
 				consegna.setUsernameUtente(username);
-				storicoConsegneFrame = new StoricoConsegneFrame2(consegna);
+				storicoConsegneFrame = new StoricoConsegneFrame2(this);
 				loginFrame.setVisible(false);
 				storicoConsegneFrame.setVisible(true);
 			}
@@ -194,6 +194,58 @@ public class Controller {
 	
 	public void closeClosingFrame() {
 		closingFrame.setVisible(false);
+	}
+	
+	public DefaultTableModel ricavaConsegne(DefaultTableModel model) {
+		ArrayList<Consegna> temp = null;
+		temp = consegnaDAO.listaConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
+		  for(Consegna consegna :temp) { 			        	
+	        	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getIndirizzoRistorante(), consegna.getUsernameUtente(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), consegna.getVeicoloUtilizzato(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
+	        }
+		return model;
+	}
+	
+	public DefaultTableModel riempiTabella(DefaultTableModel model, String s) {
+		
+		model.setRowCount(0);
+		int idRider = -1;
+		int flag = 0;
+		try {
+		 idRider = Integer.parseInt(s);
+		}
+		catch(NumberFormatException e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "Errore, inserire un valore numerico");
+			flag = 1;
+		}
+		ArrayList<Consegna> temp = consegnaDAO.cercaPerIdRider(idRider, ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
+		for(Consegna consegna :temp) { 			        	
+        	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getIndirizzoRistorante(), consegna.getUsernameUtente(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), consegna.getVeicoloUtilizzato(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
+        }
+		if(flag == 0 && model.getRowCount() == 0) {
+			 JOptionPane.showMessageDialog(null, "Il rider selezionato non ha effettuato consegne in questo ristorante");
+		}
+		return model;
+	}
+	
+	public void resettaCounterConsegne() {
+		consegnaDAO.resettaConsegneAssegnate();
+	}
+	
+	public void settaConsegnato() {
+		consegnaDAO.aggiornaStatoConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
+	}
+	
+	public void rimuoviConsegnaTabella(DefaultTableModel model, String s) {
+
+		int idConsegna = Integer.parseInt(s);						
+		consegnaDAO.cancellaConsegna(idConsegna);
+		
+	}
+	
+	public String fornisciRistoranteAdmin() {
+		String ristorante = ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente());
+		return ristorante;
 	}
 }
 

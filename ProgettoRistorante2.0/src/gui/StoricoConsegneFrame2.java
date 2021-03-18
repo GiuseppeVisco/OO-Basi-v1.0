@@ -2,20 +2,12 @@ package gui;
 
 
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import controller.Controller;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import dao.ConsegnaDAO;
-import entity.Consegna;
-import dao.RistoranteDAO;
 
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
@@ -29,7 +21,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
-import javax.swing.DropMode;
 import javax.swing.border.LineBorder;
 
 
@@ -37,20 +28,15 @@ public class StoricoConsegneFrame2 extends JFrame {
 
 	private JPanel contentPane;
 	private JTable storicoTable;
-	DateFormat dateFormat = new SimpleDateFormat("DD/MM/YY");
-	Date date = new Date();
-	Calendar calendar = Calendar.getInstance();
 	DefaultTableModel model;
-	ConsegnaDAO consegnaDAO = new ConsegnaDAO();
-	RistoranteDAO ristoranteDAO = new RistoranteDAO();
-	Consegna consegna;
 	private JTextField nomeTxt;
 	private JPanel panel;
 	private JButton ricercaPerIdButton;
 	private JTextField cercaIdRiderTxt;
+	Controller controller;
 
-	public StoricoConsegneFrame2(Consegna c) {
-		consegna = c;
+	public StoricoConsegneFrame2(Controller x) {
+		controller = x;
 		setTitle("Storico consegne");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 300, 955, 523);
@@ -61,8 +47,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 110, 919, 231);
-		contentPane.add(scrollPane);
-		
+		contentPane.add(scrollPane);	
 				
 				storicoTable = new JTable();		
 				storicoTable.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -96,16 +81,16 @@ public class StoricoConsegneFrame2 extends JFrame {
 				panel.add(nomeTxt);
 				nomeTxt.setEditable(false);
 				nomeTxt.setColumns(10);
-				nomeTxt.setText(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));													
+				nomeTxt.setText(controller.fornisciRistoranteAdmin());	
 				
 				JButton confermaConsegneButton = new JButton("Conferma consegne effettuate");
 				confermaConsegneButton.setFont(new Font("Calibri", Font.BOLD, 15));
 				confermaConsegneButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						consegnaDAO.resettaConsegneAssegnate(); //resetta a 0 tutte le consegne attive dei rider
-						consegnaDAO.aggiornaStatoConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));  //setta a "consegnato" tutte le consegne del ristorante dell'admin
+						controller.resettaCounterConsegne(); //resetta a 0 tutte le consegne attive dei rider
+						controller.settaConsegnato();  //setta a "consegnato" tutte le consegne del ristorante dell'admin						
 						model.setRowCount(0);
-						aggiungiRighe();					     
+						model = controller.ricavaConsegne(model);					     
 					}
 				});
 				confermaConsegneButton.setBounds(693, 365, 236, 40);
@@ -119,12 +104,10 @@ public class StoricoConsegneFrame2 extends JFrame {
 							Object temp = 0;
 							temp = model.getValueAt(storicoTable.getSelectedRow(), storicoTable.getSelectedColumn() );
 							String s = temp.toString();
-							int idConsegna = Integer.parseInt(s);						
-							consegnaDAO.cancellaConsegna(idConsegna);
+							controller.rimuoviConsegnaTabella(model, s);
 							model.removeRow(storicoTable.getSelectedRow());
 						}
-						else JOptionPane.showMessageDialog(null, "Errore, Seleziona una casella ID Consegna");						
-		
+						else JOptionPane.showMessageDialog(null, "Errore, Seleziona una casella ID Consegna");								
 					}
 				});
 				rimuoviConsegnaButton.setBounds(447, 363, 236, 40);
@@ -142,7 +125,8 @@ public class StoricoConsegneFrame2 extends JFrame {
 				idResearchPanel.add(ricercaPerIdButton);
 				ricercaPerIdButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						cercaPerIdRider();
+						String s = cercaIdRiderTxt.getText();
+						controller.riempiTabella(model, s);
 					}
 				});
 				
@@ -157,7 +141,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 				resetButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						model.setRowCount(0);
-						aggiungiRighe();
+						model = controller.ricavaConsegne(model);
 					}
 				});
 				resetButton.setBounds(74, 92, 89, 23);
@@ -170,38 +154,6 @@ public class StoricoConsegneFrame2 extends JFrame {
 				idResearchPanel.add(lblNewLabel_1);
 
 				 model = (DefaultTableModel) storicoTable.getModel();
-				 aggiungiRighe();
-	}
-	
-	
-	
-	public void aggiungiRighe() {
-		 ArrayList<Consegna> temp = null;
-	     temp = consegnaDAO.listaConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
-	     for(Consegna consegna :temp) { 			        	
-	        	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getIndirizzoRistorante(), consegna.getUsernameUtente(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), consegna.getVeicoloUtilizzato(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
-	        }		
-	}
-	
-	public void cercaPerIdRider() {
-		String s = cercaIdRiderTxt.getText();
-		model.setRowCount(0);
-		int idRider = -1;
-		int flag = 0;
-		try {
-		 idRider = Integer.parseInt(s);
-		}
-		catch(NumberFormatException e) {
-			System.out.println(e);
-			JOptionPane.showMessageDialog(null, "Errore, inserire un valore numerico");
-			flag = 1;
-		}
-		ArrayList<Consegna> temp = consegnaDAO.cercaPerIdRider(idRider, ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
-		for(Consegna consegna :temp) { 			        	
-        	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getIndirizzoRistorante(), consegna.getUsernameUtente(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), consegna.getVeicoloUtilizzato(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
-        }
-		if(flag == 0 && model.getRowCount() == 0) {
-			 JOptionPane.showMessageDialog(null, "Il rider selezionato non ha effettuato consegne in questo ristorante");
-		}
+				model = controller.ricavaConsegne(model);
 	}
 }

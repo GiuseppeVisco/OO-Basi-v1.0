@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import controller.*;
 
 public class Consegna {
-	
-	
-	Controller controller;
+
 	String idConsegna;
 	String usernameUtente;
 	String indirizzoConsegna;
 	int idRider;
 	String indirizzoRistorante;
-	ArrayList<Prodotto> ordine = new ArrayList<Prodotto>();
 	double totale;
 	String statoConsegna;
 	String veicoloUtilizzato;
