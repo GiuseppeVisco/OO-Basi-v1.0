@@ -1,9 +1,14 @@
 package gui;
-
-
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 
 import controller.*;
 
@@ -25,9 +30,11 @@ public class LoginFrame extends JFrame {
 	private JPasswordField passwordField;
 	Controller controller;
 	private JPanel panel;
+	private JLabel logoLabel;
 
 
 	public LoginFrame(Controller c) {
+		setResizable(false);
 		controller =c;
 		setTitle("Log In");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,56 +45,49 @@ public class LoginFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBackground(new Color(255, 255, 255));
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(363, 119, 455, 208);
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel.setBounds(474, 160, 416, 189);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		
 		usernameField = new JTextField();
-		usernameField.setBounds(146, 47, 223, 38);
+		usernameField.setBounds(146, 35, 223, 38);
 		panel.add(usernameField);
 		usernameField.setColumns(10);
 		
 		JLabel usernameLabel = new JLabel("USERNAME");
 		usernameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		usernameLabel.setBounds(26, 52, 89, 26);
+		usernameLabel.setBounds(25, 40, 89, 26);
 		panel.add(usernameLabel);
 		usernameLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(146, 140, 223, 38);
+		passwordField.setBounds(146, 84, 223, 38);
 		panel.add(passwordField);
 		
 		JLabel passwordLabel = new JLabel("PASSWORD");
 		passwordLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		passwordLabel.setBounds(28, 145, 89, 26);
+		passwordLabel.setBounds(36, 89, 89, 26);
 		panel.add(passwordLabel);
 		passwordLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JButton loginButton = new JButton("LOGIN");
+		loginButton.setBounds(311, 140, 95, 38);
+		panel.add(loginButton);
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.checkCredentials(usernameField.getText(),passwordField.getText());
 			}
 		});
 		loginButton.setFont(new Font("Calibri", Font.BOLD, 12));
-		loginButton.setBounds(711, 345, 107, 45);
-		contentPane.add(loginButton);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 206, 209), new Color(0, 0, 0), new Color(0, 0, 0), new Color(0, 206, 209)));
-		panel_1.setBounds(35, 180, 259, 87);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Nome Ristorante");
-		lblNewLabel.setBounds(0, 0, 259, 87);
-		panel_1.add(lblNewLabel);
-		lblNewLabel.setBackground(new Color(128, 128, 128));
-		lblNewLabel.setFont(new Font("Script MT Bold", Font.PLAIN, 30));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		logoLabel = new JLabel("");
+		ImageIcon image = new ImageIcon(this.getClass().getResource("/logoSmall.png"));
+		logoLabel.setIcon(image);
+		logoLabel.setBounds(22, 104, 442, 243);
+		contentPane.add(logoLabel);
 	}
 	
 	public void cleanFields() {
