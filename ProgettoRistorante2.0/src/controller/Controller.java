@@ -106,19 +106,17 @@ public class Controller {
 	}
 	
 	public String getIndirizzoConsegna() {
-		String temp = utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()); 
-		return temp;
+		String indirizzoConsegna = utenteDAO.getIndirizzoByUsername(consegna.getUsernameUtente()); 
+		return indirizzoConsegna;
 	}
 	
 	public String getNegozioConsegna() {
-		String temp = consegna.getIndirizzoRistorante();
-		return temp;
+		String indirizzoRistorante = consegna.getIndirizzoRistorante();
+		return indirizzoRistorante;
 	}
 	
-
-	
 	public void aggiornaStoricoConsegne() {    
-		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.ricavaIndirizzoResidenza(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider(), consegna.getVeicoloUtilizzato());
+		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.getIndirizzoByUsername(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider(), consegna.getVeicoloUtilizzato());
 	}
 	
 	public void updateRiderCount() {
@@ -138,12 +136,12 @@ public class Controller {
 	}
 
 	
-	public String  ricavaDescrizioneProdotto(JList<String> tempJlist) {
-		String prodottoSelezionato = tempJlist.getSelectedValue();
-		String testoDescrizione = "";
-		ArrayList<Prodotto> temp2 = null;
-		temp2 = prodottoDAO.CaricaProdotti();
-		for(Prodotto prodotto: temp2) {
+	public String  ricavaDescrizioneProdotto(JList<String> prodottoJlist) {
+		String prodottoSelezionato = prodottoJlist.getSelectedValue();
+		String testoDescrizione = null;
+		ArrayList<Prodotto> listaProdotti;
+		listaProdotti = prodottoDAO.CaricaProdotti();
+		for(Prodotto prodotto: listaProdotti) {
 		if(prodottoSelezionato.equals(prodotto.getNomeProdotto())) {
 			ArrayList<String> listaAllergeni = new ArrayList<>();
 			listaAllergeni = allergeneDAO.fornisciAllergeni(prodottoSelezionato);
@@ -268,12 +266,7 @@ public class Controller {
 	       }
 	       return listaProdottiJl;
 	}
-	
-	public double fornisciPrezzo(String prodotto) {
-		double prezzo = prodottoDAO.restituisciPrezzo(prodotto);
-		return prezzo;
-	}
-	
+
 	public ArrayList<String> ricercaProdottoPerTipo(int y) {
 		ArrayList<String> temp = new ArrayList<String>();
 		temp = ricercaDAO.trovaProdottoPerTipo(y);
@@ -285,6 +278,13 @@ public class Controller {
 		temp = ricercaDAO.trovaProdottoPerAllergeni(s);
 		return temp;
 	}
+	
+	
+	public double getPrezzo(String prodotto) {
+		double prezzo = prodottoDAO.getPrezzoByName(prodotto);
+		return prezzo;
+	}
+	
 }
 
 

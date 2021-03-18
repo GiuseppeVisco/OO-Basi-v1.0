@@ -50,8 +50,8 @@ public class ProdottoDAO {
 		return listaProdotti;
 	}
 	
-	public double restituisciPrezzo(String nomeProdotto) {
-		double temp = -1;
+	public double getPrezzoByName(String nomeProdotto) {
+		double prezzo = -1;
 		try {
 
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");    
@@ -60,7 +60,7 @@ public class ProdottoDAO {
 			st.setString(1, nomeProdotto);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-			temp = rs.getDouble("costo");				
+			prezzo = rs.getDouble("costo");				
 			}
 			//- Release delle risorse
 			rs.close();
@@ -70,7 +70,7 @@ public class ProdottoDAO {
 	    catch (SQLException e) {
 	    	System.out.println("Class Not Found: \n"+e);
 	    }
-		return temp;
+		return prezzo;
 	}
 }
 

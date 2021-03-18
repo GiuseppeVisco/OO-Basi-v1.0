@@ -54,8 +54,8 @@ public class UtenteDAO {
 		return check;
 	}
 	
-	public String ricavaIndirizzoResidenza(String username) {
-		String temp = "non trovato";
+	public String getIndirizzoByUsername(String username) {
+		String indirizzo = "non trovato";
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
     
@@ -63,14 +63,14 @@ public class UtenteDAO {
 			st.setString(1, username);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				temp = rs.getString("indirizzo");
+				indirizzo = rs.getString("indirizzo");
 				
 			}
 	}
 	catch (SQLException e) {
 		System.out.println("Class Not Found: \n"+e);
 	}	
-	return temp;
+	return indirizzo;
 	}
 	
 	
