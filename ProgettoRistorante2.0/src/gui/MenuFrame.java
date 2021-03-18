@@ -363,16 +363,20 @@ public class MenuFrame extends JFrame {
     
     
     
-    class MyListModel implements ListModel {      
+    class MyListModel implements ListModel {    
+    	
         public int getSize() {
             return listaProdottiJl.size();
         }       
+        
         public Object getElementAt(int index) {
             return listaProdottiJl.get(index);            
-        }      
-        public void addListDataListener(ListDataListener l) {
+        }     
+        
+        public void addListDataListener(ListDataListener listData) {
         }       
-        public void removeListDataListener(ListDataListener l) {
+        
+        public void removeListDataListener(ListDataListener listData) {
         }	
     }
        
