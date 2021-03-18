@@ -251,7 +251,8 @@ public class Controller {
 	}
 	
 	public ArrayList<String> resettaButton(ArrayList<String> listaProdottiJl) {
-			ArrayList<Prodotto> temp = null;
+		   
+		   ArrayList<Prodotto> temp = null;
 	       temp = prodottoDAO.CaricaProdotti();
 	       for(Prodotto prodotto :temp) {
 	       	listaProdottiJl.add(prodotto.getNomeProdotto());
@@ -261,6 +262,7 @@ public class Controller {
 	
 	
 	public ArrayList<String> riempiMenu(ArrayList<String> listaProdottiJl) {
+		
 		   ArrayList<Prodotto> temp = null;
 	       temp = prodottoDAO.CaricaProdotti();
 	       for(Prodotto prodotto :temp) {

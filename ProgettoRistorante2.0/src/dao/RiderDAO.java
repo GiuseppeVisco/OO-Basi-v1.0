@@ -27,7 +27,7 @@ public class RiderDAO {
 		boolean check = false;
 		
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
     
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("SELECT veicolo, consegne_assegnate FROM rider");
@@ -57,7 +57,7 @@ catch (SQLException e) {
 		int id_rider = 0;
 		
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
     
 			PreparedStatement st = con.prepareStatement("SELECT id_rider FROM rider WHERE consegne_assegnate < 3 and veicolo =?");
 			st.setString(1, veicoloRider);
@@ -81,7 +81,7 @@ catch (SQLException e) {
 	public void updateCount(int idRider) {
 		
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
     
 			PreparedStatement st = con.prepareStatement("update rider set consegne_assegnate = consegne_assegnate+1 WHERE id_rider = ?");
 			st.setInt(1, idRider);

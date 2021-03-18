@@ -21,6 +21,7 @@ public class MenuFrame extends JFrame {
     public MenuFrame(Controller c) {
     	controller = c;
     	listaProdottiJl = controller.riempiMenu(listaProdottiJl);
+
     	
     	setTitle("Men\u00F9");
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,9 +108,14 @@ public class MenuFrame extends JFrame {
         scrollPane_2.setBounds(485, 106, 197, 132);
         checkOutInternalFrame.getContentPane().add(scrollPane_2);
         
-        MyListModel listaMenuModel = new MyListModel();										//definizioni dei ListModel
+        																					//definizioni dei ListModel
+        DefaultListModel<String> listaMenuModel2 = new DefaultListModel<String>();
         DefaultListModel<String> listaCarrelloModel = new DefaultListModel<String>();
         DefaultListModel<String> riepilogoCarrelloModel = new DefaultListModel<String>();
+        
+        for(String s :listaProdottiJl) {
+        	listaMenuModel2.addElement(s);
+        }
                        
         JList<String> riepilogoCarrelloJList = new JList<String>(riepilogoCarrelloModel);								//Riepilogo JListCarrello
         scrollPane_2.setViewportView(riepilogoCarrelloJList);
@@ -131,7 +137,7 @@ public class MenuFrame extends JFrame {
         scrollPane.setBounds(196, 110, 206, 205);
         getContentPane().add(scrollPane);
         
-        JList<String> listaMenuJList = new JList<String>(listaMenuModel);
+        JList<String> listaMenuJList = new JList<String>(listaMenuModel2);
         scrollPane.setViewportView(listaMenuJList);
         listaMenuJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
@@ -153,11 +159,6 @@ public class MenuFrame extends JFrame {
         
         JList<String> listaCarrelloJList = new JList<String>(listaCarrelloModel);
        scrollPane_1.setViewportView(listaCarrelloJList);
-        
-
-        JLabel menuPrincipaleLabel = new JLabel("Men\u00F9 Principale");
-        menuPrincipaleLabel.setBounds(240, 89, 113, 23);
-        getContentPane().add(menuPrincipaleLabel);
                      
         JLabel lblNewLabel = new JLabel("Men\u00F9 Principale");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -252,7 +253,7 @@ public class MenuFrame extends JFrame {
         JButton rimuoviButton = new JButton("Rimuovi");				//Bottone rimuovi
         rimuoviButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		rimuoviButton(listaCarrelloJList,listaCarrelloModel,listaMenuModel);
+        		rimuoviButton(listaCarrelloJList,listaCarrelloModel,listaMenuModel2); 
         	}
         });
         rimuoviButton.setBounds(412, 216, 92, 23);
@@ -284,13 +285,7 @@ public class MenuFrame extends JFrame {
         });
         indietroButton.setBounds(13, 286, 89, 35);
         checkOutInternalFrame.getContentPane().add(indietroButton);
-
-        
-        JButton btnNewButton_3 = new JButton("Log Out");  				///BOTTONE LOG OUT
-        btnNewButton_3.setFont(new Font("Calibri", Font.BOLD, 15));
-        btnNewButton_3.setBounds(10, 414, 89, 23);
-        getContentPane().add(btnNewButton_3);
-        
+               
         
         JButton descrizioneButton = new JButton("Descrizione");          //Bottone descrizione
         descrizioneButton.addActionListener(new ActionListener() {
@@ -305,7 +300,7 @@ public class MenuFrame extends JFrame {
         JButton resettaButton = new JButton("Resetta");							//Bottone Resetta
         resettaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		resetta(resettaButton);  		
+        		resetta(resettaButton, listaMenuModel2);  		
         	}
         });
         resettaButton.setEnabled(false);
@@ -332,18 +327,19 @@ public class MenuFrame extends JFrame {
         		int prezzoIndex = fasciaPrezzoBox.getSelectedIndex(); 
         		int prodottoIndex = tipoProdottoBox.getSelectedIndex();
         		
-        		listaProdottiJl = controller.ricercaPerPrezzo(prezzoIndex, listaProdottiJl);
+        		if (prezzoIndex != 0) {
+        		ricercaFasciaPrezzo(listaMenuModel2, prezzoIndex);
         		fasciaPrezzoBox.setSelectedIndex(0);        		
+        		}
         		
         		if (prodottoIndex != 0) {
-        			ArrayList<String> prodotti = new ArrayList<String>();
-        			prodotti = controller.ricercaProdottoPerTipo(prodottoIndex);
-        			listaProdottiJl.removeAll(prodotti);
+        			ricercaTipo(listaMenuModel2, prodottoIndex);
         			tipoProdottoBox.setSelectedIndex(0);
         		}
-       		
-        		checkAllergeni(cerealiCheck, uovaCheck, arachidiCheck, soiaCheck, latteCheck, anidrideCheck);
         		
+        		checkAllergeni(cerealiCheck, uovaCheck, arachidiCheck, soiaCheck, latteCheck, anidrideCheck, listaMenuModel2);
+        		
+        		listaProdottiJl = controller.riempiMenu(listaProdottiJl);
         		resettaButton.setEnabled(true);
         		ricercaInternalFrame.setVisible(false);
         	}
@@ -359,40 +355,21 @@ public class MenuFrame extends JFrame {
         tipoProdottoLabel.setBounds(44, 143, 128, 18);
         ricercaInternalFrame.getContentPane().add(tipoProdottoLabel);
     }
-
-    
-    
-    
-    class MyListModel implements ListModel {    
-    	
-        public int getSize() {
-            return listaProdottiJl.size();
-        }       
-        
-        public Object getElementAt(int index) {
-            return listaProdottiJl.get(index);            
-        }     
-        
-        public void addListDataListener(ListDataListener listData) {
-        }       
-        
-        public void removeListDataListener(ListDataListener listData) {
-        }	
-    }
        
+    
     
     ///////////METODI PER GLI ACTION LISTENER ///////////////
     
     
     
-    public void checkAllergeni(JCheckBox cerealiCheck,JCheckBox uovaCheck,JCheckBox arachidiCheck,JCheckBox soiaCheck,JCheckBox latteCheck,JCheckBox anidrideCheck) {
+    public void checkAllergeni(JCheckBox cerealiCheck,JCheckBox uovaCheck,JCheckBox arachidiCheck,JCheckBox soiaCheck,JCheckBox latteCheck,JCheckBox anidrideCheck, DefaultListModel<String> listaMenuModel2) {
 
     	if(cerealiCheck.isSelected()) {		
 			ArrayList<String> prodotti = null;
 			String allergene1 = "cereali e derivati";
 			prodotti = controller.fornisciProdottiPerAllergeni(allergene1);
 			for(String s :prodotti) {
-				listaProdottiJl.remove(s);
+				listaMenuModel2.removeElement(s);
 			}
 			cerealiCheck.setSelected(false);
 		}
@@ -402,7 +379,7 @@ public class MenuFrame extends JFrame {
 			String allergene2 = "uova";
 			prodotti = controller.fornisciProdottiPerAllergeni(allergene2);
 			for(String s :prodotti) {        				
-				listaProdottiJl.remove(s);
+				listaMenuModel2.removeElement(s);
 			}
 			uovaCheck.setSelected(false);
 		}
@@ -412,7 +389,7 @@ public class MenuFrame extends JFrame {
 			String allergene3 = "arachidi";
 			prodotti = controller.fornisciProdottiPerAllergeni(allergene3);
 			for(String s :prodotti) {
-				listaProdottiJl.remove(s);
+				listaMenuModel2.removeElement(s);
 			}
 			arachidiCheck.setSelected(false);
 		}
@@ -422,7 +399,7 @@ public class MenuFrame extends JFrame {
 			String allergene4 = "soia";
 			prodotti = controller.fornisciProdottiPerAllergeni(allergene4);
 			for(String s :prodotti) {
-				listaProdottiJl.remove(s);
+				listaMenuModel2.removeElement(s);
 			}
 			soiaCheck.setSelected(false);
 		}
@@ -432,7 +409,7 @@ public class MenuFrame extends JFrame {
 			String allergene5 = "latte";
 			prodotti = controller.fornisciProdottiPerAllergeni(allergene5);
 			for(String s :prodotti) {
-				listaProdottiJl.remove(s);
+				listaMenuModel2.removeElement(s);
 			}
 			latteCheck.setSelected(false);
 		}
@@ -442,7 +419,7 @@ public class MenuFrame extends JFrame {
 			String allergene6 = "anidride solforosa e solfiti";
 			prodotti = controller.fornisciProdottiPerAllergeni(allergene6);
 			for(String s :prodotti) {
-				listaProdottiJl.remove(s);
+				listaMenuModel2.removeElement(s);
 			}
 			anidrideCheck.setSelected(false);
 		}
@@ -473,14 +450,14 @@ public class MenuFrame extends JFrame {
   
     
     
-   public void rimuoviButton(JList<String> listaCarrelloJList, DefaultListModel<String> listaCarrelloModel, MyListModel listaMenuModel) {
+   public void rimuoviButton(JList<String> listaCarrelloJList, DefaultListModel<String> listaCarrelloModel, DefaultListModel<String> listaMenuModel2) {
 		int isSelected = listaCarrelloJList.getSelectedIndex();
 		if(isSelected == -1) {
 			return;
 		}
 		String elementoRimosso = listaCarrelloJList.getSelectedValue();        		
 		listaCarrelloModel.remove(isSelected);
-		int size = listaMenuModel.getSize();
+		int size = listaMenuModel2.getSize();
 		if(size == 0) {
 			return;
 		}
@@ -495,9 +472,13 @@ public class MenuFrame extends JFrame {
  
    
    
-   public void resetta(JButton resettaButton) {
-		listaProdottiJl.clear();
+   public void resetta(JButton resettaButton, DefaultListModel<String> listaMenuModel2) {
+		listaMenuModel2.clear();
+	    listaProdottiJl.clear();
 		listaProdottiJl = controller.resettaButton(listaProdottiJl);
+		for(String s :listaProdottiJl) {
+        	listaMenuModel2.addElement(s);
+        }
 		resettaButton.setEnabled(false);     
    }
    
@@ -526,6 +507,25 @@ public class MenuFrame extends JFrame {
 			else {
 				JOptionPane.showMessageDialog(null, "Inserisci qualcosa nel carrello");
 			}		
+   }
+   
+   public void ricercaTipo(DefaultListModel<String> listaMenuModel2, int prodottoIndex) {
+		listaMenuModel2.removeAllElements();      			
+		ArrayList<String> prodotti = new ArrayList<String>();
+		prodotti = controller.ricercaProdottoPerTipo(prodottoIndex);        			        			
+		listaProdottiJl.removeAll(prodotti);
+		  for(String s :listaProdottiJl) {
+	        	listaMenuModel2.addElement(s);       		        	
+	        }
+		  listaProdottiJl.clear();		
+   }
+   
+   public void ricercaFasciaPrezzo(DefaultListModel<String> listaMenuModel2, int prezzoIndex) {
+	   listaProdottiJl = controller.ricercaPerPrezzo(prezzoIndex, listaProdottiJl);
+		listaMenuModel2.removeAllElements();
+		for(String s :listaProdottiJl) {
+       	listaMenuModel2.addElement(s);
+       }
    }
 
 }   
