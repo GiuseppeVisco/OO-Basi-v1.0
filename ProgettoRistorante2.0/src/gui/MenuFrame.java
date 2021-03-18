@@ -336,9 +336,9 @@ public class MenuFrame extends JFrame {
         		fasciaPrezzoBox.setSelectedIndex(0);        		
         		
         		if (prodottoIndex != 0) {
-        			ArrayList<String> temp = new ArrayList<String>();
-        			temp = controller.ricercaProdottoPerTipo(prodottoIndex);
-        			listaProdottiJl.removeAll(temp);
+        			ArrayList<String> prodotti = new ArrayList<String>();
+        			prodotti = controller.ricercaProdottoPerTipo(prodottoIndex);
+        			listaProdottiJl.removeAll(prodotti);
         			tipoProdottoBox.setSelectedIndex(0);
         		}
        		
@@ -388,59 +388,60 @@ public class MenuFrame extends JFrame {
     public void checkAllergeni(JCheckBox cerealiCheck,JCheckBox uovaCheck,JCheckBox arachidiCheck,JCheckBox soiaCheck,JCheckBox latteCheck,JCheckBox anidrideCheck) {
 
     	if(cerealiCheck.isSelected()) {		
-			ArrayList<String> temp4 = null;
+			ArrayList<String> prodotti = null;
 			String allergene1 = "cereali e derivati";
-			temp4 = controller.fornisciProdottiPerAllergeni(allergene1);
-			for(String s :temp4) {
+			prodotti = controller.fornisciProdottiPerAllergeni(allergene1);
+			for(String s :prodotti) {
 				listaProdottiJl.remove(s);
 			}
 			cerealiCheck.setSelected(false);
 		}
+    	
 		if(uovaCheck.isSelected()) {
-			ArrayList<String> temp5 = null;
+			ArrayList<String> prodotti = null;
 			String allergene2 = "uova";
-			temp5 = controller.fornisciProdottiPerAllergeni(allergene2);
-			for(String s :temp5) {        				
+			prodotti = controller.fornisciProdottiPerAllergeni(allergene2);
+			for(String s :prodotti) {        				
 				listaProdottiJl.remove(s);
 			}
 			uovaCheck.setSelected(false);
 		}
 		
 		if(arachidiCheck.isSelected()) {
-			ArrayList<String> temp6 = null;
+			ArrayList<String> prodotti = null;
 			String allergene3 = "arachidi";
-			temp6 = controller.fornisciProdottiPerAllergeni(allergene3);
-			for(String s :temp6) {
+			prodotti = controller.fornisciProdottiPerAllergeni(allergene3);
+			for(String s :prodotti) {
 				listaProdottiJl.remove(s);
 			}
 			arachidiCheck.setSelected(false);
 		}
 		
 		if(soiaCheck.isSelected()) {
-			ArrayList<String> temp7 = null;
+			ArrayList<String> prodotti = null;
 			String allergene4 = "soia";
-			temp7 = controller.fornisciProdottiPerAllergeni(allergene4);
-			for(String s :temp7) {
+			prodotti = controller.fornisciProdottiPerAllergeni(allergene4);
+			for(String s :prodotti) {
 				listaProdottiJl.remove(s);
 			}
 			soiaCheck.setSelected(false);
 		}
 		
 		if(latteCheck.isSelected()) {
-			ArrayList<String> temp8 = null;
+			ArrayList<String> prodotti = null;
 			String allergene5 = "latte";
-			temp8 = controller.fornisciProdottiPerAllergeni(allergene5);
-			for(String s :temp8) {
+			prodotti = controller.fornisciProdottiPerAllergeni(allergene5);
+			for(String s :prodotti) {
 				listaProdottiJl.remove(s);
 			}
 			latteCheck.setSelected(false);
 		}
 		       		
 		if(anidrideCheck.isSelected()) {
-			ArrayList<String> temp9 = null;
+			ArrayList<String> prodotti = null;
 			String allergene6 = "anidride solforosa e solfiti";
-			temp9 = controller.fornisciProdottiPerAllergeni(allergene6);
-			for(String s :temp9) {
+			prodotti = controller.fornisciProdottiPerAllergeni(allergene6);
+			for(String s :prodotti) {
 				listaProdottiJl.remove(s);
 			}
 			anidrideCheck.setSelected(false);
