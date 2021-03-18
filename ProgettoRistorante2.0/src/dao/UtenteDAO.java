@@ -29,7 +29,7 @@ public class UtenteDAO {
 	public boolean checkCredentials(String username,String password) {
 		boolean check = false;
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
         
 				Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery("SELECT email, passwordutente FROM utente");
@@ -57,7 +57,7 @@ public class UtenteDAO {
 	public String ricavaIndirizzoResidenza(String username) {
 		String temp = "non trovato";
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
     
 			st = con.prepareStatement("SELECT indirizzo from utente WHERE email = ?");
 			st.setString(1, username);
@@ -81,7 +81,7 @@ public class UtenteDAO {
 		boolean isAdmin = false;
 		
 		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","angolo98");
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
 			PreparedStatement st = con.prepareStatement("SELECT admin FROM utente WHERE email = ?");    			        	
 			st.setString(1, email);
 			ResultSet rs = st.executeQuery();

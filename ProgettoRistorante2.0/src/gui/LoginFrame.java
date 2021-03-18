@@ -83,11 +83,11 @@ public class LoginFrame extends JFrame {
 		});
 		loginButton.setFont(new Font("Calibri", Font.BOLD, 12));
 		
-		logoLabel = new JLabel("");
-		ImageIcon image = new ImageIcon(this.getClass().getResource("/logoSmall.png"));
-		logoLabel.setIcon(image);
-		logoLabel.setBounds(22, 104, 442, 243);
-		contentPane.add(logoLabel);
+//		logoLabel = new JLabel("");
+//		ImageIcon image = new ImageIcon(this.getClass().getResource("/logoSmall.png"));
+//		logoLabel.setIcon(image);
+//		logoLabel.setBounds(22, 104, 442, 243);
+//		contentPane.add(logoLabel);
 	}
 	
 	public void cleanFields() {

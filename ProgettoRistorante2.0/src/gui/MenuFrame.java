@@ -238,7 +238,7 @@ public class MenuFrame extends JFrame {
         checkOutInternalFrame.getContentPane().add(accettaConsegnaButton);
 
         
-        JButton aggiungiButton = new JButton("Aggiungi >");           //Bottone aggiungi
+        JButton aggiungiButton = new JButton("Aggiungi");           //Bottone aggiungi
         aggiungiButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {    		
         		switchCarrello(listaMenuJList, listaCarrelloModel);
@@ -248,7 +248,7 @@ public class MenuFrame extends JFrame {
         getContentPane().add(aggiungiButton);
 
         
-        JButton rimuoviButton = new JButton("< Rimuovi");				//Bottone rimuovi
+        JButton rimuoviButton = new JButton("Rimuovi");				//Bottone rimuovi
         rimuoviButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		rimuoviButton(listaCarrelloJList,listaCarrelloModel,listaMenuModel);
