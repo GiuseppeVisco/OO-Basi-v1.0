@@ -19,6 +19,7 @@ public class MenuFrame extends JFrame {
     public ArrayList<String> listaProdottiJl = new ArrayList<>();
     
     public MenuFrame(Controller c) {
+    	setResizable(false);
     	controller = c;
     	listaProdottiJl = controller.riempiMenu(listaProdottiJl);
 
@@ -277,12 +278,6 @@ public class MenuFrame extends JFrame {
         });
         indietroButton.setBounds(13, 286, 89, 35);
         checkOutInternalFrame.getContentPane().add(indietroButton);                      
-
-     
-        JButton btnNewButton_3 = new JButton("Log Out");  				//Bottone logout  
-        btnNewButton_3.setFont(new Font("Calibri", Font.BOLD, 15));
-        btnNewButton_3.setBounds(10, 414, 89, 23);
-        getContentPane().add(btnNewButton_3);
         
      
         JButton descrizioneButton = new JButton("Descrizione");          //Bottone descrizione  

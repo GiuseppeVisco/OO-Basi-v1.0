@@ -228,7 +228,7 @@ public class Controller {
 		return model;
 	}
 	
-	public void resettaCounterConsegne() {
+	public void resettaCounterConsegneRider() {
 		consegnaDAO.resettaConsegneAssegnate();
 	}
 	

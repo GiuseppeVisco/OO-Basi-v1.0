@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+import javax.swing.ListSelectionModel;
 
 
 public class StoricoConsegneFrame2 extends JFrame {
@@ -36,6 +37,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 	Controller controller;
 
 	public StoricoConsegneFrame2(Controller x) {
+		setResizable(false);
 		controller = x;
 		setTitle("Storico consegne");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,7 +51,9 @@ public class StoricoConsegneFrame2 extends JFrame {
 		scrollPane.setBounds(10, 110, 919, 231);
 		contentPane.add(scrollPane);	
 				
-				storicoTable = new JTable();		
+				storicoTable = new JTable();
+				storicoTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				storicoTable.setCellSelectionEnabled(true);
 				storicoTable.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				storicoTable.setFont(new Font("Lucida Sans", Font.BOLD, 12));
 				scrollPane.setViewportView(storicoTable);
@@ -87,8 +91,8 @@ public class StoricoConsegneFrame2 extends JFrame {
 				confermaConsegneButton.setFont(new Font("Calibri", Font.BOLD, 15));
 				confermaConsegneButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						controller.resettaCounterConsegne(); //resetta a 0 tutte le consegne attive dei rider
-						controller.settaConsegnato();  //setta a "consegnato" tutte le consegne del ristorante dell'admin						
+						controller.resettaCounterConsegneRider();
+						controller.settaConsegnato();  					
 						model.setRowCount(0);
 						model = controller.ricavaConsegne(model);					     
 					}

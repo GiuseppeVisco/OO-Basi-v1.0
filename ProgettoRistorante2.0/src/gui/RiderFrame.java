@@ -22,6 +22,7 @@ public class RiderFrame extends JFrame {
 	private String mezzoRider;
 	
 	public RiderFrame(Controller c) {
+		setResizable(false);
 		controller = c;
 		group = new ButtonGroup();
 		

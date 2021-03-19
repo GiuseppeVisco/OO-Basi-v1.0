@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Window.Type;
 
 public class ClosingFrame extends JFrame {
 
@@ -21,6 +22,7 @@ public class ClosingFrame extends JFrame {
 	Controller controller;
 	
 	public ClosingFrame(Controller c) {
+		setResizable(false);
 		controller = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 300, 670, 300);
