@@ -30,7 +30,7 @@ public class RestaurantFrame extends JFrame {
 		group = new ButtonGroup();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(500, 300, 501, 456);
+		setBounds(500, 300, 343, 484);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -39,12 +39,12 @@ public class RestaurantFrame extends JFrame {
 		JLabel lblSelezionaLaSede = new JLabel("Seleziona la sede pi\u00F9 vicina");
 		lblSelezionaLaSede.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSelezionaLaSede.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 22));
-		lblSelezionaLaSede.setBounds(47, 33, 275, 29);
+		lblSelezionaLaSede.setBounds(29, 36, 275, 29);
 		contentPane.add(lblSelezionaLaSede);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel.setBounds(50, 71, 166, 266);
+		panel.setBounds(78, 78, 166, 266);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -125,7 +125,7 @@ public class RestaurantFrame extends JFrame {
 			}
 		});
 		selectionButton.setFont(new Font("Tahoma", Font.BOLD, 10));
-		selectionButton.setBounds(268, 182, 116, 50);
+		selectionButton.setBounds(105, 365, 116, 50);
 		contentPane.add(selectionButton);
 		
 	}
