@@ -25,7 +25,6 @@ public class RestaurantFrame extends JFrame {
 	
 	public RestaurantFrame(Controller c) {
 		setResizable(false);
-		setTitle("Selezione sede");
 		controller = c;
 		group = new ButtonGroup();
 		
