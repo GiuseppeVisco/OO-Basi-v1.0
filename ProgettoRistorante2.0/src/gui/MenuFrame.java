@@ -225,8 +225,8 @@ public class MenuFrame extends JFrame {
         accettaConsegnaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         			controller.aggiornaStoricoConsegne();
-        			controller.updateRiderCount();
-        			controller.openClosingFrame();
+        			controller.aggiornaConteggioRider();
+        			controller.apriClosingFrame();
         	}
         });
         accettaConsegnaButton.setBounds(724, 286, 89, 35);

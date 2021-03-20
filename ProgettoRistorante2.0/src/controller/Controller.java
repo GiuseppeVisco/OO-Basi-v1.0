@@ -20,7 +20,7 @@ public class Controller {
 	Consegna consegna = new Consegna();
 	ConsegnaDAO consegnaDAO = new ConsegnaDAO();
 	RiderDAO riderDAO = new RiderDAO();
-	StoricoConsegneFrame2 storicoConsegneFrame;
+	StoricoConsegneFrame storicoConsegneFrame;
 	AllergeneDAO allergeneDAO = new AllergeneDAO();
 	RicercaDAO ricercaDAO = new RicercaDAO();
 	RistoranteDAO ristoranteDAO = new RistoranteDAO();
@@ -50,13 +50,13 @@ public class Controller {
 		else {
 			if(utenteDAO.checkTipoUtente(username)) {
 				consegna.setUsernameUtente(username);
-				storicoConsegneFrame = new StoricoConsegneFrame2(this);
+				storicoConsegneFrame = new StoricoConsegneFrame(this);
 				loginFrame.setVisible(false);
 				storicoConsegneFrame.setVisible(true);
 			}
 			else {
 			consegna.setUsernameUtente(username);			
-			openRestaurantFrame();
+			apriRestaurantFrame();
 			}
 	}
 }
@@ -65,35 +65,29 @@ public class Controller {
 		boolean check=riderDAO.checkAvailability(s);
 		if(check) {
 			this.setIdRiderConsegna(s);
-			openMenuFrame();
+			apriMenuFrame();
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Non ci sono rider disponibili con questo mezzo.");
 		}
 	}
-	public void openRestaurantFrame() {
+	public void apriRestaurantFrame() {
 		loginFrame.setVisible(false);
 		restaurantFrame = new RestaurantFrame(this);
 		restaurantFrame.setVisible(true);
-	}
-	
-	public void backToLogin() {		
-		restaurantFrame.setVisible(false);
-		loginFrame = new LoginFrame(this);
-		loginFrame.setVisible(true);
 	}
 	
 	public void ristoranteSelezionato(String s) {
 		consegna.setIndirizzoRistorante(s);
 	}
 
-	public void openRiderFrame() {
+	public void apriRiderFrame() {
 		restaurantFrame.setVisible(false);
 		riderFrame = new RiderFrame(this);
 		riderFrame.setVisible(true);
 	}
 	
-	public void openMenuFrame() {		
+	public void apriMenuFrame() {		
 		
 		riderFrame.setVisible(false);
 		menuFrame = new MenuFrame(this);
@@ -119,7 +113,7 @@ public class Controller {
 		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.getIndirizzoByUsername(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider(), consegna.getVeicoloUtilizzato());
 	}
 	
-	public void updateRiderCount() {
+	public void aggiornaConteggioRider() {
 		riderDAO.updateCount(getIdRiderConsegna());
 	}
 	
@@ -186,14 +180,28 @@ public class Controller {
 		consegna.setTotale(totale);
 	}
 
-	public void openClosingFrame() {
+	public void apriClosingFrame() {
 		menuFrame.setVisible(false);
 		closingFrame = new ClosingFrame(this);
 		closingFrame.setVisible(true);
 	}
 	
-	public void closeClosingFrame() {
+	public void chiudiClosingFrame() {
 		closingFrame.setVisible(false);
+	}
+	
+	public void logOutUser() {
+		chiudiClosingFrame();
+		openLoginFrame();
+	}
+	
+	public void chiudiStoricoConsegneFrame() {
+		storicoConsegneFrame.setVisible(false);
+	}
+	
+	public void logOutAdmin() {
+		chiudiStoricoConsegneFrame();
+		openLoginFrame();
 	}
 	
 	public DefaultTableModel ricavaConsegne(DefaultTableModel model) {
@@ -286,6 +294,8 @@ public class Controller {
 		double prezzo = prodottoDAO.getPrezzoByName(prodotto);
 		return prezzo;
 	}
+
+
 	
 }
 

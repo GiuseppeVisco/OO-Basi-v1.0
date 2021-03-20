@@ -36,11 +36,11 @@ public class ClosingFrame extends JFrame {
 		lblNewLabel.setBounds(96, 41, 491, 36);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Continua gli acqusti");
+		JButton btnNewButton = new JButton("Continua gli acquisti");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.openRestaurantFrame();
-				controller.closeClosingFrame();
+				controller.apriRestaurantFrame();
+				controller.chiudiClosingFrame();
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -50,8 +50,7 @@ public class ClosingFrame extends JFrame {
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.closeClosingFrame();
-				controller.openLoginFrame();
+				controller.logOutUser();
 			}
 		});
 		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 11));

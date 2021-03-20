@@ -25,7 +25,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.ListSelectionModel;
 
 
-public class StoricoConsegneFrame2 extends JFrame {
+public class StoricoConsegneFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTable storicoTable;
@@ -36,7 +36,7 @@ public class StoricoConsegneFrame2 extends JFrame {
 	private JTextField cercaIdRiderTxt;
 	Controller controller;
 
-	public StoricoConsegneFrame2(Controller x) {
+	public StoricoConsegneFrame(Controller x) {
 		setResizable(false);
 		controller = x;
 		setTitle("Storico consegne");
@@ -156,6 +156,16 @@ public class StoricoConsegneFrame2 extends JFrame {
 				lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 				lblNewLabel_1.setBounds(35, 19, 46, 14);
 				idResearchPanel.add(lblNewLabel_1);
+				
+				JButton btnNewButton = new JButton("Logout");
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						controller.logOutAdmin();
+					}
+				});
+				btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+				btnNewButton.setBounds(843, 436, 85, 32);
+				contentPane.add(btnNewButton);
 
 				 model = (DefaultTableModel) storicoTable.getModel();
 				model = controller.ricavaConsegne(model);
