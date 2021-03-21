@@ -14,9 +14,8 @@ import java.awt.Color;
 
 public class MenuFrame extends JFrame {
 
-	Controller controller;
-	
-    public ArrayList<String> listaProdottiJl = new ArrayList<>();
+	Controller controller;	
+    private ArrayList<String> listaProdottiJl = new ArrayList<>();
     
     public MenuFrame(Controller c) {
     	setResizable(false);
@@ -101,7 +100,7 @@ public class MenuFrame extends JFrame {
         checkOutInternalFrame.getContentPane().add(scrollPane_2);
         
 
-        																					//definizioni dei ListModel
+        //definizioni dei ListModel
         DefaultListModel<String> listaMenuModel2 = new DefaultListModel<String>();										
         DefaultListModel<String> listaCarrelloModel = new DefaultListModel<String>();
         DefaultListModel<String> riepilogoCarrelloModel = new DefaultListModel<String>();
@@ -109,8 +108,10 @@ public class MenuFrame extends JFrame {
         for(String s :listaProdottiJl) {
         	listaMenuModel2.addElement(s);
         }                         
-
-        JList<String> riepilogoCarrelloJList = new JList<String>(riepilogoCarrelloModel);					//Riepilogo JListCarrello			
+         
+      
+        //Riepilogo JListCarrello
+        JList<String> riepilogoCarrelloJList = new JList<String>(riepilogoCarrelloModel);								
         scrollPane_2.setViewportView(riepilogoCarrelloJList);
         
         JLabel riepilogoCarelloLabel = new JLabel("Riepilogo carrello");
@@ -151,7 +152,7 @@ public class MenuFrame extends JFrame {
         descrizione.setText("Seleziona un prodotto");
         
         JList<String> listaCarrelloJList = new JList<String>(listaCarrelloModel);
-       scrollPane_1.setViewportView(listaCarrelloJList);
+        scrollPane_1.setViewportView(listaCarrelloJList);
                      
         JLabel lblNewLabel = new JLabel("Men\u00F9 Principale");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -219,8 +220,8 @@ public class MenuFrame extends JFrame {
         
         //////////////// BOTTONI //////////////////////
         
-
-        JButton accettaConsegnaButton = new JButton("Accetta");				//Bottone AccettaConsegna
+        //Bottone AccettaConsegna
+        JButton accettaConsegnaButton = new JButton("Accetta");				
         accettaConsegnaButton.setFont(new Font("Calibri", Font.BOLD, 15));
         accettaConsegnaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -232,8 +233,8 @@ public class MenuFrame extends JFrame {
         accettaConsegnaButton.setBounds(724, 286, 89, 35);
         checkOutInternalFrame.getContentPane().add(accettaConsegnaButton);
 
-      
-        JButton aggiungiButton = new JButton("Aggiungi");           //Bottone aggiungi  
+        //Bottone aggiungi  
+        JButton aggiungiButton = new JButton("Aggiungi");           
         aggiungiButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {    		
         		switchCarrello(listaMenuJList, listaCarrelloModel);
@@ -242,8 +243,8 @@ public class MenuFrame extends JFrame {
         aggiungiButton.setBounds(415, 147, 92, 23);
         getContentPane().add(aggiungiButton);
 
-
-        JButton rimuoviButton = new JButton("Rimuovi");				//Bottone rimuovi
+        //Bottone rimuovi
+        JButton rimuoviButton = new JButton("Rimuovi");				
         rimuoviButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		rimuoviButton(listaCarrelloJList,listaCarrelloModel,listaMenuModel2); 
@@ -252,8 +253,8 @@ public class MenuFrame extends JFrame {
         rimuoviButton.setBounds(412, 216, 92, 23);
         getContentPane().add(rimuoviButton);               
  
-
-        JButton confermaButton = new JButton("Conferma");				//Bottone conferma
+        //Bottone conferma
+        JButton confermaButton = new JButton("Conferma");				
         confermaButton.setFont(new Font("Calibri", Font.BOLD, 15));
         confermaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) { 
@@ -267,8 +268,8 @@ public class MenuFrame extends JFrame {
         confermaButton.setBounds(560, 326, 105, 40);
         getContentPane().add(confermaButton);
         
-                
-        JButton indietroButton = new JButton("Indietro");					//BOTTONE INDIETRO
+        //BOTTONE INDIETRO      
+        JButton indietroButton = new JButton("Indietro");					
         indietroButton.setFont(new Font("Calibri", Font.BOLD, 15));
         indietroButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -279,8 +280,8 @@ public class MenuFrame extends JFrame {
         indietroButton.setBounds(13, 286, 89, 35);
         checkOutInternalFrame.getContentPane().add(indietroButton);                      
         
-     
-        JButton descrizioneButton = new JButton("Descrizione");          //Bottone descrizione  
+        //Bottone descrizione  
+        JButton descrizioneButton = new JButton("Descrizione");          
         descrizioneButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {        		
         		descrizione.setText(controller.ricavaDescrizioneProdotto(listaMenuJList));
@@ -289,8 +290,8 @@ public class MenuFrame extends JFrame {
         descrizioneButton.setBounds(251, 326, 103, 40);
         getContentPane().add(descrizioneButton);
  
-
-        JButton resettaButton = new JButton("Resetta");					//Bottone Resetta
+        //Bottone Resetta
+        JButton resettaButton = new JButton("Resetta");					
         resettaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		resetta(resettaButton, listaMenuModel2);  		
@@ -300,8 +301,8 @@ public class MenuFrame extends JFrame {
         resettaButton.setBounds(42, 139, 89, 23);
         getContentPane().add(resettaButton);
                 
-        																	      
-        JButton ricercaButton = new JButton("Ricerca");             //Bottone ricerca   
+     	//Bottone ricerca																      
+        JButton ricercaButton = new JButton("Ricerca");                
         ricercaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		ricercaInternalFrame.setVisible(true);
@@ -310,8 +311,8 @@ public class MenuFrame extends JFrame {
         ricercaButton.setBounds(42, 108, 89, 23);
         getContentPane().add(ricercaButton);
         
-        
-        JButton cercaInternalButton = new JButton("Cerca");                   //BOTTONE INTERNAL CERCA
+        //BOTTONE INTERNAL CERCA
+        JButton cercaInternalButton = new JButton("Cerca");                   
         cercaInternalButton.setFont(new Font("Calibri", Font.BOLD, 15));
         cercaInternalButton.addActionListener(new ActionListener() {
         	
@@ -469,7 +470,7 @@ public class MenuFrame extends JFrame {
    public void resetta(JButton resettaButton, DefaultListModel<String> listaMenuModel2) {
 		listaMenuModel2.clear();
 	    listaProdottiJl.clear();
-		listaProdottiJl = controller.resettaButton(listaProdottiJl);
+		listaProdottiJl = controller.resettaRicerca(listaProdottiJl);
 		for(String s :listaProdottiJl) {
         	listaMenuModel2.addElement(s);
         }
@@ -491,7 +492,7 @@ public class MenuFrame extends JFrame {
 		double somma = 0;
 		for(int i = 0; i < y; i++) {
 			String prodotto = riepilogoCarrelloModel.elementAt(i).toString();
-			somma += controller.getPrezzo(prodotto);
+			somma += controller.getPrezzoPerNome(prodotto);
 		}
 		if(somma > 0) {
 			totaleTxtArea.setText(""+String.format("%.2f", somma)+"€");

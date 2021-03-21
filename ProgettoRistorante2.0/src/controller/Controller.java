@@ -33,10 +33,10 @@ public class Controller {
 	}
 	
 	public Controller() {
-		openLoginFrame();
+		apriLoginFrame();
 	}
 	
-	public void openLoginFrame() {
+	public void apriLoginFrame() {
 		loginFrame = new LoginFrame(this);
 		loginFrame.setVisible(true);	
 	}
@@ -147,27 +147,27 @@ public class Controller {
 	
 	
 	public ArrayList<String> ricercaPerPrezzo(int x, ArrayList<String> listaProdotti) {
-		ArrayList<String> temp = null;
-		ArrayList<String> temp2 = null;
-		ArrayList<String> temp3 = null;
+		ArrayList<String> prodottoBasso = null;
+		ArrayList<String> prodottoMedio = null;
+		ArrayList<String> prodottoAlto = null;
 
 		switch(x) {
 		case 0: break;
-		case 1: temp = ricercaDAO.trovaProdottoPerPrezzoBasso();
+		case 1: prodottoBasso = ricercaDAO.trovaProdottoPerPrezzoBasso();
 				listaProdotti.clear();
-				for(String s :temp) {
+				for(String s :prodottoBasso) {
 				listaProdotti.add(s);
 				}
 				break;
-		case 2: temp2 = ricercaDAO.trovaProdottoPerPrezzoMedio();
+		case 2: prodottoMedio = ricercaDAO.trovaProdottoPerPrezzoMedio();
 				listaProdotti.clear();
-				for(String s :temp2) {
+				for(String s :prodottoMedio) {
 				listaProdotti.add(s);
 				}
 				break;
-		case 3: temp3 = ricercaDAO.trovaProdottoPerPrezzoAlto();
+		case 3: prodottoAlto = ricercaDAO.trovaProdottoPerPrezzoAlto();
 				listaProdotti.clear();
-				for(String s :temp3) {							
+				for(String s :prodottoAlto) {							
 				listaProdotti.add(s);
 				}
 				break;
@@ -192,7 +192,7 @@ public class Controller {
 	
 	public void logOutUser() {
 		chiudiClosingFrame();
-		openLoginFrame();
+		apriLoginFrame();
 	}
 	
 	public void chiudiStoricoConsegneFrame() {
@@ -201,13 +201,13 @@ public class Controller {
 	
 	public void logOutAdmin() {
 		chiudiStoricoConsegneFrame();
-		openLoginFrame();
+		apriLoginFrame();
 	}
 	
 	public DefaultTableModel ricavaConsegne(DefaultTableModel model) {
-		ArrayList<Consegna> temp = null;
-		temp = consegnaDAO.listaConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
-		  for(Consegna consegna :temp) { 			        	
+		ArrayList<Consegna> listaConsegne = null;
+		listaConsegne = consegnaDAO.listaConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
+		  for(Consegna consegna :listaConsegne) { 			        	
 	        	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getIndirizzoRistorante(), consegna.getUsernameUtente(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), consegna.getVeicoloUtilizzato(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
 	        }
 		return model;
@@ -226,8 +226,8 @@ public class Controller {
 			JOptionPane.showMessageDialog(null, "Errore, inserire un valore numerico");
 			flag = 1;
 		}
-		ArrayList<Consegna> temp = consegnaDAO.cercaPerIdRider(idRider, ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
-		for(Consegna consegna :temp) { 			        	
+		ArrayList<Consegna> listaConsegneRider = consegnaDAO.cercaPerIdRider(idRider, ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
+		for(Consegna consegna :listaConsegneRider) { 			        	
         	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getIndirizzoRistorante(), consegna.getUsernameUtente(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), consegna.getVeicoloUtilizzato(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
         }
 		if(flag == 0 && model.getRowCount() == 0) {
@@ -256,15 +256,7 @@ public class Controller {
 		return ristorante;
 	}
 	
-	public ArrayList<String> resettaButton(ArrayList<String> listaProdottiJl) {
-		   
-		   ArrayList<Prodotto> temp = null;
-	       temp = prodottoDAO.CaricaProdotti();
-	       for(Prodotto prodotto :temp) {
-	       	listaProdottiJl.add(prodotto.getNomeProdotto());
-	       }
-	       return listaProdottiJl;
-	}
+	
 	
 	
 	public ArrayList<String> riempiMenu(ArrayList<String> listaProdottiJl) {
@@ -288,12 +280,24 @@ public class Controller {
 		temp = ricercaDAO.trovaProdottoPerAllergeni(s);
 		return temp;
 	}
-	
-	
-	public double getPrezzo(String prodotto) {
-		double prezzo = prodottoDAO.getPrezzoPerNome(prodotto);
-		return prezzo;
+
+	public double getPrezzoPerNome(String prodotto) {
+			double prezzo = prodottoDAO.getPrezzoPerNome(prodotto);
+			return prezzo;
 	}
+
+	public ArrayList<String> resettaRicerca(ArrayList<String> listaProdottiJl) {	   
+			   ArrayList<Prodotto> temp = null;
+		       temp = prodottoDAO.CaricaProdotti();
+		       for(Prodotto prodotto :temp) {
+		       	listaProdottiJl.add(prodotto.getNomeProdotto());
+		       }
+		       return listaProdottiJl;
+	}
+	
+	
+	
+
 
 
 	
