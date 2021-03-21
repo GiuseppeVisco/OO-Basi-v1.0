@@ -50,7 +50,7 @@ public class ProdottoDAO {
 		return listaProdotti;
 	}
 	
-	public double getPrezzoByName(String nomeProdotto) {
+	public double getPrezzoPerNome(String nomeProdotto) {
 		double prezzo = -1;
 		try {
 

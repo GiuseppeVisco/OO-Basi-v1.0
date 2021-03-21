@@ -78,7 +78,7 @@ public class LoginFrame extends JFrame {
 		panel.add(loginButton);
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.checkCredentials(usernameField.getText(),passwordField.getText());
+				controller.controllaCredenzialiInserite(usernameField.getText(),passwordField.getPassword());
 			}
 		});
 		loginButton.setFont(new Font("Calibri", Font.BOLD, 12));

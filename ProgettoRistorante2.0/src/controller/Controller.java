@@ -41,14 +41,14 @@ public class Controller {
 		loginFrame.setVisible(true);	
 	}
 	
-	public void checkCredentials(String username,String password) {		
-		boolean checked=utenteDAO.checkCredentials(username,password);				
+	public void controllaCredenzialiInserite(String username,char[] password) {		
+		boolean checked=utenteDAO.controllaCredenziali(username,password);				
 		if(checked==false) {
 			loginFrame.cleanFields();
 			JOptionPane.showMessageDialog(null, "Password o Username incorretti, riprovare.");
 		}
 		else {
-			if(utenteDAO.checkTipoUtente(username)) {
+			if(utenteDAO.controllaTipoUtente(username)) {
 				consegna.setUsernameUtente(username);
 				storicoConsegneFrame = new StoricoConsegneFrame(this);
 				loginFrame.setVisible(false);
@@ -61,8 +61,8 @@ public class Controller {
 	}
 }
 
-	public void checkRiderAvailable(String s) {
-		boolean check=riderDAO.checkAvailability(s);
+	public void controllaRiderDisponibili(String s) {
+		boolean check=riderDAO.controllaDisponibilità(s);
 		if(check) {
 			this.setIdRiderConsegna(s);
 			apriMenuFrame();
@@ -100,7 +100,7 @@ public class Controller {
 	}
 	
 	public String getIndirizzoConsegna() {
-		String indirizzoConsegna = utenteDAO.getIndirizzoByUsername(consegna.getUsernameUtente()); 
+		String indirizzoConsegna = utenteDAO.getIndirizzoPerUsername(consegna.getUsernameUtente()); 
 		return indirizzoConsegna;
 	}
 	
@@ -110,7 +110,7 @@ public class Controller {
 	}
 	
 	public void aggiornaStoricoConsegne() {    
-		consegnaDAO.insertConsegna(consegna.getIndirizzoRistorante(), utenteDAO.getIndirizzoByUsername(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider(), consegna.getVeicoloUtilizzato());
+		consegnaDAO.inserisciConsegna(consegna.getIndirizzoRistorante(), utenteDAO.getIndirizzoPerUsername(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider(), consegna.getVeicoloUtilizzato());
 	}
 	
 	public void aggiornaConteggioRider() {
@@ -291,7 +291,7 @@ public class Controller {
 	
 	
 	public double getPrezzo(String prodotto) {
-		double prezzo = prodottoDAO.getPrezzoByName(prodotto);
+		double prezzo = prodottoDAO.getPrezzoPerNome(prodotto);
 		return prezzo;
 	}
 

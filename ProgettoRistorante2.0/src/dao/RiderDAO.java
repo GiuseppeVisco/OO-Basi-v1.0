@@ -23,7 +23,7 @@ public class RiderDAO {
 			}
 	} 
 	
-	public boolean checkAvailability(String mezzoRider) {
+	public boolean controllaDisponibilità(String mezzoRider) {
 		boolean check = false;
 		
 		try {

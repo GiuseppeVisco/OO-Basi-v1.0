@@ -1,6 +1,4 @@
 package dao;
-
-
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
@@ -8,8 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 public class UtenteDAO {
+	
 	private PreparedStatement st;
 		
 	public UtenteDAO() {	
@@ -26,8 +24,11 @@ public class UtenteDAO {
 			}
 	} 
 	
-	public boolean checkCredentials(String username,String password) {
+	public boolean controllaCredenziali(String username,char[] charPassword) {
+		
 		boolean check = false;
+		String password = new String(charPassword);
+		
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
         
@@ -54,7 +55,7 @@ public class UtenteDAO {
 		return check;
 	}
 	
-	public String getIndirizzoByUsername(String username) {
+	public String getIndirizzoPerUsername(String username) {
 		String indirizzo = "non trovato";
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
@@ -76,7 +77,7 @@ public class UtenteDAO {
 	
 	
 	
-	public boolean checkTipoUtente(String email) {
+	public boolean controllaTipoUtente(String email) {
 
 		boolean isAdmin = false;
 		

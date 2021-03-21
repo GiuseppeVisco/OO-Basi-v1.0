@@ -30,9 +30,9 @@ public class RicercaDAO {
 			st.setString(1, nomeAllergene);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				String temp = null;
-				temp = rs.getString("nome_piatto");								
-				listaProdottiDaEliminare.add(temp);
+				String nomePiatto = null;
+				nomePiatto = rs.getString("nome_piatto");								
+				listaProdottiDaEliminare.add(nomePiatto);
 			}
 			
 			//- Release delle risorse
@@ -56,10 +56,10 @@ public class RicercaDAO {
 			st = con.prepareStatement("SELECT nome_piatto from menù  WHERE costo > 0 and costo < 3 ");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				String temp = "";
-				temp = rs.getString("nome_piatto");
+				String nomePiatto = null;
+				nomePiatto = rs.getString("nome_piatto");
 				
-				listaProdottiDaAggiungere.add(temp);
+				listaProdottiDaAggiungere.add(nomePiatto);
 			}
 			
 			//- Release delle risorse
@@ -83,10 +83,10 @@ public class RicercaDAO {
 			st = con.prepareStatement("SELECT nome_piatto from menù where costo >= 3 and costo < 6 ");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				String temp = "";
-				temp = rs.getString("nome_piatto");
+				String nomePiatto = null;
+				nomePiatto = rs.getString("nome_piatto");
 				
-				listaProdottiDaAggiungere2.add(temp);
+				listaProdottiDaAggiungere2.add(nomePiatto);
 			}
 			
 			//- Release delle risorse
@@ -110,10 +110,10 @@ public class RicercaDAO {
 			st = con.prepareStatement("SELECT menù.nome_piatto from menù  WHERE costo >= 6");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				String temp = "";
-				temp = rs.getString("nome_piatto");
+				String nomePiatto = null;
+				nomePiatto = rs.getString("nome_piatto");
 				
-				listaProdottiDaAggiungere3.add(temp);
+				listaProdottiDaAggiungere3.add(nomePiatto);
 			}
 			
 			//- Release delle risorse
@@ -138,10 +138,10 @@ public class RicercaDAO {
 			st.setInt(1, codiceProdotto);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				String temp = "";
-				temp = rs.getString("nome_piatto");
+				String nomePiatto = null;
+				nomePiatto = rs.getString("nome_piatto");
 				
-				listaProdottiDaAggiungere4.add(temp);
+				listaProdottiDaAggiungere4.add(nomePiatto);
 			}
 			
 			//- Release delle risorse
