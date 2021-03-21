@@ -11,20 +11,20 @@ import java.util.ArrayList;
 
 public class Controller {
 	
-	LoginFrame loginFrame;
-	RestaurantFrame restaurantFrame;
-	RiderFrame riderFrame;
-	MenuFrame menuFrame;
-	UtenteDAO utenteDAO = new UtenteDAO();
-	ProdottoDAO prodottoDAO = new ProdottoDAO();
-	Consegna consegna = new Consegna();
-	ConsegnaDAO consegnaDAO = new ConsegnaDAO();
-	RiderDAO riderDAO = new RiderDAO();
-	StoricoConsegneFrame storicoConsegneFrame;
-	AllergeneDAO allergeneDAO = new AllergeneDAO();
-	RicercaDAO ricercaDAO = new RicercaDAO();
-	RistoranteDAO ristoranteDAO = new RistoranteDAO();
-	ClosingFrame closingFrame;
+	private LoginFrame loginFrame;
+	private RestaurantFrame restaurantFrame;
+	private RiderFrame riderFrame;
+	private MenuFrame menuFrame;
+	private UtenteDAO utenteDAO = new UtenteDAO();
+	private ProdottoDAO prodottoDAO = new ProdottoDAO();
+	private Consegna consegna = new Consegna();
+	private ConsegnaDAO consegnaDAO = new ConsegnaDAO();
+	private RiderDAO riderDAO = new RiderDAO();
+	private StoricoConsegneFrame storicoConsegneFrame;
+	private AllergeneDAO allergeneDAO = new AllergeneDAO();
+	private RicercaDAO ricercaDAO = new RicercaDAO();
+	private RistoranteDAO ristoranteDAO = new RistoranteDAO();
+	private ClosingFrame closingFrame;
 	
 	public static void main(String[] args) {
 		
