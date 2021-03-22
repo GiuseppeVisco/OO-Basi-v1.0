@@ -9,7 +9,9 @@ import entity.Consegna;
 
 
 public class ConsegnaDAO {	
-	private PreparedStatement st;
+	
+	private PreparedStatement statement;
+	private Consegna consegna;
 	
 	public ConsegnaDAO() {
 		try {
@@ -20,25 +22,24 @@ public class ConsegnaDAO {
 			}
 	}
 	
-	//SALVARE LA CONSEGNA COME ONSEGNA E NON COME ATTRIBUTI SINGOLI?
 	public void inserisciConsegna(String ristorantePartenza, String indirizzoConsegna, double costoTotale, String usernameUtente, int idRiderAssegnato, String veicoloRider) {
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
 
-			st = con.prepareStatement("INSERT INTO consegne(ristorante_di_partenza, indirizzo_consegna, costo_totale, mail_utente, id_rider, stato_consegna, veicolo_utilizzato) VALUES (?,?,?,?,?,?,?)");
-			st.setString(1, ristorantePartenza);
-			st.setString(2, indirizzoConsegna);
-			st.setDouble(3, costoTotale);
-			st.setString(4, usernameUtente);
-			st.setInt(5, idRiderAssegnato);
-			st.setString(6,"In consegna");
-			st.setString(7, veicoloRider);
+			statement = con.prepareStatement("INSERT INTO consegne(ristorante_di_partenza, indirizzo_consegna, costo_totale, mail_utente, id_rider, stato_consegna, veicolo_utilizzato) VALUES (?,?,?,?,?,?,?)");
+			statement.setString(1, ristorantePartenza);
+			statement.setString(2, indirizzoConsegna);
+			statement.setDouble(3, costoTotale);
+			statement.setString(4, usernameUtente);
+			statement.setInt(5, idRiderAssegnato);
+			statement.setString(6,"In consegna");
+			statement.setString(7, veicoloRider);
 			
-			ResultSet rs = st.executeQuery();
+			ResultSet rs = statement.executeQuery();
 			
 			//- Release delle risorse
 			rs.close();
-			st.close();
+			statement.close();
 			con.close();
 		}
 
@@ -47,15 +48,17 @@ public class ConsegnaDAO {
 		}	
 	}
 	
-	public ArrayList<Consegna> listaConsegne (String ristoranteAssegnato) {
+	public ArrayList<Consegna> getListaConsegne (String ristoranteAssegnato) {
+		
 		ArrayList<Consegna> listaStorico = new ArrayList<Consegna>();
+		
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
-			st = con.prepareStatement("SELECT * from consegne WHERE ristorante_di_partenza LIKE ?");
-			st.setString(1, ristoranteAssegnato);
-			ResultSet rs = st.executeQuery();
+			statement = con.prepareStatement("SELECT * from consegne WHERE ristorante_di_partenza LIKE ?");
+			statement.setString(1, ristoranteAssegnato);
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				Consegna consegna = new Consegna();
+				consegna = new Consegna();
 				consegna.setIndirizzoRistorante(rs.getString("ristorante_di_partenza"));
 				consegna.setIndirizzoConsegna(rs.getString("indirizzo_consegna"));
 				consegna.setTotale(rs.getDouble("costo_totale"));
@@ -70,7 +73,7 @@ public class ConsegnaDAO {
 			}
 		// Release delle risorse
 			rs.close();
-			st.close();
+			statement.close();
 			con.close();
 		}
 		catch (SQLException e) {
@@ -82,13 +85,13 @@ public class ConsegnaDAO {
 	public void aggiornaStatoConsegne(String ristorantePartenza) {
 		try {			
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
-			st = con.prepareStatement("update consegne set stato_consegna = 'Consegnato' where ristorante_di_partenza like ?");
-			st.setString(1, ristorantePartenza);
-			ResultSet rs = st.executeQuery();
+			statement = con.prepareStatement("update consegne set stato_consegna = 'Consegnato' where ristorante_di_partenza like ?");
+			statement.setString(1, ristorantePartenza);
+			ResultSet rs = statement.executeQuery();
 
 			// Release delle risorse
 						rs.close();
-						st.close();
+						statement.close();
 						con.close();
 			}
 		catch (SQLException e) {
@@ -100,13 +103,13 @@ public class ConsegnaDAO {
 	public void resettaConsegneAssegnate() {
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
-			st = con.prepareStatement("update rider set consegne_assegnate = '0'");
+			statement = con.prepareStatement("update rider set consegne_assegnate = '0'");
 			
-			ResultSet rs = st.executeQuery();
+			ResultSet rs = statement.executeQuery();
 
 			// Release delle risorse
 						rs.close();
-						st.close();
+						statement.close();
 						con.close();
 			}
 		catch (SQLException e) {
@@ -118,14 +121,14 @@ public class ConsegnaDAO {
 		
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
-			st = con.prepareStatement("delete from consegne where id_consegna = ?");
-			st.setInt(1, idConsegna);
+			statement = con.prepareStatement("delete from consegne where id_consegna = ?");
+			statement.setInt(1, idConsegna);
 			
-			ResultSet rs = st.executeQuery();
+			ResultSet rs = statement.executeQuery();
 
 			// Release delle risorse
 						rs.close();
-						st.close();
+						statement.close();
 						con.close();
 			}
 		catch (SQLException e) {
@@ -138,10 +141,10 @@ public class ConsegnaDAO {
 		ArrayList<Consegna> listaStoricoPerIdRider = new ArrayList<Consegna>();
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
-			st = con.prepareStatement("SELECT * from consegne WHERE ristorante_di_partenza LIKE ? AND id_rider = ?");
-			st.setString(1, ristoranteAssegnato);
-			st.setInt(2, riderId);
-			ResultSet rs = st.executeQuery();
+			statement = con.prepareStatement("SELECT * from consegne WHERE ristorante_di_partenza LIKE ? AND id_rider = ?");
+			statement.setString(1, ristoranteAssegnato);
+			statement.setInt(2, riderId);
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				
 				Consegna consegna = new Consegna();
@@ -160,7 +163,7 @@ public class ConsegnaDAO {
 			}
 		// Release delle risorse
 			rs.close();
-			st.close();
+			statement.close();
 			con.close();
 		}
 		catch (SQLException e) {

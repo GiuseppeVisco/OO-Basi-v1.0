@@ -25,12 +25,12 @@ import java.awt.Color;
 
 public class LoginFrame extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField usernameField;
-	private JPasswordField passwordField;
+	JPanel contentPane;
+	JTextField usernameField;
+	JPasswordField passwordField;
 	Controller controller;
-	private JPanel panel;
-	private JLabel logoLabel;
+	JPanel datiPanel;
+	JLabel logoLabel;
 
 
 	public LoginFrame(Controller c) {
@@ -44,38 +44,38 @@ public class LoginFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		panel = new JPanel();
-		panel.setBackground(Color.LIGHT_GRAY);
-		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel.setBounds(474, 160, 416, 189);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		datiPanel = new JPanel();
+		datiPanel.setBackground(Color.LIGHT_GRAY);
+		datiPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		datiPanel.setBounds(474, 160, 416, 189);
+		contentPane.add(datiPanel);
+		datiPanel.setLayout(null);
 
 		
 		usernameField = new JTextField();
 		usernameField.setBounds(146, 35, 223, 38);
-		panel.add(usernameField);
+		datiPanel.add(usernameField);
 		usernameField.setColumns(10);
 		
 		JLabel usernameLabel = new JLabel("USERNAME");
 		usernameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		usernameLabel.setBounds(25, 40, 89, 26);
-		panel.add(usernameLabel);
+		datiPanel.add(usernameLabel);
 		usernameLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(146, 84, 223, 38);
-		panel.add(passwordField);
+		datiPanel.add(passwordField);
 		
 		JLabel passwordLabel = new JLabel("PASSWORD");
 		passwordLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		passwordLabel.setBounds(36, 89, 89, 26);
-		panel.add(passwordLabel);
+		datiPanel.add(passwordLabel);
 		passwordLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JButton loginButton = new JButton("LOGIN");
 		loginButton.setBounds(311, 140, 95, 38);
-		panel.add(loginButton);
+		datiPanel.add(loginButton);
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.controllaCredenzialiInserite(usernameField.getText(),passwordField.getPassword());
@@ -90,7 +90,7 @@ public class LoginFrame extends JFrame {
 //		contentPane.add(logoLabel);
 	}
 	
-	public void cleanFields() {
+	public void pulisciCampi() {
 		usernameField.setText(null);
 		passwordField.setText(null);
 	}

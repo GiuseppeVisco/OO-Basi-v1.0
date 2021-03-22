@@ -95,4 +95,22 @@ catch (SQLException e) {
     System.out.println("Class Not Found: \n"+e);
 		}
 	}
+	
+	public void rimuoviConsegna(int idRider) {
+		
+		try {
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
+    
+			PreparedStatement st = con.prepareStatement("update rider set consegne_assegnate = consegne_assegnate-1 WHERE id_rider = ?");
+			st.setInt(1, idRider);
+			st.executeQuery();
+
+        //- Release delle risorse
+            st.close();
+            con.close();
+		}
+catch (SQLException e) {
+    System.out.println("Class Not Found: \n"+e);
+		}
+	}
 }

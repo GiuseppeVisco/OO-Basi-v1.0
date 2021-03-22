@@ -44,7 +44,7 @@ public class Controller {
 	public void controllaCredenzialiInserite(String username,char[] password) {		
 		boolean checked=utenteDAO.controllaCredenziali(username,password);				
 		if(checked==false) {
-			loginFrame.cleanFields();
+			loginFrame.pulisciCampi();
 			JOptionPane.showMessageDialog(null, "Password o Username incorretti, riprovare.");
 		}
 		else {
@@ -113,8 +113,12 @@ public class Controller {
 		consegnaDAO.inserisciConsegna(consegna.getIndirizzoRistorante(), utenteDAO.getIndirizzoPerUsername(consegna.getUsernameUtente()), consegna.getTotale(), consegna.getUsernameUtente(),consegna.getIdRider(), consegna.getVeicoloUtilizzato());
 	}
 	
-	public void aggiornaConteggioRider() {
+	public void incrementaConteggioRider() {
 		riderDAO.updateCount(getIdRiderConsegna());
+	}
+	
+	public void decrementaConteggioRider() {
+		riderDAO.rimuoviConsegna(getIdRiderConsegna());
 	}
 	
 	public int getIdRiderConsegna() {
@@ -128,7 +132,6 @@ public class Controller {
 	public void setVeicoloUtilizzato(String veicolo) {
 		consegna.setVeicoloUtilizzato(veicolo);
 	}
-
 	
 	public String  ricavaDescrizioneProdotto(JList<String> prodottoJlist) {
 		String prodottoSelezionato = prodottoJlist.getSelectedValue();
@@ -174,7 +177,6 @@ public class Controller {
 		}
 		return listaProdotti;
 	}
-
 	
 	public void setTotaleConsegna(double totale) {
 		consegna.setTotale(totale);
@@ -206,7 +208,7 @@ public class Controller {
 	
 	public DefaultTableModel ricavaConsegne(DefaultTableModel model) {
 		ArrayList<Consegna> listaConsegne = null;
-		listaConsegne = consegnaDAO.listaConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
+		listaConsegne = consegnaDAO.getListaConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
 		  for(Consegna consegna :listaConsegne) { 			        	
 	        	model.addRow(new Object[] {consegna.getIdConsegna(),consegna.getIndirizzoRistorante(), consegna.getUsernameUtente(), consegna.getIndirizzoConsegna(), consegna.getIdRider(), consegna.getVeicoloUtilizzato(), ""+consegna.getTotale()+"€", consegna.getStatoConsegna() });
 	        }
@@ -234,10 +236,6 @@ public class Controller {
 			 JOptionPane.showMessageDialog(null, "Il rider selezionato non ha effettuato consegne in questo ristorante");
 		}
 		return model;
-	}
-	
-	public void resettaCounterConsegneRider() {
-		consegnaDAO.resettaConsegneAssegnate();
 	}
 	
 	public void settaConsegnato() {
@@ -294,12 +292,6 @@ public class Controller {
 		       }
 		       return listaProdottiJl;
 	}
-	
-	
-	
-
-
-
 	
 }
 

@@ -18,9 +18,9 @@ import javax.swing.border.BevelBorder;
 
 public class RestaurantFrame extends JFrame {
 
-	private JPanel contentPane;
-	private Controller controller;
-	private ButtonGroup group;
+	JPanel contentPane;
+	Controller controller;
+	ButtonGroup group;
 	private String indirizzoRistorante;
 	
 	public RestaurantFrame(Controller c) {
@@ -35,11 +35,11 @@ public class RestaurantFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblSelezionaLaSede = new JLabel("Seleziona la sede pi\u00F9 vicina");
-		lblSelezionaLaSede.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSelezionaLaSede.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 22));
-		lblSelezionaLaSede.setBounds(29, 36, 275, 29);
-		contentPane.add(lblSelezionaLaSede);
+		JLabel labelSelezionaLaSede = new JLabel("Seleziona la sede pi\u00F9 vicina");
+		labelSelezionaLaSede.setHorizontalAlignment(SwingConstants.CENTER);
+		labelSelezionaLaSede.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 22));
+		labelSelezionaLaSede.setBounds(29, 36, 275, 29);
+		contentPane.add(labelSelezionaLaSede);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -84,8 +84,8 @@ public class RestaurantFrame extends JFrame {
 		button_6.setFont(new Font("Calibri", Font.PLAIN, 12));
 		group.add(button_6);
 		
-		JButton selectionButton = new JButton("CONTINUA");
-		selectionButton.addActionListener(new ActionListener() {
+		JButton continuaButton = new JButton("CONTINUA");
+		continuaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(button_1.isSelected()) {
 					indirizzoRistorante = button_1.getText();
@@ -123,13 +123,10 @@ public class RestaurantFrame extends JFrame {
 				
 			}
 		});
-		selectionButton.setFont(new Font("Tahoma", Font.BOLD, 10));
-		selectionButton.setBounds(105, 365, 116, 50);
-		contentPane.add(selectionButton);
+		continuaButton.setFont(new Font("Tahoma", Font.BOLD, 10));
+		continuaButton.setBounds(105, 365, 116, 50);
+		contentPane.add(continuaButton);
 		
 	}
 
-	public String getIndirizzoRistorante() {
-		return indirizzoRistorante;	
-	}
 }

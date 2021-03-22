@@ -18,7 +18,7 @@ import java.awt.Window.Type;
 
 public class ClosingFrame extends JFrame {
 
-	private JPanel contentPane;
+	JPanel contentPane;
 	Controller controller;
 	
 	public ClosingFrame(Controller c) {
@@ -31,30 +31,30 @@ public class ClosingFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Il tuo ordine \u00E8 stato ricevuto e verr\u00E0 consegnato al pi\u00F9 presto.");
-		lblNewLabel.setFont(new Font("Script MT Bold", Font.BOLD, 16));
-		lblNewLabel.setBounds(96, 41, 491, 36);
-		contentPane.add(lblNewLabel);
+		JLabel infoLabel = new JLabel("Il tuo ordine \u00E8 stato ricevuto e verr\u00E0 consegnato al pi\u00F9 presto.");
+		infoLabel.setFont(new Font("Script MT Bold", Font.BOLD, 16));
+		infoLabel.setBounds(96, 41, 491, 36);
+		contentPane.add(infoLabel);
 		
-		JButton btnNewButton = new JButton("Continua gli acquisti");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton bottoneContinua = new JButton("Continua gli acquisti");
+		bottoneContinua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.apriRestaurantFrame();
 				controller.chiudiClosingFrame();
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBounds(78, 153, 157, 50);
-		contentPane.add(btnNewButton);
+		bottoneContinua.setFont(new Font("Tahoma", Font.BOLD, 11));
+		bottoneContinua.setBounds(78, 153, 157, 50);
+		contentPane.add(bottoneContinua);
 		
-		JButton btnLogout = new JButton("Logout");
-		btnLogout.addActionListener(new ActionListener() {
+		JButton bottoneLogout = new JButton("Logout");
+		bottoneLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.logOutUser();
 			}
 		});
-		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnLogout.setBounds(439, 153, 140, 50);
-		contentPane.add(btnLogout);
+		bottoneLogout.setFont(new Font("Tahoma", Font.BOLD, 11));
+		bottoneLogout.setBounds(439, 153, 140, 50);
+		contentPane.add(bottoneLogout);
 	}
 }

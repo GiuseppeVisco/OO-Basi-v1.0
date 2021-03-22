@@ -5,14 +5,14 @@ import controller.*;
 
 public class Consegna {
 
-	String idConsegna;
-	String usernameUtente;
-	String indirizzoConsegna;
-	int idRider;
-	String indirizzoRistorante;
-	double totale;
-	String statoConsegna;
-	String veicoloUtilizzato;
+	private String idConsegna;
+	private String usernameUtente;
+	private String indirizzoConsegna;
+	private int idRider;
+	private String indirizzoRistorante;
+	private double totale;
+	private String statoConsegna;
+	private String veicoloUtilizzato;
 	
 
 	public void setIndirizzoConsegna(String indirizzoConsegna) {

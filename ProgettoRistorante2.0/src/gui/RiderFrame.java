@@ -16,9 +16,9 @@ import javax.swing.border.BevelBorder;
 
 public class RiderFrame extends JFrame {
 
-	private JPanel contentPane;
-	private Controller controller;
-	private ButtonGroup group;
+	JPanel contentPane;
+	Controller controller;
+	ButtonGroup group;
 	private String mezzoRider;
 	
 	public RiderFrame(Controller c) {
@@ -69,8 +69,8 @@ public class RiderFrame extends JFrame {
 		riderButton_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		group.add(riderButton_4);
 		
-		JButton selectionButton = new JButton("CONTINUA");
-		selectionButton.addActionListener(new ActionListener() {
+		JButton continuaButton = new JButton("CONTINUA");
+		continuaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(riderButton_1.isSelected()) {
 				mezzoRider=riderButton_1.getText();
@@ -98,9 +98,9 @@ public class RiderFrame extends JFrame {
 			}
 			}
 		});
-		selectionButton.setFont(new Font("Tahoma", Font.BOLD, 10));
-		selectionButton.setBounds(308, 127, 117, 45);
-		contentPane.add(selectionButton);
+		continuaButton.setFont(new Font("Tahoma", Font.BOLD, 10));
+		continuaButton.setBounds(308, 127, 117, 45);
+		contentPane.add(continuaButton);
 	}
 
 }

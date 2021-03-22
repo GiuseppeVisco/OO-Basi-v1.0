@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Prodotto {
 	
-	private float prezzoProdotto;	
+	private double prezzoProdotto;	
 	private String nomeProdotto;
 	private String Descrizione;
 
 	
-	public float getPrezzoProdotto() {
+	public double getPrezzoProdotto() {
 		return prezzoProdotto;
 	}
 
-	public void setPrezzoProdotto(float prezzoProdotto) {
+	public void setPrezzoProdotto(double prezzoProdotto) {
 		this.prezzoProdotto = prezzoProdotto;
 	}
 

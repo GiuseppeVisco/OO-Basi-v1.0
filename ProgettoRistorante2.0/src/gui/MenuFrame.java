@@ -226,7 +226,7 @@ public class MenuFrame extends JFrame {
         accettaConsegnaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         			controller.aggiornaStoricoConsegne();
-        			controller.aggiornaConteggioRider();
+        			controller.incrementaConteggioRider();
         			controller.apriClosingFrame();
         	}
         });

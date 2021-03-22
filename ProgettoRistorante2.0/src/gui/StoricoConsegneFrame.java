@@ -27,13 +27,13 @@ import javax.swing.ListSelectionModel;
 
 public class StoricoConsegneFrame extends JFrame {
 
-	private JPanel contentPane;
-	private JTable storicoTable;
+	JPanel contentPane;
+	JTable storicoTable;
 	DefaultTableModel model;
-	private JTextField nomeTxt;
-	private JPanel panel;
-	private JButton ricercaPerIdButton;
-	private JTextField cercaIdRiderTxt;
+	JTextField nomeText;
+	JPanel panel;
+	JButton ricercaPerIdButton;
+	JTextField cercaIdRiderText;
 	Controller controller;
 
 	public StoricoConsegneFrame(Controller x) {
@@ -47,16 +47,16 @@ public class StoricoConsegneFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 110, 919, 231);
-		contentPane.add(scrollPane);	
+		JScrollPane storicoPanel = new JScrollPane();
+		storicoPanel.setBounds(10, 110, 919, 231);
+		contentPane.add(storicoPanel);	
 				
 				storicoTable = new JTable();
 				storicoTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				storicoTable.setCellSelectionEnabled(true);
 				storicoTable.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				storicoTable.setFont(new Font("Lucida Sans", Font.BOLD, 12));
-				scrollPane.setViewportView(storicoTable);
+				storicoPanel.setViewportView(storicoTable);
 				storicoTable.setModel(new DefaultTableModel(
 					new Object[][] {
 					},
@@ -65,11 +65,11 @@ public class StoricoConsegneFrame extends JFrame {
 					}
 				));
 				
-				JLabel lblNewLabel = new JLabel("STORICO CONSEGNE");
-				lblNewLabel.setFont(new Font("Lucida Sans", Font.BOLD, 19));
-				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				lblNewLabel.setBounds(314, 11, 274, 52);
-				contentPane.add(lblNewLabel);
+				JLabel storicoLabel = new JLabel("STORICO CONSEGNE");
+				storicoLabel.setFont(new Font("Lucida Sans", Font.BOLD, 19));
+				storicoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+				storicoLabel.setBounds(314, 11, 274, 52);
+				contentPane.add(storicoLabel);
 				
 				panel = new JPanel();
 				panel.setBackground(Color.LIGHT_GRAY);
@@ -79,19 +79,19 @@ public class StoricoConsegneFrame extends JFrame {
 				panel.setLayout(null);
 				
 				
-				nomeTxt = new JTextField();
-				nomeTxt.setBackground(Color.WHITE);
-				nomeTxt.setBounds(6, 16, 196, 25);
-				panel.add(nomeTxt);
-				nomeTxt.setEditable(false);
-				nomeTxt.setColumns(10);
-				nomeTxt.setText(controller.fornisciRistoranteAdmin());	
+				nomeText = new JTextField();
+				nomeText.setBackground(Color.WHITE);
+				nomeText.setBounds(6, 16, 196, 25);
+				panel.add(nomeText);
+				nomeText.setEditable(false);
+				nomeText.setColumns(10);
+				nomeText.setText(controller.fornisciRistoranteAdmin());	
 				
-				JButton confermaConsegneButton = new JButton("Conferma consegne effettuate");
+				JButton confermaConsegneButton = new JButton("Conferma consegna");
 				confermaConsegneButton.setFont(new Font("Calibri", Font.BOLD, 15));
 				confermaConsegneButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						controller.resettaCounterConsegneRider();
+						controller.decrementaConteggioRider();
 						controller.settaConsegnato();  					
 						model.setRowCount(0);
 						model = controller.ricavaConsegne(model);					     
@@ -129,16 +129,16 @@ public class StoricoConsegneFrame extends JFrame {
 				idResearchPanel.add(ricercaPerIdButton);
 				ricercaPerIdButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String s = cercaIdRiderTxt.getText();
+						String s = cercaIdRiderText.getText();
 						controller.riempiTabella(model, s);
 					}
 				});
 				
-				cercaIdRiderTxt = new JTextField();
-				cercaIdRiderTxt.setHorizontalAlignment(SwingConstants.CENTER);
-				cercaIdRiderTxt.setBounds(91, 16, 59, 20);
-				idResearchPanel.add(cercaIdRiderTxt);
-				cercaIdRiderTxt.setColumns(10);
+				cercaIdRiderText = new JTextField();
+				cercaIdRiderText.setHorizontalAlignment(SwingConstants.CENTER);
+				cercaIdRiderText.setBounds(91, 16, 59, 20);
+				idResearchPanel.add(cercaIdRiderText);
+				cercaIdRiderText.setColumns(10);
 				
 				JButton resetButton = new JButton("Reset");
 				resetButton.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -151,23 +151,23 @@ public class StoricoConsegneFrame extends JFrame {
 				resetButton.setBounds(74, 92, 89, 23);
 				idResearchPanel.add(resetButton);
 				
-				JLabel lblNewLabel_1 = new JLabel("ID");
-				lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-				lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
-				lblNewLabel_1.setBounds(35, 19, 46, 14);
-				idResearchPanel.add(lblNewLabel_1);
+				JLabel idLabel = new JLabel("ID");
+				idLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+				idLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+				idLabel.setBounds(35, 19, 46, 14);
+				idResearchPanel.add(idLabel);
 				
-				JButton btnNewButton = new JButton("Logout");
-				btnNewButton.addActionListener(new ActionListener() {
+				JButton logOutButton = new JButton("Logout");
+				logOutButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						controller.logOutAdmin();
 					}
 				});
-				btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-				btnNewButton.setBounds(843, 436, 85, 32);
-				contentPane.add(btnNewButton);
+				logOutButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+				logOutButton.setBounds(843, 436, 85, 32);
+				contentPane.add(logOutButton);
 
-				 model = (DefaultTableModel) storicoTable.getModel();
+				model = (DefaultTableModel) storicoTable.getModel();
 				model = controller.ricavaConsegne(model);
 	}
 }
