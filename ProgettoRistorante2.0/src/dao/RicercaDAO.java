@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 
 public class RicercaDAO {
-	private PreparedStatement st;
+	 
+	private PreparedStatement statement;
 	
 	public RicercaDAO() {
 		try {
@@ -25,10 +26,10 @@ public class RicercaDAO {
 		try {			
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
 			
-			st = con.prepareStatement("SELECT nome_piatto from menù NATURAL JOIN allergeniassociati NATURAL JOIN allergeni WHERE nome_allergene LIKE ? ");
+			statement = con.prepareStatement("SELECT nome_piatto from menù NATURAL JOIN allergeniassociati NATURAL JOIN allergeni WHERE nome_allergene LIKE ? ");
 
-			st.setString(1, nomeAllergene);
-			ResultSet rs = st.executeQuery();
+			statement.setString(1, nomeAllergene);
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String nomePiatto = null;
 				nomePiatto = rs.getString("nome_piatto");								
@@ -37,7 +38,7 @@ public class RicercaDAO {
 			
 			//- Release delle risorse
 			rs.close();
-			st.close();
+			statement.close();
 			con.close();
 		}
 		catch (SQLException e) {
@@ -53,8 +54,8 @@ public class RicercaDAO {
 		try {			
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
 			
-			st = con.prepareStatement("SELECT nome_piatto from menù  WHERE costo > 0 and costo < 3 ");
-			ResultSet rs = st.executeQuery();
+			statement = con.prepareStatement("SELECT nome_piatto from menù  WHERE costo > 0 and costo < 3 ");
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String nomePiatto = null;
 				nomePiatto = rs.getString("nome_piatto");
@@ -64,7 +65,7 @@ public class RicercaDAO {
 			
 			//- Release delle risorse
 			rs.close();
-			st.close();
+			statement.close();
 			con.close();
 		}
 		catch (SQLException e) {
@@ -80,8 +81,8 @@ public class RicercaDAO {
 		try {			
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
 			
-			st = con.prepareStatement("SELECT nome_piatto from menù where costo >= 3 and costo < 6 ");
-			ResultSet rs = st.executeQuery();
+			statement = con.prepareStatement("SELECT nome_piatto from menù where costo >= 3 and costo < 6 ");
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String nomePiatto = null;
 				nomePiatto = rs.getString("nome_piatto");
@@ -91,7 +92,7 @@ public class RicercaDAO {
 			
 			//- Release delle risorse
 			rs.close();
-			st.close();
+			statement.close();
 			con.close();
 		}
 		catch (SQLException e) {
@@ -107,8 +108,8 @@ public class RicercaDAO {
 		try {			
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
 			
-			st = con.prepareStatement("SELECT menù.nome_piatto from menù  WHERE costo >= 6");
-			ResultSet rs = st.executeQuery();
+			statement = con.prepareStatement("SELECT menù.nome_piatto from menù  WHERE costo >= 6");
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String nomePiatto = null;
 				nomePiatto = rs.getString("nome_piatto");
@@ -118,7 +119,7 @@ public class RicercaDAO {
 			
 			//- Release delle risorse
 			rs.close();
-			st.close();
+			statement.close();
 			con.close();
 		}
 		catch (SQLException e) {
@@ -134,9 +135,9 @@ public class RicercaDAO {
 		try {			
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
 			
-			st = con.prepareStatement("SELECT menù.nome_piatto from menù  WHERE codice_prodotto != ?");
-			st.setInt(1, codiceProdotto);
-			ResultSet rs = st.executeQuery();
+			statement = con.prepareStatement("SELECT menù.nome_piatto from menù  WHERE codice_prodotto != ?");
+			statement.setInt(1, codiceProdotto);
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String nomePiatto = null;
 				nomePiatto = rs.getString("nome_piatto");
@@ -146,7 +147,7 @@ public class RicercaDAO {
 			
 			//- Release delle risorse
 			rs.close();
-			st.close();
+			statement.close();
 			con.close();
 		}
 		catch (SQLException e) {

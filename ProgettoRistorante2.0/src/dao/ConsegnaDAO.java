@@ -99,44 +99,6 @@ public class ConsegnaDAO {
 		}
 	}
 	
-	
-	public void resettaConsegneAssegnate() {
-		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
-			statement = con.prepareStatement("update rider set consegne_assegnate = '0'");
-			
-			ResultSet rs = statement.executeQuery();
-
-			// Release delle risorse
-						rs.close();
-						statement.close();
-						con.close();
-			}
-		catch (SQLException e) {
-			System.out.println("Class Not Found: \n"+e);
-		}
-	}
-	
-	public void cancellaConsegna(int idConsegna) {
-		
-		try {
-			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
-			statement = con.prepareStatement("delete from consegne where id_consegna = ?");
-			statement.setInt(1, idConsegna);
-			
-			ResultSet rs = statement.executeQuery();
-
-			// Release delle risorse
-						rs.close();
-						statement.close();
-						con.close();
-			}
-		catch (SQLException e) {
-			System.out.println("Class Not Found: \n"+e);
-		}
-		
-	}
-	
 	public ArrayList<Consegna> cercaPerIdRider(int riderId, String ristoranteAssegnato) {
 		ArrayList<Consegna> listaStoricoPerIdRider = new ArrayList<Consegna>();
 		try {

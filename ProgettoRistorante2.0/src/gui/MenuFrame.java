@@ -221,17 +221,17 @@ public class MenuFrame extends JFrame {
         //////////////// BOTTONI //////////////////////
         
         //Bottone AccettaConsegna
-        JButton accettaConsegnaButton = new JButton("Accetta");				
-        accettaConsegnaButton.setFont(new Font("Calibri", Font.BOLD, 15));
-        accettaConsegnaButton.addActionListener(new ActionListener() {
+        JButton confermaConsegnaButton = new JButton("Conferma");				
+        confermaConsegnaButton.setFont(new Font("Calibri", Font.BOLD, 15));
+        confermaConsegnaButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         			controller.aggiornaStoricoConsegne();
         			controller.incrementaConteggioRider();
         			controller.apriClosingFrame();
         	}
         });
-        accettaConsegnaButton.setBounds(724, 286, 89, 35);
-        checkOutInternalFrame.getContentPane().add(accettaConsegnaButton);
+        confermaConsegnaButton.setBounds(693, 286, 120, 35);
+        checkOutInternalFrame.getContentPane().add(confermaConsegnaButton);
 
         //Bottone aggiungi  
         JButton aggiungiButton = new JButton("Aggiungi");           
@@ -253,10 +253,10 @@ public class MenuFrame extends JFrame {
         rimuoviButton.setBounds(412, 216, 92, 23);
         getContentPane().add(rimuoviButton);               
  
-        //Bottone conferma
-        JButton confermaButton = new JButton("Conferma");				
-        confermaButton.setFont(new Font("Calibri", Font.BOLD, 15));
-        confermaButton.addActionListener(new ActionListener() {
+        //Bottone prosegui
+        JButton proseguiButton = new JButton("Prosegui");				
+        proseguiButton.setFont(new Font("Calibri", Font.BOLD, 15));
+        proseguiButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) { 
         		usernameConsegna.setText(controller.getUsernameConsegna());
         		indirizzoConsegna.setText(controller.getIndirizzoConsegna());
@@ -265,8 +265,8 @@ public class MenuFrame extends JFrame {
         		riepilogo(listaCarrelloModel, riepilogoCarrelloModel, checkOutInternalFrame,totaleTxtArea);        		
         	}
         });
-        confermaButton.setBounds(560, 326, 105, 40);
-        getContentPane().add(confermaButton);
+        proseguiButton.setBounds(560, 326, 105, 40);
+        getContentPane().add(proseguiButton);
         
         //BOTTONE INDIETRO      
         JButton indietroButton = new JButton("Indietro");					

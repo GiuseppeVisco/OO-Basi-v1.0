@@ -78,7 +78,7 @@ catch (SQLException e) {
 	return id_rider;
 	}
 	
-	public void updateCount(int idRider) {
+	public void aggiornaConteggio(int idRider) {
 		
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");

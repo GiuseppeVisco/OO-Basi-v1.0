@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class UtenteDAO {
 	
-	private PreparedStatement st;
+	private PreparedStatement statement;
 		
 	public UtenteDAO() {	
 
@@ -60,9 +60,9 @@ public class UtenteDAO {
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
     
-			st = con.prepareStatement("SELECT indirizzo from utente WHERE email = ?");
-			st.setString(1, username);
-			ResultSet rs = st.executeQuery();
+			statement = con.prepareStatement("SELECT indirizzo from utente WHERE email = ?");
+			statement.setString(1, username);
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				indirizzo = rs.getString("indirizzo");
 				

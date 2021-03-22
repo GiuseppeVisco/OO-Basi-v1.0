@@ -12,7 +12,10 @@ import java.util.ArrayList;
 
 
 public class ProdottoDAO {
-	private PreparedStatement st;
+	
+	private PreparedStatement statement;
+	private Prodotto prodotto;
+	
 	public ProdottoDAO() {	
 		
 		try {
@@ -30,7 +33,7 @@ public class ProdottoDAO {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("SELECT nome_piatto, costo, descrizione_piatto FROM menù");			
 				while (rs.next()) {
-					Prodotto prodotto = new Prodotto();																	
+					prodotto = new Prodotto();																	
 					prodotto.setNomeProdotto(rs.getString("nome_piatto"));
 					prodotto.setPrezzoProdotto(rs.getFloat("costo"));
 					prodotto.setDescrizione(rs.getString("descrizione_piatto"));
@@ -56,15 +59,15 @@ public class ProdottoDAO {
 
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");    
 
-			st = con.prepareStatement("SELECT costo FROM menù WHERE nome_piatto = ?");
-			st.setString(1, nomeProdotto);
-			ResultSet rs = st.executeQuery();
+			statement = con.prepareStatement("SELECT costo FROM menù WHERE nome_piatto = ?");
+			statement.setString(1, nomeProdotto);
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 			prezzo = rs.getDouble("costo");				
 			}
 			//- Release delle risorse
 			rs.close();
-			st.close();
+			statement.close();
 			con.close();
 	    }
 	    catch (SQLException e) {

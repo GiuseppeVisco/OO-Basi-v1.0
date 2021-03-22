@@ -91,31 +91,14 @@ public class StoricoConsegneFrame extends JFrame {
 				confermaConsegneButton.setFont(new Font("Calibri", Font.BOLD, 15));
 				confermaConsegneButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						controller.decrementaConteggioRider();
 						controller.settaConsegnato();  					
 						model.setRowCount(0);
-						model = controller.ricavaConsegne(model);					     
+						model = controller.ricavaConsegne(model);
+						controller.decrementaConteggioRider();
 					}
 				});
-				confermaConsegneButton.setBounds(693, 365, 236, 40);
+				confermaConsegneButton.setBounds(517, 390, 236, 40);
 				contentPane.add(confermaConsegneButton);
-				
-				JButton rimuoviConsegnaButton = new JButton("Rimuovi consegna");
-				rimuoviConsegnaButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-				rimuoviConsegnaButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(storicoTable.getSelectedColumn() == 0) {
-							Object temp = 0;
-							temp = model.getValueAt(storicoTable.getSelectedRow(), storicoTable.getSelectedColumn() );
-							String s = temp.toString();
-							controller.rimuoviConsegnaTabella(model, s);
-							model.removeRow(storicoTable.getSelectedRow());
-						}
-						else JOptionPane.showMessageDialog(null, "Errore, Seleziona una casella ID Consegna");								
-					}
-				});
-				rimuoviConsegnaButton.setBounds(447, 363, 236, 40);
-				contentPane.add(rimuoviConsegnaButton);
 				
 				JPanel idResearchPanel = new JPanel();
 				idResearchPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -164,7 +147,7 @@ public class StoricoConsegneFrame extends JFrame {
 					}
 				});
 				logOutButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-				logOutButton.setBounds(843, 436, 85, 32);
+				logOutButton.setBounds(818, 398, 85, 32);
 				contentPane.add(logOutButton);
 
 				model = (DefaultTableModel) storicoTable.getModel();

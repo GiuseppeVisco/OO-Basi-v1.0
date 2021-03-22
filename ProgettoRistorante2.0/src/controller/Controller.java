@@ -114,7 +114,7 @@ public class Controller {
 	}
 	
 	public void incrementaConteggioRider() {
-		riderDAO.updateCount(getIdRiderConsegna());
+		riderDAO.aggiornaConteggio(getIdRiderConsegna());
 	}
 	
 	public void decrementaConteggioRider() {
@@ -242,21 +242,11 @@ public class Controller {
 		consegnaDAO.aggiornaStatoConsegne(ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente()));
 	}
 	
-	public void rimuoviConsegnaTabella(DefaultTableModel model, String s) {
-
-		int idConsegna = Integer.parseInt(s);						
-		consegnaDAO.cancellaConsegna(idConsegna);
-		
-	}
-	
 	public String fornisciRistoranteAdmin() {
 		String ristorante = ristoranteDAO.ricavaRistoranteAdmin(consegna.getUsernameUtente());
 		return ristorante;
 	}
-	
-	
-	
-	
+
 	public ArrayList<String> riempiMenu(ArrayList<String> listaProdottiJl) {
 		
 		   ArrayList<Prodotto> temp = null;
