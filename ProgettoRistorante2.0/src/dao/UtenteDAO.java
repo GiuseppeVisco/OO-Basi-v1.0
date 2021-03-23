@@ -83,7 +83,7 @@ public class UtenteDAO {
 	
 	public boolean controllaTipoUtente(String email) {
 
-		boolean isAdmin = false;
+		boolean admin = false;
 		
 		try {
 			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");
@@ -92,7 +92,7 @@ public class UtenteDAO {
 			ResultSet rs = st.executeQuery();
 		    
 			while (rs.next()) {
-				isAdmin = rs.getBoolean("admin");				
+				admin = rs.getBoolean("admin");				
 				}
 			
      	    st.close();
@@ -101,7 +101,7 @@ public class UtenteDAO {
 	    catch (SQLException e) {
 	    	System.out.println("Class Not Found: \n"+e);
 	        }
-		return isAdmin;
+		return admin;
 
 	}
 }
