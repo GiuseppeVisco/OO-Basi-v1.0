@@ -62,8 +62,7 @@ CREATE TABLE IF NOT EXISTS Allergeni_Associati
 	Id_Piatto INT,
 	Id_Allergene INT,
 	CONSTRAINT fk_allergene FOREIGN KEY(Id_allergene) REFERENCES Allergeni(Id_allergene) ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT fk_menu FOREIGN KEY(Id_piatto) REFERENCES Menù(Id_piatto) ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT Allergeni_Associati_pkey PRIMARY KEY (id_Allergene, Id_piatto)
+	CONSTRAINT fk_menu FOREIGN KEY(Id_piatto) REFERENCES Menù(Id_piatto) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
