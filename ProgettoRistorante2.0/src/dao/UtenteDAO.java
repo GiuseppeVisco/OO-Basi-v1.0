@@ -1,5 +1,8 @@
 package dao;
 import java.sql.Statement;
+
+import entity.Utente;
+
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +12,8 @@ import java.sql.SQLException;
 public class UtenteDAO {
 	
 	private PreparedStatement statement;
-		
+	Utente utente;
+	
 	public UtenteDAO() {	
 
 		try {
@@ -26,7 +30,7 @@ public class UtenteDAO {
 	
 	public boolean controllaCredenziali(String username,char[] charPassword) {
 		
-		boolean check = false;
+		boolean controllo = false;
 		String password = new String(charPassword);
 		
 		try {
@@ -38,7 +42,7 @@ public class UtenteDAO {
 						String usernameDB = rs.getString("email");
 						String passwordDB = rs.getString("passwordutente");
 							if ((username.equals(usernameDB)) && (password.equals(passwordDB))) {
-								check = true;
+								controllo = true;
 								break;
 								}
 							}
@@ -52,7 +56,7 @@ public class UtenteDAO {
         System.out.println("Class Not Found: \n"+e);
     }
 		
-		return check;
+		return controllo;
 	}
 	
 	public String getIndirizzoPerUsername(String username) {
