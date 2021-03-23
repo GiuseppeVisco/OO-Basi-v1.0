@@ -1,0 +1,79 @@
+package dao;
+
+import java.sql.Connection;
+
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import entity.Prodotto;
+import java.util.ArrayList;
+
+
+public class ProdottoDAO {
+	
+	private PreparedStatement statement;
+	private Prodotto prodotto;
+	
+	public ProdottoDAO() {	
+		
+		try {
+			Class.forName("org.postgresql.Driver");
+			}
+		catch (ClassNotFoundException e){
+			System.out.println("Class Not Found: \n"+e);
+			}
+		}
+	
+	public ArrayList<Prodotto> CaricaProdotti() {
+		ArrayList<Prodotto> listaProdotti = new ArrayList<>();		
+		try {
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");    
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("SELECT nome_piatto, costo, descrizione_piatto FROM menù");			
+				while (rs.next()) {
+					prodotto = new Prodotto();																	
+					prodotto.setNomeProdotto(rs.getString("nome_piatto"));
+					prodotto.setPrezzoProdotto(rs.getFloat("costo"));
+					prodotto.setDescrizione(rs.getString("descrizione_piatto"));
+					
+					listaProdotti.add(prodotto);
+					
+				}
+				//- Release delle risorse
+				rs.close();
+				st.close();
+				con.close();
+		}
+	
+		catch (SQLException e) {
+			System.out.println("Class Not Found: \n"+e);
+		}
+		return listaProdotti;
+	}
+	
+	public double getPrezzoPerNome(String nomeProdotto) {
+		double prezzo = -1;
+		try {
+
+			Connection con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ProgettoTest","postgres","informatica");    
+
+			statement = con.prepareStatement("SELECT costo FROM menù WHERE nome_piatto = ?");
+			statement.setString(1, nomeProdotto);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
+			prezzo = rs.getDouble("costo");				
+			}
+			//- Release delle risorse
+			rs.close();
+			statement.close();
+			con.close();
+	    }
+	    catch (SQLException e) {
+	    	System.out.println("Class Not Found: \n"+e);
+	    }
+		return prezzo;
+	}
+}
+
