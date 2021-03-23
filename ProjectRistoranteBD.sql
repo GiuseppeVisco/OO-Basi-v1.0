@@ -30,7 +30,8 @@ Create TABLE IF NOT EXISTS Menù
     Id_piatto SERIAL PRIMARY KEY NOT NULL,  
     Nome_piatto varchar( 45 ) UNIQUE NOT NULL, 
     Descrizione_Piatto TEXT,
-    Costo NUMERIC(5,2) NOT NULL
+    Costo NUMERIC(5,2) NOT NULL,
+    Tipo_Ristorante INT references ristoranti(ristorante_id) default null
 );
 
 CREATE TABLE IF NOT EXISTS Utente 
@@ -103,21 +104,48 @@ VALUES
 ('Anastasia Basso','Motorino');
 
 
+INSERT INTO Menù (Nome_Piatto,Descrizione_Piatto,Costo,Tipo_Ristorante)
+VALUES
+('Arancino','Arancino','0.90','2'),
+('Frittatina','Frittatina','0.90','2'),
+('Mozarella in carrozza','Mozarella in carrozza','0.60','2'),
+('Mozzarelline impanate','Mozzarelline impanate','2.00','2'),
+('Rustico al Wurstel','Rustico al Wurstel','1.00','2'),
+('Polpette di carne','Polpette di carne scottona fatte in loco','3.00','2'),
+('Polpette di carne al formaggio','Polpette di carne scottona con aggiunta di scamorza','3.00','2'),
+('Chicken nuggets','Stracciettti di pollo fatti in casa con salsa a scelta','2.00','2'),
+('Crochetta di patata','Crochetta di patata','1.00','2'),
+('Patate fritte','Potatine fritte fatte a mano e salsa a scelta','1.50','2'),
+('Hamburger Classico','Hamburger di manzo con formaggio, pomodoro, insalata, cipolle, Ketchup e Maionese','7.50','1'),
+('Cistecca Classica','Sfilatino riempito con straccietti di carne bovina, scamorza e cipolla','6.50','3'),
+('Cistecca Mediterranea','Sfilatino riempito con straccietti di carne bovina, scamorza, rucola e pomodoro','7.00','3'),
+('Hamburger Croccante','Hamburger di manzo con bacon, insalata, pomodoro e cheddar','7.50','1'),
+('Hamburger Boscaiolo','Hamburger di manzo con speck, funghi, insalata, provola affumicata e maionese o salsa boscaiola','8.00','1'),
+('Hamburger Gustoso','Hamburger di manzo con pomodori secchi, insalata, mozzarella fiordilatte e pesto di basilico','8.00','1'),
+('Hamburger Bismark','Hamburger di manzo con uovo occhio di bue, insalata, emmental e maionese al tartufo','8.50','1'),
+('Cistecca Parmigiana','Sfilatino riempito con straccietti di carne bovina, scamorza e parmigiana di melanzane','7.00','1'),
+('Cistecca Ristica','Sfilatino riempito con straccietti di carne bovina, scamorza, pancetta piastrata e patate al forno','7.50','1'),
+('Cistecca Cafona','Sfilatino riempito con straccietti di carne bovina, scamorza, friarielli e salsa piccante','7.50','1'),
+('Burrito Beef','Tortilla riempita con manzo, riso, fagioli, lattuga e salse','6.50','4'),
+('Burrito Chicken','Tortilla riempita con pollo, riso, fagioli, lattuga e salse','6.50','4'),
+('Burrito Pork','Tortilla riempita con maiale, riso, fagioli, lattuga e salsa rossa','6.50','4'),
+('Quesadilla','Tortilla grigliatta con formaggio, tagliata di bistecca, guacamole, panna acida e pomodori','8.00','4'),
+('Taco Pollo','Tortilla croccante con pollo, salsa, guacamole e formaggio','5.00','4'),
+('Taco Maiale','Tortilla croccante con maiale alla griglia, salsa, guacamole e formaggio','5.00','4'),
+('Chirashi','Riso con salmone salsa di soia e sesamo','10.00','5'),
+('Tori Meshi','Riso Saltato con pollo e verdure','7.00','5'),
+('Yaki Soba','Spaghetti di soia con verdure e pollo','9.00','5'),
+('Tempura Ebi', '6 pezzi di gamberi fritti in pastella','12.00','5'),
+('Gyoza','Ravioli di carne di maiale cotti al vapore','6.00','5'),
+('Sushi Misto','Pezzi assortiti di sushi tra cui Nigiri, Hosomaki e Futomaki','15.00','5'),
+('Antipasto','Insalata di giardino con verdure fresche, cetrioli, cipolle rosse, pomodori datterini, formaggio cheddar e crostini','8.50','6'),
+('Pasta al pomodoro fresco','Pasta fresca trafilata al bronzo, salsa di pomodori del pendolo con basilico e agio tostato','12.50','6'),
+('Ravioli ripieni','Ravioli ripieni di ricotta e spinaci, serviti in salsa al burro aromatizzata con salvia','13.00','6'),
+('Entrée di Terra','Tagliata di bistecca di manzo 100% Black Angus in salsa con funghi Portabella arrostiti e cipolle saltate. Servito con Purè di patate','18.50','6'),
+('Entrée di Mare','Salmone bollito in salsa al burro, lime e Chardonnay, servita con spinachi e pomodori all julienne','19.00','6')
+
 INSERT INTO Menù (Nome_Piatto,Descrizione_Piatto,Costo)
 VALUES
-('Arancino','Arancino','0.90'),
-('Frittatina','Frittatina','0.90'),
-('Mozarella in carrozza','Mozarella in carrozza','0.60'),
-('Mozzarelline impanate','Mozzarelline impanate','2.00'),
-('Rustico al Wurstel','Rustico al Wurstel','1.00'),
-('Polpette di carne','Polpette di carne scottona fatte in loco','3.00'),
-('Polpette di carne al formaggio','Polpette di carne scottona con aggiunta di scamorza','3.00'),
-('Chicken nuggets','Stracciettti di pollo fatti in casa con salsa a scelta','2.00'),
-('Crochetta di patata','Crochetta di patata','1.00'),
-('Patate fritte','Potatine fritte fatte a mano e salsa a scelta','1.50'),
-('Cistecca Classica','Sfilatino riempito con straccietti di carne bovina, scamorza e cipolla','6.50'),
-('Cistecca Mediterranea','Sfilatino riempito con straccietti di carne bovina, scamorza, rucola e pomodoro','7.00'),
-('Hamburger Classico','Hamburger di chianina con formaggio, pomodoro, insalata, cipolle, Ketchup e Maionese','7.50'),
 ('Acqua Naturale 50 cl','Acqua Naturale 50 cl','0.50'),
 ('Aqcua Frizzante 50 cl','Aqcua Frizzante 50 cl','0.50'),
 ('Coca Cola','Coca Cola','1.00'),
