@@ -1,6 +1,7 @@
 CREATE DATABASE IF NOT EXISTS `projectristoranteoodb`; 
 -- username per la connessione: ProjectRistorante-OO-BD
 -- password per la connessione: Peron
+--"jdbc:postgresql://localhost:5432/projectristoranteoodb","ProjectRistorante-OO-BD","Peron"
 --case sensitive
 
 CREATE TABLE IF NOT EXISTS Rider (
@@ -31,7 +32,7 @@ Create TABLE IF NOT EXISTS Menù
     Nome_piatto varchar( 45 ) UNIQUE NOT NULL, 
     Descrizione_Piatto TEXT,
     Costo NUMERIC(5,2) NOT NULL,
-    Tipo_Ristorante INT references ristoranti(ristorante_id) default null
+    Tipo_Ristorante INT references ristoranti(ristorante_id) default 0
 );
 
 CREATE TABLE IF NOT EXISTS Utente 
@@ -142,15 +143,14 @@ VALUES
 ('Pasta al pomodoro fresco','Pasta fresca trafilata al bronzo, salsa di pomodori del pendolo con basilico e agio tostato','12.50','6'),
 ('Ravioli ripieni','Ravioli ripieni di ricotta e spinaci, serviti in salsa al burro aromatizzata con salvia','13.00','6'),
 ('Entrée di Terra','Tagliata di bistecca di manzo 100% Black Angus in salsa con funghi Portabella arrostiti e cipolle saltate. Servito con Purè di patate','18.50','6'),
-('Entrée di Mare','Salmone bollito in salsa al burro, lime e Chardonnay, servita con spinachi e pomodori all julienne','19.00','6')
-
-INSERT INTO Menù (Nome_Piatto,Descrizione_Piatto,Costo)
-VALUES
-('Acqua Naturale 50 cl','Acqua Naturale 50 cl','0.50'),
-('Aqcua Frizzante 50 cl','Aqcua Frizzante 50 cl','0.50'),
-('Coca Cola','Coca Cola','1.00'),
-('Fanta','Fanta','1.00'), 
-('Sprite','Sprite', '1.00');
+('Entrée di Mare','Salmone bollito in salsa al burro, lime e Chardonnay, servita con spinachi e pomodori all julienne','19.00','6'),
+('Acqua Naturale 50 cl','Acqua Naturale 50 cl','0.50','0'),
+('Aqcua Frizzante 50 cl','Aqcua Frizzante 50 cl','0.50','0'),
+('Coca Cola','Coca Cola','1.00','0'),
+('Fanta','Fanta','1.00','2'), 
+('Sprite','Sprite', '1.00','2'),
+('Vino Rosso', "Bottiglia di Chateau de Programmateur", '35.00','6'),
+('Vino Bianco', "Bottiglia di Chateau de Programmateur", '35.00','6');
 
 INSERT INTO Allergeni (Nome_Allergene)
 VALUES
